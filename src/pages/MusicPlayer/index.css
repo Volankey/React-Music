@@ -1,0 +1,132 @@
+.content.music{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /*background-color: pink;*/
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: skyblue;
+    font-weight: 300;
+}
+.content.music .head{
+
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 30px 10px 0;
+}
+.content.music .head>div{
+
+
+}
+.content.music .head .title{
+    flex: 3;
+    text-align: center;
+    font-size: 36px;
+
+}
+.content.music .btn.ignore{
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+
+    background-repeat: no-repeat;
+    margin:0 10px;
+}
+.btn-down{
+    background-image: url("./down.png");
+
+
+
+}
+.singer span{
+    font-size: 26px;
+}
+.singer span:before{
+    content: "—";
+    display: inline-block;
+    margin: 0 10px;
+    color: rgba(255,255,255,0.7);
+
+}
+.singer span:after{
+    content: "—";
+    display: inline-block;
+    margin: 0 10px;
+    color: rgba(255,255,255,0.7);
+}
+.content.music .cd{
+    margin: 80px 0 20px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 10px solid rgba(0,0,0,0.5);
+}
+.content.music .mini-lyric{
+    color: rgba(255,255,255,0.7);
+    font-size: 26px;
+}
+
+.player-controller{
+    padding: 10px 80px;
+    margin-top: 30px;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+.controller{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.social{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+#controller .btn{
+    /*border:1px solid #fff;*/
+    font-size: 26px;
+
+}
+#controller .btn.ignore{
+    width: 36px;
+    height: 36px;
+}
+
+#controller .big.ignore{
+    width: 42px;
+    height: 42px;
+}
+#controller .btn-loop{
+    background-image: url("/asset/loop.png");
+    background-size: contain;
+}
+#controller .btn-single-loop{
+    background-image: url("/asset/singleloop.png");
+    background-size: contain;
+}
+#controller .btn-random{
+    background-image: url("/asset/random.png");
+    background-size: contain;
+}
+#controller .btn-pre{
+    background-image: url("/asset/playPreview.fw.png");
+    background-size: contain;
+}
+#controller .btn-next{
+    background-image: url("/asset/playNext.fw.png");
+    background-size: contain;
+}
+#controller .btn-list{
+    background-image: url("/asset/list.png");
+    background-size: contain;
+}
+#controller .btn-play{
+    background-image: url("/asset/play.fw.png");
+    background-size: contain;
+}#controller .btn-pause{
+     background-image: url("/asset/pause.fw.png");
+     background-size: contain;
+ }

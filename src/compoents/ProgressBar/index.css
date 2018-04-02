@@ -1,0 +1,57 @@
+.player-controller .progress{
+    transform: translateZ(1px);
+    height: 6px;
+    width: 100%;
+    background-color: rgba(255,255,255,.2);
+    position: relative;
+    z-index: 10;
+
+}
+.loading-bar{
+    background-color: rgba(255,255,255,.3);
+    width: 50%;
+    height: 6px;
+}
+.progress-content{
+    padding: 0 20px;
+}
+.progress-bar{
+    height: 6px;
+    /*width: 30%;*/
+    background-color: rgb(57,192,126);
+    position: absolute;
+    top:0;
+
+}
+.progress-bar .circle{
+    content: "";
+    position: absolute;
+
+    width: 24px;
+    height: 24px;
+
+    border-radius: 50%;
+    background-color: rgb(57,192,126);
+    top:-9px;
+
+
+}
+.progress:before{
+    content: attr(data-current);
+    position: absolute;
+    left: -85px;
+    font-size: 24px;
+    top:-12px;
+    pointer-events:none;
+
+}
+.progress:after{
+    content: attr(data-duration);
+    position: absolute;
+    right: -85px;
+    font-size: 24px;
+    top:-12px;
+    pointer-events:none;
+
+
+}

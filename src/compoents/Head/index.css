@@ -1,0 +1,17 @@
+.header{
+
+    font-size: 36px;
+}
+.header .header-tabs {
+    display: flex;
+
+    justify-content: center;
+}
+
+.header .header-tabs span{
+    margin: 15px;
+}
+.header .search{
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,54 @@
+#player{
+    display: flex;
+    font-size: 26px;
+    background-color: rgb(30,34,32);
+}
+#player .left{
+    margin-left: 15px;
+    display: flex;
+    flex: 6;
+}
+#player .pic{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#player .pic .ignore{
+    background-size: cover;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    max-width: 50px;
+    max-height: 50px;
+}
+#player>div{
+    flex:1;
+}
+#player .btns{
+    flex: 1.5;
+    display: flex;
+    align-items: center;
+}
+#player .info{
+    padding: 15px;
+    flex: 4;
+}
+#player .info .singer{
+    color: rgba(255,255,255,0.8);
+    font-size: 24px;
+}
+#player .btn.ignore{
+    width: 32px;
+    height: 32px;
+    margin: 0 10px;
+}
+#player .btn-play{
+    background-image: url("./asset/play.fw.png");
+    background-size: contain;
+}
+#player .btn.btn-list.ignore{
+    background-image: url("./asset/list.png");
+    background-size: contain;
+    width: 24px;
+    height:24px;
+}
