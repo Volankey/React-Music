@@ -14,6 +14,8 @@
     justify-content: space-between;
     width: 100%;
     padding: 30px 10px 0;
+    margin-bottom: 30px;
+
 }
 .content.music .head>div{
 
@@ -39,6 +41,10 @@
 
 
 }
+.singer{
+    text-align: center;
+    margin-bottom: 50px;
+}
 .singer span{
     font-size: 26px;
 }
@@ -56,19 +62,26 @@
     color: rgba(255,255,255,0.7);
 }
 .content.music .cd{
-    margin: 80px 0 20px;
+    margin: 0px auto;
     overflow: hidden;
     border-radius: 50%;
     border: 10px solid rgba(0,0,0,0.5);
+
+
+}
+.content.music .cd.ignore{
+    width: 300px;
+    height: 300px;
 }
 .content.music .mini-lyric{
     color: rgba(255,255,255,0.7);
     font-size: 26px;
+    text-align: center;
 }
 
 .player-controller{
     padding: 10px 80px;
-    margin-top: 30px;
+    margin-top: 50px;
     width: 100%;
     box-sizing: border-box;
 
@@ -129,4 +142,9 @@
 }#controller .btn-pause{
      background-image: url("/asset/pause.fw.png");
      background-size: contain;
+ }
+ .slider-wrap.ignore{
+     height: 380px;
+     width: 100%;
+     overflow: hidden;
  }

@@ -21,11 +21,10 @@ import { connect } from 'react-redux'; // 引入connect函数
 import * as PlayerAction from "../actions/PlayerAction";
 
 class Home extends Component {
-
+    
     componentDidMount() {
-        document.querySelector('body').addEventListener('touchmove', function (event) {
-            event.preventDefault();
-        });
+
+
         var player = myplayer();
 
         player.bind("ended",()=>{
@@ -37,6 +36,7 @@ class Home extends Component {
         player.bind("pause",()=>{
             this.props.onPause();
         })
+
     }
     render() {
         return (

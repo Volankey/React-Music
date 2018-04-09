@@ -1,0 +1,17 @@
+.slider{
+    width: 100%;
+    height: 100%;
+}
+.slider ul{
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    list-style: none;
+    height: 100%;
+
+}
+.slider ul>li{
+    transition: opacity .3s;
+    float: left;
+    height: 100%;
+}

@@ -23,11 +23,12 @@ const  initialState = Immutable({
             currentTime:0,
             index:-1
         },
+        lyric:null,
         playingList:[
             {
                 name:"病变",
                 singer:"鞠伟倩",
-                id:"002lUqDY0GmcWj",
+                id:"003bOtQz24HvqN",
 
             },
             {
@@ -41,9 +42,14 @@ const  initialState = Immutable({
 
 });
 export default  function MusicPlayer(state=initialState,action){
-    console.log(action);
+    // console.log(action);
     switch (action.type)
     {
+        case TYPE.MUSIC_LYRIC:{
+
+        return  Immutable.set(state,"lyric",action.playload.lyric);
+        }
+        break;
 
         case TYPE.MUSIC_MODE:{
             const modes = [LIST_LOOP,SINGLE_LOOP,LIST_RANDOM];

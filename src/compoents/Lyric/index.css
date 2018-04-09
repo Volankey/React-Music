@@ -1,0 +1,38 @@
+#lyric{
+    display: flex;
+
+    /*background-color: rgb(30,34,32);*/
+
+    overflow: hidden;
+    text-align: center;
+    flex-direction: column;
+
+    font-size: 28px;
+    height: 100%;
+
+}
+#lyric.ignore{
+    width: 100%;
+
+}
+#scroll{
+    position: relative;
+
+}
+#scroll p{
+    font-size: 34px;
+    overflow: hidden;
+    margin: 15px 10px;
+}
+#scroll .on{
+    color: green;
+}
+#lyric .no-lyric{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    margin: auto 0;
+    height: 500px;
+
+}

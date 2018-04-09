@@ -165,11 +165,11 @@ export var myplayer = (function () {
         };
 
         this.bind = function (evt,fn) {
-            fn = fn.bind(this);
+            // fn = fn.bind(this);
             audio.addEventListener(evt, fn, false);
         };
         this.unbind = function (evt,fn) {
-            fn = fn.bind(this);
+            // fn = fn.bind(this);
             audio.removeEventListener(evt, fn, false);
         };
         this.currentTime = function () {
@@ -247,8 +247,8 @@ export var myplayer = (function () {
     var player =  new Player();
 
 
-    player.bind("canplay",function () {
-        console.log("可以播放"+this.duration());
+    player.bind("canplay",()=> {
+        console.log("可以播放"+player.duration());
 
     });
 

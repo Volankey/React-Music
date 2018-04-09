@@ -7,6 +7,7 @@ import {
 import './index.css';
 
 
+
 class Player extends Component {
 
     componentDidMount(){

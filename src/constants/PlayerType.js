@@ -12,6 +12,8 @@ export const MUSIC_NEXT = 'MUSIC_NEXT';
 
 export const MUSIC_MODE= 'MUSIC_MODE';
 
+export const MUSIC_LYRIC= 'MUSIC_LYRIC';
+
 
 export const    STATUS_PLAYING = 'STATUS_PLAYING',
                 STATUS_PAUSE = 'STATUS_PAUSE',
