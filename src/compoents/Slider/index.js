@@ -23,7 +23,7 @@ class Slider extends Component {
         });
         this.x = 0;
         this.idx = 0;
-        this.slider.addEventListener("touchmove",this.handleMove);
+        this.slider.addEventListener("touchmove",this.handleMove,true);
         this.slider.addEventListener("touchend",this.handleEnd);
     }
     handleStart(e){
@@ -37,6 +37,8 @@ class Slider extends Component {
         this.offset = 0;
     }
     handleMove(e){
+        console.log("slider");
+        e.preventDefault();
         if(this.isTracking){
             let currentX = e.touches[0].clientX,
                 currentY = e.touches[0].clientY;
@@ -47,9 +49,12 @@ class Slider extends Component {
             this.offset+=deltaX;
 
 
+            if(Math.abs(deltaY)>Math.abs(deltaX))
+                return;
             if(x>0 || x<this.min)
                 return;
 
+            e.stopImmediatePropagation();
             this.x = x;
 
             let opacity = Math.abs(this.offset)/this.state.width;

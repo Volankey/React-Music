@@ -1,4 +1,4 @@
-
+import domian from './domian'
 export  const tools  =     {
     fetch :function (param) {
         // 做一些异步操作
@@ -147,7 +147,7 @@ export var myplayer = (function () {
             //请求数据
             tools.fetch(
                 {
-                    url:'http://192.168.1.104:3001/apis/vkey?id='+id,
+                    url:'http://'+domian+':3001/apis/vkey?id='+id,
                     dataType:"json",
                 }
             ).then(response=>{

@@ -36,6 +36,8 @@
 #player .info .singer{
     color: rgba(255,255,255,0.8);
     font-size: 24px;
+    text-align: left;
+    margin:0;
 }
 #player .btn.ignore{
     width: 32px;

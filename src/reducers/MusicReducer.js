@@ -21,13 +21,14 @@ const  initialState = Immutable({
             name:"暂无歌曲",
             singer:"小白",
             currentTime:0,
-            index:-1
+            index:-1,
+            id:null
         },
         lyric:null,
         playingList:[
             {
-                name:"病变",
-                singer:"鞠伟倩",
+                name:"Love The Way You Lie ",
+                singer:"Eminem/Rihanna",
                 id:"003bOtQz24HvqN",
 
             },
@@ -47,7 +48,9 @@ export default  function MusicPlayer(state=initialState,action){
     {
         case TYPE.MUSIC_LYRIC:{
 
-        return  Immutable.set(state,"lyric",action.playload.lyric);
+           let data = action.playload.lyric;
+                 data.id= action.playload.id;
+        return  Immutable.set(state,"lyric",data);
         }
         break;
 
@@ -130,7 +133,8 @@ export default  function MusicPlayer(state=initialState,action){
                    name: list[idx].name,
                    singer: list[idx].singer,
                    currentTime: state.song.currentTime,
-                   index: idx
+                   index: idx,
+                   id:list[idx].id
                }
             },{deep:true});
 
@@ -179,7 +183,8 @@ export default  function MusicPlayer(state=initialState,action){
                     name: list[idx].name,
                     singer: list[idx].singer,
                     currentTime: 0,
-                    index: idx
+                    index: idx,
+                    id:list[idx].id
                 }
             },{deep:true});
 
@@ -204,7 +209,8 @@ export default  function MusicPlayer(state=initialState,action){
                     name: list[idx].name,
                     singer: list[idx].singer,
                     currentTime: 0,
-                    index: idx
+                    index: idx,
+                    id:list[idx].id
                 },
 
             },{deep:true});

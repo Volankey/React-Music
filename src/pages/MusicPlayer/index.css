@@ -41,8 +41,9 @@
 
 
 }
+
 .singer{
-    text-align: center;
+    text-align: center ;
     margin-bottom: 50px;
 }
 .singer span{
@@ -62,7 +63,7 @@
     color: rgba(255,255,255,0.7);
 }
 .content.music .cd{
-    margin: 0px auto;
+    margin: 0 auto;
     overflow: hidden;
     border-radius: 50%;
     border: 10px solid rgba(0,0,0,0.5);
@@ -72,6 +73,11 @@
 .content.music .cd.ignore{
     width: 300px;
     height: 300px;
+}
+.content.music .cd.ignore img{
+    display: block;
+    border-radius: 50%;
+
 }
 .content.music .mini-lyric{
     color: rgba(255,255,255,0.7);
@@ -148,3 +154,16 @@
      width: 100%;
      overflow: hidden;
  }
+ .play{
+     animation: rotate 20s linear infinite;
+ }
+
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -1,5 +1,5 @@
 import * as TYPE from '../constants/PlayerType';
-
+import {tools} from '../tools/Tools';
 //获取列表信息
 export function play(music) {
 
@@ -57,6 +57,29 @@ export function statusChange(status) {
     }
 }
 
+export function getLyric(id) {
+    return dispatch => {
+
+        tools.fetch({
+            url:'http://192.168.1.104:3001/apis/lyric?id='+id,
+            dataType:"json",
+
+        }).then(response=>{
+            // console.log(response);
+            dispatch(
+                {
+                    type: TYPE.MUSIC_LYRIC,
+                    playload: {
+                        lyric:response,
+                        id
+                    },
+                    meta: "播放下一首"
+                }
+            )
+        })
+
+    }
+}
 
 
 export function playNext(type) {

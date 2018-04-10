@@ -18,10 +18,13 @@ class MusicPlayer extends Component {
     goBack() {
         this.props.history.goBack();
     }
-
+    onloadstart(){
+        this.props.getLyric(this.props.song.id);
+    }
     componentDidMount() {
 
-        this.isFirst = false;
+        // this.isFirst = false;
+        this.cd_wrap_transform="";
         //设置是否更新进度 因为只有这个页面需要进度的显示
         player.onprogress = true;
         //绑定更新进度事件，根据onprogress的值来决定是否解除绑定
@@ -35,6 +38,7 @@ class MusicPlayer extends Component {
         };
 
         player.bind("timeupdate", this.handleOnProgress);
+        player.bind("loadstart", this.onloadstart.bind(this));
 
     }
     componentWillUnmount() {
@@ -44,11 +48,27 @@ class MusicPlayer extends Component {
     }
     computeBtnClass() {
         let status = this.props.status;
+
+
+
+
+
+
         if (status === TYPE.STATUS_PLAYING) {
-            return "btn-pause"
+            return {
+                btn:"btn-pause",
+                cd:"play",
+                transform:this.cd_wrap_transform
+            }
         }
         else {
-            return "btn-play";
+
+
+            return {
+                btn:"btn-play",
+                cd:"",
+                transform:this.cd_wrap_transform
+            }
         }
 
     }
@@ -61,12 +81,20 @@ class MusicPlayer extends Component {
         else
             return "btn-random";
     }
+    computeCd(){
+        if(this.cd_img){
+            let transform = getComputedStyle(this.cd_img).transform;
+            transform = transform=="none"?"":transform;
+            this.cd_wrap_transform = this.cd_wrap_transform.concat(" ",transform);
+        }
+    }
     render() {
 
         let { song,lyric } = this.props;
         let d = player.duration();
-        let btnClass = this.computeBtnClass();
+        let btn_cd = this.computeBtnClass();
         let mode = this.computeModeClass();
+
         return (
             <div className="content music">
 
@@ -82,8 +110,12 @@ class MusicPlayer extends Component {
                             <div className="singer">
                                 <span>{song.singer}</span>
                             </div>
-                            <div className="cd ignore">
-                                <img height={300} src={require("./1.png")} alt="" />
+                            <div className="cd ignore" style={{
+                                transform:btn_cd.transform
+                            }}>
+                                <img className={btn_cd.cd} height={300} src={require("./1.png")} alt=""
+                                    ref={(ref)=>{this.cd_img=ref}}
+                                />
                             </div>
                                 {/*<div className="mini-lyric">*/}
                                     {/*<p>曲:张不已</p>*/}
@@ -92,8 +124,8 @@ class MusicPlayer extends Component {
 
                         <Lyric
                             height={345}
-                            // data={require("./lyric.json")}
-                            data={{lyric}}
+                            //data={require("./lyric.json")}
+                             data={{lyric}}
                             bind={player.bind}
                             unbind={player.unbind}
                         />
@@ -131,7 +163,8 @@ class MusicPlayer extends Component {
                             this.props.playNext(-1);
                         }}> </div>
 
-                        <div className={"btn big ignore " + btnClass} onClick={() => {
+                        <div className={"btn big ignore "+btn_cd.btn} onClick={() => {
+                            this.computeCd();
                             this.props.play();
                         }}> </div>
 
@@ -173,6 +206,9 @@ export default withRouter(connect(
         changeMode: () => {
             dispatch(PlayerAction.changeMode())
         },
+        getLyric:(id)=>{
+            dispatch(PlayerAction.getLyric(id))
+        }
 
     })
 )(MusicPlayer))
