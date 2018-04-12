@@ -5,7 +5,10 @@ export function play(music) {
 
 
 
-    return dispatch => {
+    return (dispatch,getState) => {
+        let{ MusicReducer } = getState();
+        let list = MusicReducer.songList;
+        let idx = MusicReducer.idx;
         dispatch(
             {
                 type: TYPE.MUSIC_PLAY,
@@ -58,7 +61,7 @@ export function statusChange(status) {
 }
 
 export function getLyric(id) {
-    return dispatch => {
+    return (dispatch,getState) => {
 
         tools.fetch({
             url:'http://192.168.1.104:3001/apis/lyric?id='+id,

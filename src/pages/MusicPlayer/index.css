@@ -41,7 +41,9 @@
 
 
 }
-
+.page-1{
+    height: 100%;
+}
 .singer{
     text-align: center ;
     margin-bottom: 50px;
@@ -150,7 +152,7 @@
      background-size: contain;
  }
  .slider-wrap.ignore{
-     height: 380px;
+     height: 400px;
      width: 100%;
      overflow: hidden;
  }

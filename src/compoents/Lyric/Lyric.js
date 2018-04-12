@@ -91,6 +91,7 @@ class Lyric extends Component {
         preEl && preEl.classList.remove("on");
     }
     initScroller(){
+        this.loaded = true;
         this.wrapHeight = this.props.height;
         this.scrollerHeight = this.scroller.offsetHeight;
         this.centerOffset = this.wrapHeight/2;
@@ -158,9 +159,15 @@ class Lyric extends Component {
             this.initScroller.bind(this)
         );
     }
-    componentDidUpdate(){
+    componentDidMount(){
 
         this.init();
+        console.log("mount")
+    }
+    componentDidUpdate(){
+
+
+        this.loaded && this.init() && console.log("update");
 
     }
     scrollTo(idx,dt=300){
@@ -218,7 +225,7 @@ class Lyric extends Component {
 
     render() {
 
-
+        console.log("我更新了");
         return (
             <div  id="lyric" className="ignore"  ref={(ref)=>{this.wrap = ref}} >
 

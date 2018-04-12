@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 
 
 import './index.css';
 
 
-class ProgressBar extends Component {
+class ProgressBar extends PureComponent {
 
     constructor(props){
         super(props);

@@ -19,6 +19,7 @@ class MusicPlayer extends Component {
         this.props.history.goBack();
     }
     onloadstart(){
+        console.log(this.props.song.name);
         this.props.getLyric(this.props.song.id);
     }
     componentDidMount() {
@@ -38,7 +39,7 @@ class MusicPlayer extends Component {
         };
 
         player.bind("timeupdate", this.handleOnProgress);
-        player.bind("loadstart", this.onloadstart.bind(this));
+
 
     }
     componentWillUnmount() {
@@ -63,7 +64,6 @@ class MusicPlayer extends Component {
         }
         else {
 
-
             return {
                 btn:"btn-play",
                 cd:"",
@@ -87,6 +87,14 @@ class MusicPlayer extends Component {
             transform = transform=="none"?"":transform;
             this.cd_wrap_transform = this.cd_wrap_transform.concat(" ",transform);
         }
+    }
+    shouldComponentUpdate(nextProps){
+        if(this.props.lyric!=nextProps.lyric){
+
+            return false;
+        }
+
+        return true;
     }
     render() {
 
@@ -201,6 +209,7 @@ export default withRouter(connect(
         play: () => dispatch(PlayerAction.play({})),
         updateTime: (t) => dispatch(PlayerAction.updateTime(t)),
         playNext: (type) => {
+
             dispatch(PlayerAction.playNext(type))
         },
         changeMode: () => {
