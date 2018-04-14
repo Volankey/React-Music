@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="959fe164-6959-4217-b8c9-9bc69b572178" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/pages/MusicPlayer/1.png" afterPath="$PROJECT_DIR$/public/asset/1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/compoents/Lyric/Lyric.js" afterPath="$PROJECT_DIR$/src/compoents/Lyric/Lyric.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/compoents/ProgressBar/ProgressBar.js" afterPath="$PROJECT_DIR$/src/compoents/ProgressBar/ProgressBar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/compoents/Slider/index.js" afterPath="$PROJECT_DIR$/src/compoents/Slider/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/MusicPlayer/MusicPlayer.js" afterPath="$PROJECT_DIR$/src/pages/MusicPlayer/MusicPlayer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/MusicReducer.js" afterPath="$PROJECT_DIR$/src/reducers/MusicReducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tools/Tools.js" afterPath="$PROJECT_DIR$/src/tools/Tools.js" />
-    </list>
+    <list default="true" id="959fe164-6959-4217-b8c9-9bc69b572178" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -36,7 +27,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/compoents/Slider/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-309">
@@ -83,14 +74,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Lyric.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Lyric.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/compoents/Lyric/Lyric.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="116" column="40" lean-forward="false" selection-start-line="116" selection-start-column="40" selection-end-line="116" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="57">
+              <caret line="3" column="50" lean-forward="false" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="alloy_touch.css.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/alloytouch/alloy_touch.css.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1397">
+              <caret line="129" column="55" lean-forward="true" selection-start-line="129" selection-start-column="8" selection-end-line="129" selection-end-column="55" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -414,12 +413,12 @@
       <workItem from="1522128639307" duration="86240000" />
       <workItem from="1523028011157" duration="60168000" />
       <workItem from="1523516154580" duration="9593000" />
-      <workItem from="1523612162863" duration="9876000" />
+      <workItem from="1523612162863" duration="10088000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="388684000" />
+    <option name="totallyTimeSpent" value="388896000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-25" y="23" width="1228" height="777" extended-state="0" />
@@ -806,14 +805,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/alloytouch/alloy_touch.css.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="125" column="48" lean-forward="true" selection-start-line="125" selection-start-column="48" selection-end-line="125" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/MusicPlayer/MusicPlayer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="56">
@@ -822,20 +813,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/compoents/Lyric/Lyric.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="116" column="40" lean-forward="false" selection-start-line="116" selection-start-column="40" selection-end-line="116" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/compoents/Slider/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-309">
           <caret line="96" column="16" lean-forward="false" selection-start-line="88" selection-start-column="10" selection-end-line="96" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/alloytouch/alloy_touch.css.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1397">
+          <caret line="129" column="55" lean-forward="true" selection-start-line="129" selection-start-column="8" selection-end-line="129" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/compoents/Lyric/Lyric.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="50" lean-forward="false" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="50" />
           <folding />
         </state>
       </provider>
