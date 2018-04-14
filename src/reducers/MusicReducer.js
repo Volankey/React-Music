@@ -1,19 +1,10 @@
 import  * as TYPE from '../constants/PlayerType';
 import Immutable from "seamless-immutable";
-import {myplayer,tools} from '../tools/Tools'
-
-const STATUS_PLAYING = 'STATUS_PLAYING',
-      STATUS_PAUSE = 'STATUS_PAUSE',
-      STATUS_EMPTY = 'STATUS_EMPTY',
-      SINGLE_LOOP = 'SINGLE_LOOP',
-      LIST_QUE = 'LIST_QUE',
-      LIST_LOOP = 'LIST_LOOP',
-      LIST_RANDOM = 'LIST_RANDOM';
 
 
 const  initialState = Immutable({
         //播放模式
-        mode:LIST_LOOP,
+        mode:TYPE.LIST_LOOP,
         //播放状态
         status:TYPE.STATUS_EMPTY,
         //当前歌曲
@@ -101,7 +92,7 @@ function setLyric(state,action) {
 }
 
 //播放模式
-const modes = [LIST_LOOP,SINGLE_LOOP,LIST_RANDOM];
+const modes = [TYPE.LIST_LOOP,TYPE.SINGLE_LOOP,TYPE.LIST_RANDOM];
 
 function setMode(state,action) {
     let current = modes.indexOf(state.mode);

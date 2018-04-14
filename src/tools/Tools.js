@@ -232,8 +232,8 @@ export var myplayer = (function () {
         //     this.onprogress && this.onprogress(e.target.currentTime);
         // });
         this.bind("error",function () {
-            if(this.src!=="")
-            alert("请求错误");
+            if(this.src!=="");
+            // alert("请求错误");
         });
 
         this.bind("canplaythrough",function () {

@@ -194,7 +194,7 @@ class ProgressBar extends PureComponent {
 
 
         w=isNaN(w)?0:w;
-        console.log(w);
+        // console.log(w);
         let circle = w-this.circleWidth;
         // console.log(w,ratio,circle);
 

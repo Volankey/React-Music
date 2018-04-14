@@ -103,7 +103,7 @@ class MusicPlayer extends Component {
         let btn_cd = this.computeBtnClass();
         let mode = this.computeModeClass();
 
-        console.log(d);
+        // console.log(d);
         return (
             <div className="content music">
 

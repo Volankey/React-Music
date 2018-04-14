@@ -113,11 +113,12 @@ class Lyric extends Component {
             maxSpeed: 1.5, //不必需，触摸反馈的最大速度限制
             initialValue: 0,
             // change:function(value){console.log(value)  },
-            touchStart:(evt, value)=>{ this.isMoving = true; },
-            touchMove:function(evt, value){ console.log("lyric"); },
+            touchStart:(evt, value)=>{ this.isMoving = true;  },
+            touchMove:function(evt, value){ console.log("lytic 滚动");evt.stopPropagation();  },
             touchEnd:(evt,value)=>{
                 if(this.timer)
                     clearTimeout(this.timer);
+
                 this.timer = setTimeout(()=>{
                     this.isMoving = false;
                 },3000);

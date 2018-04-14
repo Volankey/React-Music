@@ -23,8 +23,8 @@ class Slider extends Component {
         });
         this.x = 0;
         this.idx = 0;
-        this.slider.addEventListener("touchmove",this.handleMove,true);
-        this.slider.addEventListener("touchend",this.handleEnd);
+        window.addEventListener("touchmove",this.handleMove);
+        // this.slider.addEventListener("touchend",this.handleEnd);
     }
     handleStart(e){
         this.isMoving = true;
@@ -35,6 +35,7 @@ class Slider extends Component {
         this.preX = this.startX;
         this.preY = this.startY;
         this.offset = 0;
+        // alert("slider")
     }
     handleMove(e){
         console.log("slider");
@@ -49,12 +50,13 @@ class Slider extends Component {
             this.offset+=deltaX;
 
 
-            if(Math.abs(deltaY)>Math.abs(deltaX))
+            if(Math.abs(deltaY)>Math.abs(deltaX)){
                 return;
+            }
+            e.stopImmediatePropagation();
             if(x>0 || x<this.min)
                 return;
 
-            e.stopImmediatePropagation();
             this.x = x;
 
             let opacity = Math.abs(this.offset)/this.state.width;
@@ -70,23 +72,29 @@ class Slider extends Component {
 
     }
     handleEnd(e){
-        console.log("slider");
+        // console.log("slider");
         if(this.isTracking){
             let endX = e.changedTouches[0].clientX,
                 endY = e.changedTouches[0].clientY;
-            let w = this.startX-endX;
+
+            let item_pos =-this.state.width*this.idx;
+            let w = (item_pos-this.x);
+            // let w = this.startX-endX;
             let y = this.startY-endY;
             this.transitionDuration=300+"ms";
             console.log(w);
-            if(Math.abs(y)>Math.abs(w)+5){
 
-                this.x = -this.state.width*this.idx;
-                this.setState({
-                    left:this.x
-                });
-                this.isTracking=false;
-                return;
-            }
+
+
+            // if(Math.abs(y)>Math.abs(w)+5){
+            //
+            //     this.x = item_pos;
+            //     this.setState({
+            //         left:this.x
+            //     });
+            //     this.isTracking=false;
+            //     return;
+            // }
 
             //左滑动
             if(w>0 && Math.abs(w)>20){
@@ -151,6 +159,8 @@ class Slider extends Component {
                      this.slider = ref;
                  }}
                  onTouchStart={this.handleStart}
+                 // onTouchMove={this.handleMove}
+                 onTouchEnd={this.handleEnd}
             >
                 <ul
                     style={this.computeStyle()}
