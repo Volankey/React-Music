@@ -103,9 +103,13 @@ class MusicPlayer extends Component {
         let btn_cd = this.computeBtnClass();
         let mode = this.computeModeClass();
 
+        console.log(d);
         return (
             <div className="content music">
 
+                <div className="background ignore">
+                    <img className="image" src={song.album} alt=""/>
+                </div>
                 <div className="head">
                     <div className="btn btn-down ignore" onClick={this.goBack.bind(this)}></div>
                     <div className="title"><span>{song.name}</span></div>
@@ -121,7 +125,7 @@ class MusicPlayer extends Component {
                             <div className="cd ignore" style={{
                                 transform:btn_cd.transform
                             }}>
-                                <img className={btn_cd.cd} height={300} src={require("./1.png")} alt=""
+                                <img className={btn_cd.cd} height={300} src={song.album} alt=""
                                     ref={(ref)=>{this.cd_img=ref}}
                                 />
                             </div>
@@ -206,7 +210,7 @@ export default withRouter(connect(
 
     }),
     (dispatch) => ({
-        play: () => dispatch(PlayerAction.play({})),
+        play: () => dispatch(PlayerAction.play()),
         updateTime: (t) => dispatch(PlayerAction.updateTime(t)),
         playNext: (type) => {
 

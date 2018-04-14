@@ -25,7 +25,7 @@
     margin: 15px 10px;
 }
 #scroll .on{
-    color: green;
+    color: rgb(65,191,128);
 }
 #lyric .no-lyric{
     display: flex;

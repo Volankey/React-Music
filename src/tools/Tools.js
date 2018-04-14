@@ -135,7 +135,7 @@ export var myplayer = (function () {
         this.loadMusic = function (id) {
             if(firstPlay){
                 console.log("first play");
-                this.src = "http://dl.stream.qqmusic.qq.com/C400002ZnJAb2w8Ynn.m4a?vkey=826637FC3ABACE71F288ED34E7D00D2CAB4BD9ED29BA6A789FB5B0F5AB667E50A5E613BFE11E2AA50BF7201E53A4B976D0E7B43B3D586F88&guid=762918212&uin=935196116&fromtag=66";
+                this.src = "http://dl.stream.qqmusic.qq.com/C400002ZnJAb2w8Ynn.m4a";
                 this.play();
                 this.pause();
             }
@@ -160,7 +160,7 @@ export var myplayer = (function () {
 
 
             }).catch(e=>{
-                alert("播放错误");
+                // alert("播放错误");
             });
         };
 

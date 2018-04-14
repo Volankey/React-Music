@@ -73,7 +73,7 @@ export default connect(
         play: () => dispatch(PlayerAction.play({})),
         updateTime:(t)=>dispatch(PlayerAction.updateTime(t)),
         playEnd:()=>{
-            dispatch(PlayerAction.statusChange(TYPE.MUSIC_END))
+            dispatch(PlayerAction.playEnd())
         },
         onPause:()=>{
             dispatch(PlayerAction.statusChange(TYPE.STATUS_PAUSE))

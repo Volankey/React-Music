@@ -10,7 +10,8 @@ class ProgressBar extends PureComponent {
     constructor(props){
         super(props);
         this.state={
-            ratio:0
+            ratio:0,
+            max:0
         }
 
     }
@@ -29,8 +30,10 @@ class ProgressBar extends PureComponent {
             this.handleTouchEnd(e)
         },false);
         this.setState({
-            ratio:0
+            ratio:0,
+            max:this.maxWidth
         });
+
 
     }
     componentDidMount(){
@@ -191,6 +194,7 @@ class ProgressBar extends PureComponent {
 
 
         w=isNaN(w)?0:w;
+        console.log(w);
         let circle = w-this.circleWidth;
         // console.log(w,ratio,circle);
 

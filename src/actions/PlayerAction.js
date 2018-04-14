@@ -1,45 +1,124 @@
 import * as TYPE from '../constants/PlayerType';
-import {tools} from '../tools/Tools';
-//获取列表信息
-export function play(music) {
+import {myplayer,tools} from '../tools/Tools';
+import domian from '../tools/domian';
+var player = myplayer();
+//播放音乐
+function getMusic(song,status,dispatch) {
 
+    getLyric(song.id,dispatch);
 
+    tools.fetch(
+        {
+            url:'http://'+domian+':3001/apis/vkey?id='+song.id,
+            dataType:"json",
+        }
+    ).then(response=>{
+        player.src = response.url;
+        player.play();
 
-    return (dispatch,getState) => {
-        let{ MusicReducer } = getState();
-        let list = MusicReducer.songList;
-        let idx = MusicReducer.idx;
+    }).then(()=>{
         dispatch(
             {
                 type: TYPE.MUSIC_PLAY,
                 playload: {
-                    data: music,
-
+                    song ,
+                    status
                 },
-                meta: "开始播放"
+                meta: "播放音乐"
             }
-        )
-    }
+        );
+
+    });
 }
-//获取列表信息
-export function pause() {
+
+export function getLyric(id,dispatch) {
 
 
+    tools.fetch({
+        url:'http://'+domian+':3001/apis/lyric?id='+id,
+        dataType:"json",
 
-    return dispatch => {
+    }).then(response=>{
+        // console.log(response);
         dispatch(
             {
-                type: TYPE.MUSIC_PAUSE,
-                meta: "暂停播放"
+                type: TYPE.MUSIC_LYRIC,
+                playload: {
+                    lyric:response,
+                    id
+                },
+                meta: "获取歌词"
             }
         )
+    })
+
+
+}
+
+function setStatus(dispatch,status) {
+    dispatch(
+        {
+            type: TYPE.CHANGE_STATUS,
+            playload: {
+                status
+            },
+            meta: status
+        }
+    )
+}
+
+
+//获取列表信息
+export function play() {
+
+
+
+    return (dispatch,getState) => {
+        let state = getState().MusicReducer;
+
+            let list = state.playingList;
+
+            let idx = state.song.index;
+
+            let status = state.status;
+
+            if(status === TYPE.STATUS_EMPTY){
+                idx = (idx+1)%list.length;
+
+                // let song = list[idx];
+                status = TYPE.STATUS_PLAYING;
+
+                let song={
+                    ...list[idx],
+                    currentTime: 0,
+                    index: idx,
+                };
+
+                getMusic(song,status,dispatch);
+
+
+            }
+            else if(status === TYPE.STATUS_PLAYING){
+                player.pause();
+                status = TYPE.STATUS_PAUSE;
+                setStatus(dispatch,status);
+            }
+            else {
+                player.play();
+                status = TYPE.STATUS_PLAYING;
+                setStatus(dispatch,status);
+
+            }
+
+
+
     }
 }
 export function updateTime(t) {
     return dispatch => {
         dispatch(
             {
-                type: TYPE.MUSIC_INFO,
+                type: TYPE.SET_CURRENTTIME,
                 playload: {
                     current: t
                 },
@@ -51,51 +130,75 @@ export function updateTime(t) {
 
 export function statusChange(status) {
     return dispatch => {
-        dispatch(
-            {
-                type: status,
-                meta: status
-            }
-        )
+        setStatus(dispatch,status)
     }
 }
 
-export function getLyric(id) {
-    return (dispatch,getState) => {
 
-        tools.fetch({
-            url:'http://192.168.1.104:3001/apis/lyric?id='+id,
-            dataType:"json",
+export function playEnd() {
+    return (dispatch,getState)=>{
+        let state= getState().MusicReducer;
+        let list = state.playingList;
 
-        }).then(response=>{
-            // console.log(response);
-            dispatch(
-                {
-                    type: TYPE.MUSIC_LYRIC,
-                    playload: {
-                        lyric:response,
-                        id
-                    },
-                    meta: "播放下一首"
-                }
-            )
-        })
+        let idx = state.song.index+1;
 
+        //单曲循环
+        if(state.mode === TYPE.SINGLE_LOOP){
+            player.play();
+            return state;
+        }//随机
+        else if(state.mode === TYPE.LIST_RANDOM){
+            idx = Math.floor(Math.random()*list.length);
+            console.log("播放 "+idx);
+
+        }
+        else{
+            //列表顺序
+            idx = idx%list.length;
+        }
+        let song={
+            ...list[idx],
+            currentTime: 0,
+            index: idx,
+        };
+        let status =  TYPE.STATUS_PLAYING;
+
+
+        //准备播放下一首
+        getMusic(song,status,dispatch);
     }
 }
-
 
 export function playNext(type) {
-    return dispatch => {
-        dispatch(
-            {
-                type: TYPE.MUSIC_NEXT,
-                playload: {
-                    type
-                },
-                meta: "播放下一首"
-            }
-        )
+
+
+
+    return (dispatch,getState) => {
+        let state = getState().MusicReducer;
+        let list = state.playingList;
+
+        let idx = state.song.index+type;
+        idx = idx<0?list.length-1:idx%list.length;
+
+        let status = TYPE.STATUS_PLAYING;
+
+        let song={
+            ...list[idx],
+            currentTime: 0,
+            index: idx,
+        };
+
+        getMusic(song,status,dispatch);
+
+        // dispatch(
+        //     {
+        //         type: TYPE.MUSIC_NEXT,
+        //         playload: {
+        //             type
+        //         },
+        //         meta: "播放下一首"
+        //     }
+        // )
     }
 }
 

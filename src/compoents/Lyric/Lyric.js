@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-    Link,withRouter
-} from 'react-router-dom';
+
 import AlloyTouch from 'alloytouch/alloy_touch.css';
 import Transform from 'css3transform';
 import './index.css';
@@ -182,10 +180,10 @@ class Lyric extends Component {
                 let top = -el.offsetTop+this.centerOffset;
 
                 this.offsetMap[idx] = top;
-                if(top<this.min)
-                    this.offsetMap[idx]=this.min;
-                else if(top>0)
-                    this.offsetMap[idx]=0;
+                // if(top<this.min)
+                //     this.offsetMap[idx]=this.min;
+                // else if(top>0)
+                //     this.offsetMap[idx]=0;
 
 
 

@@ -5,8 +5,12 @@
     /*background-color: pink;*/
     justify-content: flex-start;
     flex-direction: column;
-    background-color: skyblue;
+    background-color: #333;
     font-weight: 300;
+}
+.content.music>div{
+
+    z-index:10;
 }
 .content.music .head{
 
@@ -68,7 +72,7 @@
     margin: 0 auto;
     overflow: hidden;
     border-radius: 50%;
-    border: 10px solid rgba(0,0,0,0.5);
+    border: 20px solid hsla(0,0%,100%,.1);
 
 
 }
@@ -160,6 +164,20 @@
      animation: rotate 20s linear infinite;
  }
 
+.image{
+    width: 100%;
+    height: 100%;
+}
+.background.ignore{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: .6;
+    filter: blur(20px);
+}
 
 @keyframes rotate {
     0% {
