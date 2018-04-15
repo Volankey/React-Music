@@ -10,6 +10,7 @@
 }
 .content.music>div{
 
+
     z-index:10;
 }
 .content.music .head{
@@ -159,6 +160,8 @@
      height: 400px;
      width: 100%;
      overflow: hidden;
+     position: relative;
+     z-index: 5;
  }
  .play{
      animation: rotate 20s linear infinite;

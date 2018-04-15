@@ -100,7 +100,7 @@ export var myplayer = (function () {
         let audio = new Audio(src||null);
         //判断是否是第一次播放，IOS设备限制非点击的代码播放操作,解决办法是先播放一下
         //否则如果在then中进行播放操作，就无法被判定为按钮点击播放
-        let firstPlay = true;
+        this.firstPlay = true;
 
         //判断资源是否在请求中 防止进度条跳动
         let loading = true;
@@ -115,54 +115,60 @@ export var myplayer = (function () {
         this.pause = function () {
             audio.pause();
         };
+
         this.play =  function(){
             try{
-                if(firstPlay===true)
-                    firstPlay=false;
+                if(this.firstPlay===true){
+                    this.src = "http://dl.stream.qqmusic.qq.com/C400002ZnJAb2w8Ynn.m4a";
+                    audio.play();
+                    audio.pause();
+                    this.firstPlay=false;
+                }
+
 
                 audio.play();
                 loading=false;
             }
             catch (e){
-                if(firstPlay===true)
-                    firstPlay=false;
+                if(this.firstPlay===true)
+                    this.firstPlay=false;
                 else
                     console.log(e);
             }
 
         };
 
-        this.loadMusic = function (id) {
-            if(firstPlay){
-                console.log("first play");
-                this.src = "http://dl.stream.qqmusic.qq.com/C400002ZnJAb2w8Ynn.m4a";
-                this.play();
-                this.pause();
-            }
-            //加锁,防止进度条跳动
-            loading = true;
-            audio.currentTime = 0;
-            //////
-
-            //请求数据
-            tools.fetch(
-                {
-                    url:'http://'+domian+':3001/apis/vkey?id='+id,
-                    dataType:"json",
-                }
-            ).then(response=>{
-
-
-                player.src = response.url;
-
-
-                player.play();
-
-
-            }).catch(e=>{
-                // alert("播放错误");
-            });
-        };
+        // this.loadMusic = function (id) {
+        //     if(firstPlay){
+        //         console.log("first play");
+        //         this.src = "http://dl.stream.qqmusic.qq.com/C400002ZnJAb2w8Ynn.m4a";
+        //         this.play();
+        //         this.pause();
+        //     }
+        //     //加锁,防止进度条跳动
+        //     loading = true;
+        //     audio.currentTime = 0;
+        //     //////
+        //
+        //     //请求数据
+        //     tools.fetch(
+        //         {
+        //             url:'http://'+domian+':3001/apis/vkey?id='+id,
+        //             dataType:"json",
+        //         }
+        //     ).then(response=>{
+        //
+        //
+        //         player.src = response.url;
+        //
+        //
+        //         player.play();
+        //
+        //
+        //     }).catch(e=>{
+        //         // alert("播放错误");
+        //     });
+        // };
 
         this.bind = function (evt,fn) {
             // fn = fn.bind(this);

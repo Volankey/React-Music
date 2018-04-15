@@ -45,7 +45,11 @@
     margin: 0 10px;
 }
 #player .btn-play{
-    background-image: url("./asset/play.fw.png");
+    background: url("./asset/play.fw.png") no-repeat;
+    background-size: contain;
+}
+#player .btn-pause{
+    background: url("./asset/pause.fw.png") no-repeat;
     background-size: contain;
 }
 #player .btn.btn-list.ignore{

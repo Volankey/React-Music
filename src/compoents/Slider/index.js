@@ -13,16 +13,23 @@ class Slider extends Component {
             left:0
         }
     }
+
     componentDidMount() {
-        let len = this.props.children.length-1;
+        let len = this.len-1;
         len = (len>=0)?len:0;
         this.width = this.slider.offsetWidth;
         this.min = -this.width*len;
+
+        this.idx = this.props.seamless?1:0;
+
+        this.x = -this.idx*this.width;
+
+
         this.setState({
-            width:this.width
+            width:this.width,
+            left:this.x
         });
-        this.x = 0;
-        this.idx = 0;
+
         window.addEventListener("touchmove",this.handleMove);
         // this.slider.addEventListener("touchend",this.handleEnd);
     }
@@ -50,11 +57,11 @@ class Slider extends Component {
             this.offset+=deltaX;
 
 
-            if(Math.abs(deltaY)>Math.abs(deltaX)){
-                return;
-            }
-            e.stopImmediatePropagation();
-            if(x>0 || x<this.min)
+            // if(Math.abs(deltaY)>Math.abs(deltaX)){
+            //     return;
+            // }
+            // e.stopImmediatePropagation();
+            if(!this.props.seamless && (x>0 || x<this.min))
                 return;
 
             this.x = x;
@@ -72,15 +79,16 @@ class Slider extends Component {
 
     }
     handleEnd(e){
+
         // console.log("slider");
         if(this.isTracking){
-            let endX = e.changedTouches[0].clientX,
-                endY = e.changedTouches[0].clientY;
+            // let endX = e.changedTouches[0].clientX,
+            //     endY = e.changedTouches[0].clientY;
 
             let item_pos =-this.state.width*this.idx;
             let w = (item_pos-this.x);
             // let w = this.startX-endX;
-            let y = this.startY-endY;
+            // let y = this.startY-endY;
             this.transitionDuration=300+"ms";
             console.log(w);
 
@@ -101,7 +109,7 @@ class Slider extends Component {
                 let idx = this.idx+1;
 
 
-                if(idx<this.props.children.length){
+                if(idx<this.len){
                     this.idx = idx;
                     this.x = -this.state.width*this.idx;
 
@@ -131,28 +139,93 @@ class Slider extends Component {
 
 
             }
+            else{
+                this.x = item_pos;
+            }
 
-
-            this.setState({
-                left:this.x
-            });
+            this.scrollTo(this.idx);
+            // this.setState({
+            //     left:this.x
+            // });
             this.isTracking=false;
         }
 
     }
     computeStyle(){
-        let children = this.props.children && this.props.children;
+        // let children = this.props.children && this.props.children;
+        let w = this.len*this.state.width;
+        w = isNaN(w)?0:w;
         let style = {
-                width:children.length*this.state.width,
+                width:w,
                 transform:`translate(${this.state.left}px,0)`,
-                transitionDuration:this.transitionDuration
             };
-
+        if(this.content)
+            this.content.style.transitionDuration=this.transitionDuration;
         return style;
 
     }
-    render() {
+    scrollTo(idx){
+        this.isAnimating = true;
+        this.idx=idx;
+        this.x = -this.state.width*idx;
+        this.setState({
+            left:this.x
+        })
+    }
+    animateEnd(){
+        if(this.isAnimating === true){
+            this.isAnimating = false;
+
+            this.transitionDuration=null;
+            if(this.idx===0){
+
+                //说明是源数据的最后一图
+                this.scrollTo(this.len-2);
+            }
+            else if(this.idx===this.len-1){
+
+                //说明是第一个图
+                this.scrollTo(1);
+            }
+        }
+
+    }
+    renderItems(){
         let children = this.props.children && this.props.children;
+
+        let els = children.map(
+            (el,idx)=>{
+
+                return (
+                    <li
+                        key={idx}
+                        style={{
+                            width:this.state.width
+                        }}
+                    >
+                        {el}
+                    </li>
+
+                );
+            }
+        );
+        //无缝
+        if(this.props.seamless){
+            els.push((<li  key={els.length} style={{width:this.state.width}}>
+                {children[0]}
+                     </li>));
+            els.unshift((<li key={-1} style={{width:this.state.width}}>
+                {children[els.length-2]}
+            </li>))
+        }
+        this.len = els.length;
+        return els;
+    }
+    render() {
+
+
+        let style = this.computeStyle();
+
         return (
             <div className="slider"
                  ref={(ref)=>{
@@ -163,25 +236,17 @@ class Slider extends Component {
                  onTouchEnd={this.handleEnd}
             >
                 <ul
-                    style={this.computeStyle()}
+                    ref={(ref)=>{this.content=ref;}}
+                    id="slider-content"
+                    onTransitionEnd={()=>{
+                        this.animateEnd();
+                    }}
+                    style={style}
                 >
+
+
                     {
-                        children.map(
-                            (el,idx)=>{
-
-                                return (
-                                    <li
-                                        key={idx}
-                                        style={{
-                                            width:this.state.width
-                                        }}
-                                    >
-                                        {el}
-                                    </li>
-
-                                );
-                            }
-                        )
+                        this.renderItems()
                     }
                 </ul>
             </div>

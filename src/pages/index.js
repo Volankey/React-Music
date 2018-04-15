@@ -53,7 +53,11 @@ class Home extends Component {
                             <Route path='/music' exact component={MusicPlayer}/>
                         </Switch>
 
-                        <Player song={this.props.song}/>
+                        <Player
+                            status={this.props.status}
+                            song={this.props.song}
+                            play={this.props.play}
+                        />
                     </div>
 
                 </Router>
@@ -67,6 +71,7 @@ class Home extends Component {
 export default connect(
     (state) => ({
         song:state.MusicReducer.song,
+        status:state.MusicReducer.status
 
     }),
     (dispatch) => ({

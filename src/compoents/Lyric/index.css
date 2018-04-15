@@ -15,19 +15,19 @@
     width: 100%;
 
 }
-#scroll{
+#lyric #scroll{
     position: relative;
 
 }
-#scroll p{
+#lyric #scroll p{
     font-size: 34px;
     overflow: hidden;
     margin: 15px 10px;
 }
-#scroll .on{
+#lyric #scroll .on{
     color: rgb(65,191,128);
 }
-#lyric .no-lyric{
+#lyric #lyric .no-lyric{
     display: flex;
     justify-content: center;
     align-items: center;

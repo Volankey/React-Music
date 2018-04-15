@@ -7,6 +7,9 @@ function getMusic(song,status,dispatch) {
 
     getLyric(song.id,dispatch);
 
+    if(player.firstPlay===true){
+        player.play();
+    }
     tools.fetch(
         {
             url:'http://'+domian+':3001/apis/vkey?id='+song.id,
@@ -15,6 +18,7 @@ function getMusic(song,status,dispatch) {
     ).then(response=>{
         player.src = response.url;
         player.play();
+
 
     }).then(()=>{
         dispatch(

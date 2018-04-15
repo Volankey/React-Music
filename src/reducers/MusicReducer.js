@@ -15,6 +15,7 @@ const  initialState = Immutable({
             index:-1,
             id:null,
             duration:0,
+            album:"http://www.bimdiot.net/images/demo.jpg"
         },
         //当前歌曲的歌词
         lyric:null,

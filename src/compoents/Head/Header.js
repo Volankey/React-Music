@@ -20,13 +20,12 @@ class Header extends Component {
                     <Link to={"/find"}>
                         <span>音乐馆</span>
                     </Link>
-                </div>
-
-                <div className="search">
                     <Link to={"/search"}>
-                        <input type="text" placeholder="搜索" disabled={true}/>
+                        <span>搜索</span>
                     </Link>
                 </div>
+
+
 
 
             </div>

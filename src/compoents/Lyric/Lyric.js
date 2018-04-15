@@ -94,7 +94,7 @@ class Lyric extends Component {
         this.scrollerHeight = this.scroller.offsetHeight;
         this.centerOffset = this.wrapHeight/2;
 
-        let min = this.min = -this.scrollerHeight+this.wrapHeight-20;
+        let min = this.min = -this.scrollerHeight+this.wrapHeight/2-20;
         // console.log(min);
         min=min>=0?0:min;
         Transform(this.scroller);
@@ -105,7 +105,7 @@ class Lyric extends Component {
             property: "translateY",  //被运动的属性
             min: min, //不必需,运动属性的最小值
             max: 0, //不必需,滚动属性的最大值
-            sensitivity: 0.8,//不必需,触摸区域的灵敏度，默认值为1，可以为负数
+            sensitivity: 1,//不必需,触摸区域的灵敏度，默认值为1，可以为负数
             factor: 1,//不必需,表示触摸位移运动位移与被运动属性映射关系，默认值是1
             moveFactor: 1,//不必需,表示touchmove位移与被运动属性映射关系，默认值是1
             step: 1,//用于校正到step的整数倍
@@ -114,7 +114,7 @@ class Lyric extends Component {
             initialValue: 0,
             // change:function(value){console.log(value)  },
             touchStart:(evt, value)=>{ this.isMoving = true;  },
-            touchMove:function(evt, value){ console.log("lytic 滚动");evt.stopPropagation();  },
+            touchMove:function(evt, value){ evt.stopPropagation();  },
             touchEnd:(evt,value)=>{
                 if(this.timer)
                     clearTimeout(this.timer);
@@ -194,7 +194,7 @@ class Lyric extends Component {
                 this.alloyTouch.to(this.offsetMap[idx],dt);
 
             el.classList.add("on");
-            preEl.classList.remove("on");
+            preEl && preEl.classList.remove("on");
             // console.log(this.offsetMap[idx]);
             this.preIdx = idx;
         }
