@@ -1,0 +1,79 @@
+.content.cd{
+    position: absolute;
+    z-index:100;
+    width: 100%;
+    background-color: rgb(26,42,55);
+    flex-direction: column;
+    /*display: flex;*/
+    /*display: block;*/
+}
+.content.cd header{
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+
+
+}
+.content.cd header p.ignore{
+    max-width: 300px;
+}
+.back{
+    background: url("/asset/back.png") no-repeat center left;
+    background-size: 45px;
+    height: 45px;
+}
+.content.cd h2 span{
+    flex:1;
+}
+.content.cd .diss-item{
+    display: flex;
+    padding: 0 40px 60px;
+}
+.content.cd h2.ignore{
+    margin: 0;
+    height: 34px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.layer-wrap{
+    background-color: rgb(26,42,55);
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index:1;
+    flex: 1;
+}
+.list-wrap{
+
+    position: absolute;
+
+    flex: 1;
+    width: 100%;
+    /*overflow: hidden;*/
+    /*height: 100%;*/
+    padding-top: 40px;
+    z-index: 10;
+
+}
+.list-wrap.ignore{
+    top:300px;
+    bottom:0;
+}
+.cd-intro .filter{
+    background-color: rgba(0,0,0,0.3);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cd-intro.ignore{
+    height: 300px;
+    width: 100%;
+    /*background-position: center;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+}

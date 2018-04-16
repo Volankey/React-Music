@@ -8,10 +8,6 @@ import './index.css';
 
 class List extends PureComponent {
 
-    constructor(props){
-        super(props);
-
-    }
 
     componentWillUnmount(){
         this.destory();
@@ -24,7 +20,7 @@ class List extends PureComponent {
     initScroller(){
         this.loaded = true;
         // this.wrapHeight = this.props.height;
-        this.wrapHeight = this.wrap.parentNode.offsetHeight;
+        this.wrapHeight = this.props.height || this.wrap.parentNode.offsetHeight;
         this.scrollerHeight = this.scroller.offsetHeight;
         this.centerOffset = this.wrapHeight/2;
 
@@ -33,7 +29,7 @@ class List extends PureComponent {
         min=min>=0?0:min;
         Transform(this.scroller);
         this.alloyTouch = new AlloyTouch({
-            touch:"#scorller-wrap",//反馈触摸的dom
+            touch:this.wrap,//反馈触摸的dom
             vertical: true,//不必需，默认是true代表监听竖直方向touch
             target: this.scroller , //运动的对象
             property: "translateY",  //被运动的属性
@@ -46,25 +42,14 @@ class List extends PureComponent {
             bindSelf: false,
             maxSpeed: 1.5, //不必需，触摸反馈的最大速度限制
             initialValue: 0,
-            // // change:function(value){console.log(value)  },
-            // touchStart:(evt, value)=>{ this.isMoving = true;  },
-            // touchMove:function(evt, value){ evt.stopPropagation();  },
-            // touchEnd:(evt,value)=>{
-            //     if(this.timer)
-            //         clearTimeout(this.timer);
-            //
-            //     this.timer = setTimeout(()=>{
-            //         this.isMoving = false;
-            //     },3000);
-            //
-            // },
+            change:(v)=>{this.props.change && this.props.change(v)},
+            touchMove:function(evt, value){ evt.stopPropagation();  },
+
 
         });
 
     }
-    init(){
 
-    }
     componentDidMount(){
 
         this.initScroller();
@@ -80,9 +65,12 @@ class List extends PureComponent {
 
     render() {
 
-        console.log( this.props.children);
+        // console.log( this.props.children);
+        let  overflow = this.props.overHidden===false?"inherit":"hidden";
         return (
-            <div  id="scorller-wrap" className="ignore"  ref={(ref)=>{this.wrap = ref}} >
+            <div style={{
+                overflow:overflow
+            }}  id="scorller-wrap" className="ignore"  ref={(ref)=>{this.wrap = ref}} >
 
                 <div id="scroller-content" ref={(ref)=>{this.scroller = ref}}>
                     {

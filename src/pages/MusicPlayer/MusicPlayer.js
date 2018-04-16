@@ -10,7 +10,7 @@ import Slider from '../../compoents/Slider';
 import './index.css';
 
 import {
-    Link, withRouter
+     withRouter
 } from 'react-router-dom';
 var player = myplayer();
 class MusicPlayer extends Component {

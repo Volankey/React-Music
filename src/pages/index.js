@@ -7,6 +7,7 @@ import MusicPlayer from './MusicPlayer/MusicPlayer';
 import Search from './Search/Search';
 import Header from '../compoents/Head/Header';
 import Player from '../compoents/Player/Player';
+import CdList from './CdList';
 import {myplayer} from '../tools/Tools';
 import * as TYPE from '../constants/PlayerType';
 
@@ -51,6 +52,7 @@ class Home extends Component {
                             <Route path='/find' exact component={Find}/>
                             <Route path='/search' exact component={Search}/>
                             <Route path='/music' exact component={MusicPlayer}/>
+                            <Route path='/list/:id' exact component={CdList}/>
                         </Switch>
 
                         <Player
