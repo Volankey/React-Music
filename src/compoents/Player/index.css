@@ -2,6 +2,7 @@
     display: flex;
     font-size: 26px;
     background-color: rgb(30,34,32);
+    width: 100%;
 }
 #player .left{
     margin-left: 15px;
@@ -29,9 +30,20 @@
     display: flex;
     align-items: center;
 }
+#player.ignore{
+    height: 60px;
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+}
 #player .info{
     padding: 15px;
     flex: 4;
+
+
+}
+#player .info p{
+    max-width: 350px;
 }
 #player .info .singer{
     color: rgba(255,255,255,0.8);

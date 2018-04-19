@@ -7,11 +7,12 @@
     flex-direction: column;
     background-color: #333;
     font-weight: 300;
+    z-index: 200;
 }
 .content.music>div{
 
 
-    z-index:10;
+    z-index:210;
 }
 .content.music .head{
 

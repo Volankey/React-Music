@@ -22,35 +22,39 @@ class Find extends Component {
 
             <div className="content find" ref={(r)=>{this.content = r;}}>
 
-                <List
+                <div className="list-wrap ignore">
+                    <List
 
-                    data={data.data.list}
-                    renderItem={(item,index)=>{
-                        return (
-                            <Link to={"/list/"+item.dissid} key={item.dissid}>
-                                <div  className="diss-item" key={item.dissid}>
-                                    <img className="ignore" src={item.imgurl} alt=""/>
-                                    <div className="intro">
-                                        <p>{item.creator.name}</p>
-                                        <p>{item.dissname}</p>
+                        data={data.data.list}
+                        renderItem={(item,index)=>{
+                            return (
+
+                                <Link to={"/list/"+item.dissid} key={item.dissid}>
+                                    <div  className="diss-item" key={item.dissid}>
+                                        <img className="ignore" src={item.imgurl} alt=""/>
+                                        <div className="intro">
+                                            <p>{item.creator.name}</p>
+                                            <p>{item.dissname}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </Link>
+                                </Link>
 
-                        )
-                    }}
-                >
-                    <div className="slider-wrap ignore">
-                        <Slider seamless={true}>
-                            <img src="https://y.gtimg.cn/music/photo_new/T003R720x288M000002tegZM3M9s88.jpg?max_age=2592000" alt=""/>
-                            <img src="https://y.gtimg.cn/music/photo_new/T003R720x288M000000HA9Sn3blPws.jpg?max_age=2592000" alt=""/>
-                            <img src="https://y.gtimg.cn/music/photo_new/T003R720x288M000003zOYtr0XJ0iN.jpg?max_age=2592000" alt=""/>
-                            <img src="https://y.gtimg.cn/music/photo_new/T003R720x288M000000NUcZh2V2e8F.jpg?max_age=2592000" alt=""/>
-                        </Slider>
-                    </div>
+                            )
+                        }}
+                    >
+                        <div className="slider-wrap ignore">
+                            <Slider seamless={true}>
+                                <img src="https://y.gtimg.cn/music/photo_new/T003R720x288M000002tegZM3M9s88.jpg?max_age=2592000" alt=""/>
+                                <img src="https://y.gtimg.cn/music/photo_new/T003R720x288M000000HA9Sn3blPws.jpg?max_age=2592000" alt=""/>
+                                <img src="https://y.gtimg.cn/music/photo_new/T003R720x288M000003zOYtr0XJ0iN.jpg?max_age=2592000" alt=""/>
+                                <img src="https://y.gtimg.cn/music/photo_new/T003R720x288M000000NUcZh2V2e8F.jpg?max_age=2592000" alt=""/>
+                            </Slider>
+                        </div>
 
 
-                </List>
+                    </List>
+                </div>
+
             </div>
 
         );

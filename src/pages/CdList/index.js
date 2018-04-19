@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
-
+import { connect } from 'react-redux'; // 引入connect函数
+import * as PlayerAction from "../../actions/PlayerAction";
+import * as CDListAcrion from "../../actions/CDListAcrion";
 import {
     withRouter
 } from 'react-router-dom';
@@ -17,37 +19,43 @@ import './index.css';
 *  stick来控制是否到达阈值
 * */
 
-const renderItem = (item,index)=>{
-    let singers = item.singer.map(function (singer) {
-        return singer.name;
-    });
-    singers = singers.join("/");
-    return (
-        <div className="diss-item" key={item.id}>
-
-            <div className="intro">
-                <p className="ignore text-overflow">{item.title}</p>
-                <p className="ignore text-overflow">{singers+" · " +item.album.name}</p>
-            </div>
-        </div>
-    )
-};
 
 class CdList extends PureComponent {
-    renderContent = (loading)=>{
+
+    renderItem = (item,index)=>{
+        let singers = item.singer.map(function (singer) {
+            return singer.name;
+        });
+        singers = singers.join("/");
+        return (
+            <div className="diss-item" key={item.id} onClick={()=>{
+                this.props.addToPlaingList(item);
+            }}>
+
+                <div className="intro">
+                    <p className="ignore text-overflow">{item.title}</p>
+                    <p className="ignore text-overflow">{singers+" · " +item.album.name}</p>
+                </div>
+            </div>
+        )
+    };
+    renderContent = ()=>{
         // data.cdlist[0].songlist
 
-        if(this.state.data.cdlist[0]!=undefined && this.state.data.cdlist[0].songlist){
-            let data = this.state.data.cdlist[0].songlist;
+        if(this.props.data.cdlist[0]!=undefined && this.props.data.cdlist[0].songlist){
+            let data = this.props.data.cdlist[0].songlist;
             return (
                 <List
+                    //正在加载？
+                    isloading={this.props.loading}
                     //溢出是否隐藏
                     overHidden={false}
                     //监听change
                     change={this.setTop}
                     //数据
+                    end={this.props.loadMore}
                     data={data}
-                    renderItem={renderItem}
+                    renderItem={this.renderItem}
                 >
                 </List>
             )
@@ -81,17 +89,18 @@ class CdList extends PureComponent {
         this.max = this.cdHeight-this.titleHeight;
 
         let id = this.props.match.params.id;
-        id && tools.fetch(
-            {
-                url:'http://'+domain+':3001/apis/list_data?id='+id,
-                dataType:"json",
-            }
-        ).then((res)=>{
-            console.log(res);
-            this.setState({
-                data:Immutable(res)
-            })
-        });
+        id  && this.props.getData(id);
+        // id && tools.fetch(
+        //     {
+        //         url:'http://'+domain+':3001/apis/list_data?id='+id,
+        //         dataType:"json",
+        //     }
+        // ).then((res)=>{
+        //     console.log(res);
+        //     this.setState({
+        //         data:Immutable(res)
+        //     })
+        // });
 
         // alert();
 
@@ -116,7 +125,7 @@ class CdList extends PureComponent {
                 })
         }
         else{
-            this.setState({
+            this.max && this.setState({
                 top:-this.max,
                 stick:true
 
@@ -126,7 +135,7 @@ class CdList extends PureComponent {
     }
     render() {
 
-        let data = this.state.data.cdlist;
+        let data = this.props.data.cdlist;
         // data=data.length?data[0]:{};
         // console.log(data);
         let dissname ="加载中",
@@ -146,7 +155,7 @@ class CdList extends PureComponent {
             transform:`scale(${this.state.scale})`
         };
 
-        let display = this.state.stick?"none":"block";
+        let display = this.state.stick?"none":"flex";
         return (
 
             <div className="content cd" ref={(r)=>{this.content = r;}}>
@@ -166,7 +175,7 @@ class CdList extends PureComponent {
                 <div className="cd-intro ignore" style={cd_style}>
 
                     <div className="filter">
-                        <div style={{display}} className="btn-play-all">播放全部</div>
+                        <div style={{display}} className="btn-play-all ignore"><span>播放全部</span></div>
                     </div>
                 </div>
                 {/*cd图片结束*/}
@@ -187,5 +196,22 @@ class CdList extends PureComponent {
         );
     }
 }
+export default withRouter(connect(
+    (state) => ({
+        data:state.CDDataReducer.data,
+        loading:state.CDDataReducer.loading
+    }),
+    (dispatch) => ({
+        addToPlaingList: (data) => {
+            dispatch(PlayerAction.addToPlaingList(data))
+        },
+        getData:(id)=>{
+            dispatch(CDListAcrion.getData(id))
+        },
+        loadMore:()=>{
+            dispatch(CDListAcrion.loadMore())
+        }
 
-export default withRouter(CdList);
+    })
+)(CdList))
+

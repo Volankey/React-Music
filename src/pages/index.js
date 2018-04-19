@@ -36,6 +36,9 @@ class Home extends Component {
         });
         player.bind("pause",()=>{
             this.props.onPause();
+        });
+        player.bind("error",()=>{
+            this.props.onError();
         })
 
     }
@@ -87,6 +90,9 @@ export default connect(
         },
         onPlaying:()=>{
             dispatch(PlayerAction.statusChange(TYPE.STATUS_PLAYING))
+        },
+        onError:()=>{
+            dispatch(PlayerAction.playEnd())
         }
 
 

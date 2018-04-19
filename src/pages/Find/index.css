@@ -38,3 +38,10 @@
     color: #aaa;
     margin-top: 5px;
 }
+.find .list-wrap.ignore{
+    position: absolute;
+    top: 30px;
+    bottom: 60px;
+    box-sizing: border-box;
+    width: 100%;
+}

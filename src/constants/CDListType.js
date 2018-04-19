@@ -1,0 +1,5 @@
+export const CD_SONG_FETCHING = 'CD_SONG_FETCING';
+
+export const CD_SONG_FETCHEND = 'CD_SONG_FETCHEND';
+
+export const CD_SONG_LOADMORE = 'CD_SONG_LOADMORE';

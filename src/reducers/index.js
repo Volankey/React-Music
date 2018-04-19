@@ -2,10 +2,11 @@
 
 import { combineReducers } from 'redux';
 import MusicReducer from './MusicReducer';
+import CDDataReducer from './CDDataReducer';
 
 const rootReducer = combineReducers({
-    MusicReducer:MusicReducer
-
+    MusicReducer,
+    CDDataReducer
 
 });
 

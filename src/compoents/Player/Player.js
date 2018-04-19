@@ -39,7 +39,7 @@ class Player extends Component {
     render() {
         let song = this.props.song;
         return (
-            <div  id="player">
+            <div  id="player" className="ignore">
 
                     <div className="left" onClick={this.goDetail.bind(this)}>
 
@@ -47,8 +47,8 @@ class Player extends Component {
                             <div className="pic ignore"  style={{backgroundImage:"url("+song.album+")"}}></div>
                         </div>
                         <div className="info">
-                            <p>{song.name}</p>
-                            <p className="singer">{song.singer}</p>
+                            <p className="text-overflow">{song.name}</p>
+                            <p className="singer text-overflow">{song.singer}</p>
                         </div>
                     </div>
 

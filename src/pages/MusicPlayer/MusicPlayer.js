@@ -99,7 +99,7 @@ class MusicPlayer extends Component {
     render() {
 
         let { song,lyric } = this.props;
-        let d = player.duration();
+        let d = song.duration;
         let btn_cd = this.computeBtnClass();
         let mode = this.computeModeClass();
 

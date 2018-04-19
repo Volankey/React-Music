@@ -5,6 +5,10 @@ var player = myplayer();
 //播放音乐
 function getMusic(song,status,dispatch) {
 
+    if(song.id==null){
+        return;
+    }
+
     getLyric(song.id,dispatch);
 
     if(player.firstPlay===true){
@@ -86,6 +90,11 @@ export function play() {
 
             let status = state.status;
 
+
+            if(list.length===0){
+                alert("您没有歌曲需要播放~");
+                return;
+            }
             if(status === TYPE.STATUS_EMPTY){
                 idx = (idx+1)%list.length;
 
@@ -172,7 +181,53 @@ export function playEnd() {
         getMusic(song,status,dispatch);
     }
 }
+export function addToPlaingList(data) {
 
+
+     let singgers =   data.singer.map(function (singer) {
+            return singer.name
+        }).join("-");
+
+
+
+
+    return (dispatch,getState)=>{
+        let state= getState().MusicReducer;
+        let status =  TYPE.STATUS_PLAYING;
+
+        let idx = state.song.index+1;
+
+        let song = {
+            name:data.title,
+            singer:singgers,
+            id:data.mid,
+            album:data.album.mid,
+            duration:data.interval,
+            currentTime:0,
+            index:idx
+        };
+
+
+
+        dispatch(
+            {
+                type: TYPE.ADD_TO_PLAING,
+                meta: "添加了一首歌",
+                playload:{
+                    song
+                }
+            }
+        );
+
+        //准备播放下一首
+        getMusic(song,status,dispatch);
+
+
+
+
+    }
+
+}
 export function playNext(type) {
 
 

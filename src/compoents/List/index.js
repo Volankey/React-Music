@@ -42,16 +42,27 @@ class List extends PureComponent {
             bindSelf: false,
             maxSpeed: 1.5, //不必需，触摸反馈的最大速度限制
             initialValue: 0,
-            change:(v)=>{this.props.change && this.props.change(v)},
+            change:(v)=>{
+                this.top=v;
+                this.props.change && this.props.change(v);
+                if(v < this.min-30){
+                    this.props.end && this.props.end();
+                }
+            },
             touchMove:function(evt, value){ evt.stopPropagation();  },
 
 
         });
+        this.alloyTouch.to(this.top);
 
     }
+    componentDidUpdate(){
+        this.destory();
+        this.initScroller();
 
+    }
     componentDidMount(){
-
+        this.top=0;
         this.initScroller();
 
     }
@@ -83,6 +94,11 @@ class List extends PureComponent {
                         this.props.data.map((item,index)=>{
                             return this.props.renderItem(item,index);
                         })
+                    }
+                    {
+                        this.props.end && <p  className="text-center more">{
+                            this.props.isloading==true?"加载中..":"上滑动加载更多"
+                        }</p>
                     }
                 </div>
 

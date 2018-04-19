@@ -21,20 +21,20 @@ const  initialState = Immutable({
         lyric:null,
         //播放列表
         playingList:[
-            {
-                name:"Love The Way You Lie ",
-                singer:"Eminem/Rihanna",
-                id:"003bOtQz24HvqN",
-                album:"003ZkPcz3miTVA"
-
-
-            },
-            {
-                name:"说散就散",
-                singer:"袁维娅",
-                id:"003vUjJp3QwFcd",
-                album:"001xl4uF3OU04A"
-            }
+            // {
+            //     name:"Love The Way You Lie ",
+            //     singer:"Eminem/Rihanna",
+            //     id:"003bOtQz24HvqN",
+            //     album:"003ZkPcz3miTVA"
+            //
+            //
+            // },
+            // {
+            //     name:"说散就散",
+            //     singer:"袁维娅",
+            //     id:"003vUjJp3QwFcd",
+            //     album:"001xl4uF3OU04A"
+            // }
 
 
         ]
@@ -126,6 +126,21 @@ function playMusic(state,action) {
 
 
 }
+function addPlayingList(state,action) {
+    let playingList = Immutable.asMutable(state.playingList),
+        currentSong = state.song;
+
+    action.playload.song.index = currentSong.index+1;
+    playingList.splice(currentSong.index+1,0,action.playload.song);
+    playingList = Immutable(playingList);
+  // debugger;
+    console.log("播放列表:",playingList);
+    return replace(state,{
+        ...state,
+        song: action.playload.song,
+        playingList
+    });
+}
 
 export default  function MusicPlayer(state=initialState,action){
     // console.log(action);
@@ -143,6 +158,7 @@ export default  function MusicPlayer(state=initialState,action){
 
         case TYPE.MUSIC_NEXT: return playMusic(state,action);
 
+        case TYPE.ADD_TO_PLAING : return addPlayingList(state,action);
 
         default:
             return state;

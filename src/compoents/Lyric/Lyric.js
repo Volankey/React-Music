@@ -95,6 +95,7 @@ class Lyric extends Component {
         this.centerOffset = this.wrapHeight/2;
 
         let min = this.min = -this.scrollerHeight+this.wrapHeight/2-20;
+        let max = this.centerOffset;
         // console.log(min);
         min=min>=0?0:min;
         Transform(this.scroller);
@@ -104,7 +105,7 @@ class Lyric extends Component {
             target: this.scroller , //运动的对象
             property: "translateY",  //被运动的属性
             min: min, //不必需,运动属性的最小值
-            max: 0, //不必需,滚动属性的最大值
+            max: max, //不必需,滚动属性的最大值
             sensitivity: 1,//不必需,触摸区域的灵敏度，默认值为1，可以为负数
             factor: 1,//不必需,表示触摸位移运动位移与被运动属性映射关系，默认值是1
             moveFactor: 1,//不必需,表示touchmove位移与被运动属性映射关系，默认值是1
@@ -171,10 +172,12 @@ class Lyric extends Component {
     }
     scrollTo(idx,dt=300){
 
-        if(idx != this.preIdx){
+        let el = document.querySelector("#line_"+idx),
+            preEl = document.querySelector("#line_"+this.preIdx);
 
-            let el = document.querySelector("#line_"+idx),
-                preEl = document.querySelector("#line_"+this.preIdx);
+        if(idx != this.preIdx && el){
+
+
             // console.log(el);
             if(!this.offsetMap[idx]){
 
