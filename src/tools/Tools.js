@@ -1,4 +1,4 @@
-export const  domain = "192.168.1.104";
+export const  domain = "localhost";
 export  const tools  =     {
     fetch :function (param) {
         // 做一些异步操作

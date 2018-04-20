@@ -1,5 +1,6 @@
 import  * as TYPE from '../constants/PlayerType';
 import Immutable from "seamless-immutable";
+import * as tools from './ReducerTools';
 
 
 const  initialState = Immutable({
@@ -41,55 +42,14 @@ const  initialState = Immutable({
 
 });
 
-/*-----------------
-* 步骤 1.提取工具函数
-*------------------
-*/
 
-/*
-*  setValue(o,k,v)
-*  用于设置变量的值
-*  参数1 元对象 2对象的属性 3 要设置的值
-*
-* */
-function setValue(o,k,v) {
-
-    return Immutable.set(o,k,v);
-}
-/*
-*  setIn(o,a,v)
-*  用于设置变量的值
-*  参数1 元对象 2属性层次数组 3 要设置的值
-*
-* */
-function setIn(o,a,v) {
-
-    return Immutable.setIn(o,a,v);
-}
-
-/*
-*   replace(o,n,b=true)
-*   用于替换
-*   参数1 源对象 2 新对象 3 deep？
-*
-* */
-function replace(o,n,b=true) {
-    return Immutable.replace(o,n,{deep:b});
-}
-
-/*
-* 步骤2
-* 提取 case reducer
-*
-*
-* */
 
 
 
 function setLyric(state,action) {
     let data = action.playload.lyric;
         data.id= action.playload.id;
-    return setValue(state,"lyric",data);
+    return tools.setValue(state,"lyric",data);
 }
 
 //播放模式
@@ -98,18 +58,18 @@ const modes = [TYPE.LIST_LOOP,TYPE.SINGLE_LOOP,TYPE.LIST_RANDOM];
 function setMode(state,action) {
     let current = modes.indexOf(state.mode);
     let idx = (current+1)%modes.length;
-    return setValue(state,"mode",modes[idx]);
+    return tools.setValue(state,"mode",modes[idx]);
 }
 
 
 function setStatus(state,action) {
 
-    return  setValue(state,"status",action.playload.status);
+    return  tools.setValue(state,"status",action.playload.status);
 }
 
 function setCurrentTime(state,action) {
 
-    return setIn(state,["song","currentTime"],action.playload.current);
+    return tools.setIn(state,["song","currentTime"],action.playload.current);
 }
 
 function playMusic(state,action) {
@@ -118,7 +78,7 @@ function playMusic(state,action) {
     let song = playload.song,
         status = playload.status;
         song.album='https://y.gtimg.cn/music/photo_new/T002R300x300M000'+song.album+'.jpg?max_age=2592000';
-    return replace(state,{
+    return tools.replace(state,{
         ...state,
         status:status,
         song: song
@@ -135,7 +95,7 @@ function addPlayingList(state,action) {
     playingList = Immutable(playingList);
   // debugger;
     console.log("播放列表:",playingList);
-    return replace(state,{
+    return tools.replace(state,{
         ...state,
         song: action.playload.song,
         playingList

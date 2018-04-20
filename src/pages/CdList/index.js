@@ -7,8 +7,7 @@ import {
 } from 'react-router-dom';
 import List from '../../compoents/List'
 
-import {tools,domain} from '../../tools/Tools';
-import Immutable from "seamless-immutable";
+
 import './index.css';
 
 // import data from './d.json';

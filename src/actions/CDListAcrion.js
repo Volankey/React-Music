@@ -15,6 +15,7 @@ export function loadMore() {
             dispatch({
                 type:TYPE.CD_SONG_FETCHING,
                 meta:"正在取回歌单列表数据",
+
             });
             tools.fetch(
                 {
@@ -59,6 +60,9 @@ export function getData(id){
         dispatch({
             type:TYPE.CD_SONG_FETCHING,
             meta:"正在取回歌单列表数据",
+            playload:{
+                notMore:true
+            }
         });
 
 

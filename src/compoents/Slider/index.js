@@ -210,7 +210,8 @@ class Slider extends Component {
             }
         );
         //无缝
-        if(this.props.seamless){
+        if(this.props.seamless && children.length>=2){
+            els = Array.prototype.slice.apply(els);
             els.push((<li  key={els.length} style={{width:this.state.width}}>
                 {children[0]}
                      </li>));

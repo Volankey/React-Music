@@ -1,5 +1,7 @@
 import Immutable from "seamless-immutable";
 import  * as TYPE from '../constants/CDListType';
+import * as tools from './ReducerTools';
+
 const  initialState = Immutable({
     data:{
         cdlist:[
@@ -10,27 +12,22 @@ const  initialState = Immutable({
     end:0,
     loading:false
 });
-function setValue(o,k,v) {
 
-    return Immutable.set(o,k,v);
-}
-function setIn(o,a,v) {
-
-    return Immutable.setIn(o,a,v);
-}
-function replace(o,n,b=true) {
-    return Immutable.replace(o,n,{deep:b});
-}
 
 //正在取回数据
 function fetchingData(state,action) {
 
-    return setValue(state,"loading",true);
+    if(action.playload && action.playload.notMore){
+        return tools.setValue(tools.setValue(state,"loading",true),"data",{
+            cdlist:[]
+        })
+    }
+    return tools.setValue(state,"loading",true);
 
 }
 
 function setData(state,action) {
-    return replace(state,{
+    return tools.replace(state,{
         data:action.playload.data,
         loading:false,
         start:action.playload.start,
@@ -42,10 +39,10 @@ function setMore(state,action) {
     let cd_list = Immutable.asMutable(state.data.cdlist);
     let songlist =  cd_list[0].songlist.concat(action.playload.list);
 
-    cd_list = setIn(cd_list,["0","songlist"],songlist);
+    cd_list = tools.setIn(cd_list,["0","songlist"],songlist);
     // cd_list[0].songlist = songlist;
     console.log(cd_list);
-    return replace(state,{
+    return tools.replace(state,{
         data:{
             ...state.data,
             cdlist:cd_list

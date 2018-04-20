@@ -1,21 +1,24 @@
-import React, { Component } from 'react';
-
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux'; // 引入connect函数
 import Slider from '../../compoents/Slider'
 import List from '../../compoents/List'
+import Immutable from "seamless-immutable";
 import {
     Link
 } from 'react-router-dom';
 import './index.css';
+import * as SongListAction from '../../actions/SongListAction';
 
-import data from './d.json';
-class Find extends Component {
+
+
+class Find extends PureComponent {
 
     constructor(props){
         super(props);
-        console.log(data);
+        // console.log(data);
     }
     componentDidMount(){
-
+        this.props.getData();
     }
     render() {
         return (
@@ -25,7 +28,7 @@ class Find extends Component {
                 <div className="list-wrap ignore">
                     <List
 
-                        data={data.data.list}
+                        data={this.props.data.list}
                         renderItem={(item,index)=>{
                             return (
 
@@ -33,8 +36,8 @@ class Find extends Component {
                                     <div  className="diss-item" key={item.dissid}>
                                         <img className="ignore" src={item.imgurl} alt=""/>
                                         <div className="intro">
-                                            <p>{item.creator.name}</p>
                                             <p>{item.dissname}</p>
+                                            <p>{item.creator.name}</p>
                                         </div>
                                     </div>
                                 </Link>
@@ -44,10 +47,13 @@ class Find extends Component {
                     >
                         <div className="slider-wrap ignore">
                             <Slider seamless={true}>
-                                <img src="https://y.gtimg.cn/music/photo_new/T003R720x288M000002tegZM3M9s88.jpg?max_age=2592000" alt=""/>
-                                <img src="https://y.gtimg.cn/music/photo_new/T003R720x288M000000HA9Sn3blPws.jpg?max_age=2592000" alt=""/>
-                                <img src="https://y.gtimg.cn/music/photo_new/T003R720x288M000003zOYtr0XJ0iN.jpg?max_age=2592000" alt=""/>
-                                <img src="https://y.gtimg.cn/music/photo_new/T003R720x288M000000NUcZh2V2e8F.jpg?max_age=2592000" alt=""/>
+                                {
+                                    Immutable.asMutable(this.props.slider).map((item,index)=>{
+
+                                        return (<a href={item.linkUrl}>
+                                            <img key={item.id} src={item.picUrl} alt=""/></a> )
+                                    })
+                                }
                             </Slider>
                         </div>
 
@@ -61,4 +67,16 @@ class Find extends Component {
     }
 }
 
-export default Find;
+export default connect(
+    (state) => ({
+        data:state.SongListDataReducer.data,
+        loading:state.SongListDataReducer.loading,
+        slider:state.SongListDataReducer.slider
+    }),
+    (dispatch) => ({
+        getData:()=>{
+            dispatch(SongListAction.getData())
+        },
+
+    })
+)(Find)
