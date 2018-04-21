@@ -18,7 +18,9 @@ class Slider extends Component {
             left:0
         }
     }
-
+    componentWillUnmount(){
+        clearTimeout(this.autoSlideTimer)
+    }
     componentDidMount() {
         let len = this.len-1;
         len = (len>=0)?len:0;
@@ -178,7 +180,7 @@ class Slider extends Component {
             this.isTracking=false;
             this.isMoving = false;
         }
-        this.autoSlide();
+        this.props.seamless && this.autoSlide();
 
     }
     computeStyle(){
@@ -289,6 +291,7 @@ class Slider extends Component {
 }
 Slider.defaultProps = {
     autoSlide: true,
-    interval:3000
+    interval:3000,
+    seamless:false
 };
 export default Slider;

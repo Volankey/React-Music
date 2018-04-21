@@ -21,7 +21,7 @@ function fetchingData(state,action) {
 }
 
 function setData(state,action) {
-    console.log(action.playload.data);
+    // console.log(action.playload.data);
     return tools.replace(state,{
         ...state,
         data:action.playload.data,
@@ -38,7 +38,7 @@ function setSlider(state,action) {
 }
 
 export default  function SongListDataReducer(state=initialState,action){
-    console.log(state);
+    // console.log(state);
     switch (action.type)
     {
         case TYPE.SONG_LIST_FETCHING: return fetchingData(state,action);

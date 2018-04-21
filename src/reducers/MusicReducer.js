@@ -1,6 +1,8 @@
 import  * as TYPE from '../constants/PlayerType';
 import Immutable from "seamless-immutable";
 import * as tools from './ReducerTools';
+import {setIn} from "./ReducerTools";
+import {setValue} from "./ReducerTools";
 
 
 const  initialState = Immutable({
@@ -38,7 +40,10 @@ const  initialState = Immutable({
             // }
 
 
-        ]
+        ],
+        list:{
+
+        }
 
 });
 
@@ -87,18 +92,27 @@ function playMusic(state,action) {
 
 }
 function addPlayingList(state,action) {
+
+    //如果已经存在那么直接播放这个歌曲
+    if(state.list[action.playload.song.id]){
+        console.log(state);
+        return setValue(state,"song",action.playload.song);
+    }
+    //否则将这首歌加入到当前歌曲的下一首
     let playingList = Immutable.asMutable(state.playingList),
         currentSong = state.song;
 
     action.playload.song.index = currentSong.index+1;
     playingList.splice(currentSong.index+1,0,action.playload.song);
     playingList = Immutable(playingList);
+
+    let new_state = setIn(state,["list",action.playload.song.id],action.playload.song);
   // debugger;
     console.log("播放列表:",playingList);
-    return tools.replace(state,{
-        ...state,
+    return tools.replace(new_state,{
+        ...new_state,
         song: action.playload.song,
-        playingList
+        playingList,
     });
 }
 
