@@ -46,12 +46,14 @@ class Find extends PureComponent {
                         }}
                     >
                         <div className="slider-wrap ignore">
-                            <Slider seamless={true}>
+                            <Slider
+                                interval={5000}
+                                seamless={true}>
                                 {
                                     Immutable.asMutable(this.props.slider).map((item,index)=>{
 
-                                        return (<a href={item.linkUrl}>
-                                            <img key={item.id} src={item.picUrl} alt=""/></a> )
+                                        return (<a key={item.id} href={item.linkUrl}>
+                                            <img  src={item.picUrl} alt=""/></a> )
                                     })
                                 }
                             </Slider>

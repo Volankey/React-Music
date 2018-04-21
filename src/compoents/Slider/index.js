@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import "./index.css"
 
+/*
+* props : seamless（是否支持无缝滚动）autoSlide（时间间隔自动滚动） interval(间隔时间)
+* children:滚动的内容
+* 目前暂时只能够横向滚动
+* */
 class Slider extends Component {
 
     constructor(props){
@@ -24,6 +29,11 @@ class Slider extends Component {
 
         this.x = -this.idx*this.width;
 
+        //如果是无缝滚动
+        if(this.props.seamless && this.props.autoSlide===true){
+            this.autoSlide();
+        }
+
 
         this.setState({
             width:this.width,
@@ -32,6 +42,22 @@ class Slider extends Component {
 
         window.addEventListener("touchmove",this.handleMove);
         // this.slider.addEventListener("touchend",this.handleEnd);
+    }
+    autoSlide(){
+        this.autoSlideTimer = setTimeout(()=>{
+
+            if(!this.isMoving && !this.isAnimating){
+
+                this.transitionDuration=300+"ms";
+                let idx = this.idx +1 ;
+                idx = idx % this.len;
+
+                this.scrollTo(idx);
+
+            }
+
+            this.autoSlide();
+        },this.props.interval);
     }
     handleStart(e){
         this.isMoving = true;
@@ -42,6 +68,7 @@ class Slider extends Component {
         this.preX = this.startX;
         this.preY = this.startY;
         this.offset = 0;
+        clearTimeout(this.autoSlideTimer);
         // alert("slider")
     }
     handleMove(e){
@@ -90,6 +117,8 @@ class Slider extends Component {
             // let w = this.startX-endX;
             // let y = this.startY-endY;
             this.transitionDuration=300+"ms";
+
+
             console.log(w);
 
 
@@ -142,13 +171,14 @@ class Slider extends Component {
             else{
                 this.x = item_pos;
             }
-
             this.scrollTo(this.idx);
             // this.setState({
             //     left:this.x
             // });
             this.isTracking=false;
+            this.isMoving = false;
         }
+        this.autoSlide();
 
     }
     computeStyle(){
@@ -164,8 +194,8 @@ class Slider extends Component {
         return style;
 
     }
-    scrollTo(idx){
-        this.isAnimating = true;
+    scrollTo(idx,isAnimating=true){
+        this.isAnimating = isAnimating;
         this.idx=idx;
         this.x = -this.state.width*idx;
         this.setState({
@@ -180,12 +210,12 @@ class Slider extends Component {
             if(this.idx===0){
 
                 //说明是源数据的最后一图
-                this.scrollTo(this.len-2);
+                this.scrollTo(this.len-2,false);
             }
             else if(this.idx===this.len-1){
 
                 //说明是第一个图
-                this.scrollTo(1);
+                this.scrollTo(1,false);
             }
         }
 
@@ -257,5 +287,8 @@ class Slider extends Component {
         );
     }
 }
-
+Slider.defaultProps = {
+    autoSlide: true,
+    interval:3000
+};
 export default Slider;
