@@ -82,6 +82,10 @@ function setCurrentTime(state,action) {
 function playMusic(state,action) {
     let playload = action.playload;
 
+    //如果没有歌曲了
+    if(state.playingList.length===0)
+        return initialState;
+
     let song = playload.song,
         status = playload.status;
         song.album='https://y.gtimg.cn/music/photo_new/T002R300x300M000'+song.album+'.jpg?max_age=2592000';
@@ -123,8 +127,13 @@ function deleteById(state,action) {
 
 
 
+
+
     delete list[song.id];
 
+    //如果没有歌曲了
+    if(playlist.length===0)
+        return initialState;
 
     let n =  tools.replace(state,{
         ...state,
@@ -188,6 +197,8 @@ export default  function MusicPlayer(state=initialState,action){
         case TYPE.CLEAR_PLAYING_LIST: return clearList(state,action);
 
         case TYPE.DELETE_SONG: return deleteById(state,action);
+
+
         default:
             return state;
     }

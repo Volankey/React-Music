@@ -5,6 +5,12 @@ var player = myplayer();
 //播放音乐
 function getMusic(song,status,dispatch) {
 
+
+    if(song==null){
+        player.pause();
+      return;
+    }
+
     if(song.id==null){
         return;
     }
@@ -265,6 +271,9 @@ function getNext(list,currentIdx,type=1) {
     let idx = currentIdx+type;
     idx = idx<0?list.length-1:idx%list.length;
 
+    if(list[idx]==null){
+        return null;
+    }
     let song={
         ...list[idx],
         currentTime: 0,
@@ -322,6 +331,11 @@ export function deleteById(song) {
         let state = getState().MusicReducer;
 
         let currentId = state.song.id;
+
+        let list = state.playingList;
+
+        let next_song=getNext(list,state.song.index);
+
         dispatch(
             {
                 type: TYPE.DELETE_SONG,
@@ -333,8 +347,15 @@ export function deleteById(song) {
         );
 
         if(currentId === song.id){
-            let list = state.playingList;
-            let next_song=getNext(list,state.song.index);
+
+            let list = getState().MusicReducer.playingList;
+
+            if(list.length==0){
+                player.pause();
+                return;
+            }
+
+
             getMusic(next_song,TYPE.STATUS_PLAYING,dispatch);
         }
     }

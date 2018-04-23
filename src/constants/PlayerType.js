@@ -21,7 +21,8 @@ export const SET_CURRENTTIME= 'SET_CURRENTTIME';
 
 export const ADD_TO_PLAING = 'ADD_TO_PLAING',
              CLEAR_PLAYING_LIST='CLEAR_PLAYING_LIST',
-             DELETE_SONG = 'DELETE_SONG';
+             DELETE_SONG = 'DELETE_SONG',
+             INIT = 'INIT';
 
 export const    STATUS_PLAYING = 'STATUS_PLAYING',
                 STATUS_PAUSE = 'STATUS_PAUSE',
