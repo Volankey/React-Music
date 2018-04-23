@@ -22,7 +22,7 @@ class PlayingList extends PureComponent {
                 <p
                     onClick={(e)=>{
                         e.stopPropagation();
-                        this.props.play(item.index)
+                        this.props.play(index)
                     }}
                     className="text-overflow info"
                 >
