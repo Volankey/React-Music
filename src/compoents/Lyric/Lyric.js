@@ -115,7 +115,10 @@ class Lyric extends Component {
             initialValue: 0,
             // change:function(value){console.log(value)  },
             touchStart:(evt, value)=>{ this.isMoving = true;  },
-            touchMove:function(evt, value){ evt.stopPropagation();  },
+            touchMove:function(evt, value){
+                evt.stopPropagation();
+                console.log("lyric");
+            },
             touchEnd:(evt,value)=>{
                 if(this.timer)
                     clearTimeout(this.timer);

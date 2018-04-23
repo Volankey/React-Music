@@ -57,7 +57,9 @@ class Player extends Component {
                     <div className={"btn ignore "+this.computeBtnClass()}
                          onClick={()=>{this.props.play()}}
                     > </div>
-                    <div className="btn ignore btn-list"></div>
+                    <div className="btn ignore btn-list" onClick={()=>{
+                        this.props.show();
+                    }}></div>
                 </div>
 
 

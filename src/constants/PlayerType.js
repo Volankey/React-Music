@@ -19,7 +19,9 @@ export const CHANGE_STATUS= 'CHANGE_STATUS';
 export const SET_CURRENTTIME= 'SET_CURRENTTIME';
 
 
-export const ADD_TO_PLAING = 'ADD_TO_PLAING';
+export const ADD_TO_PLAING = 'ADD_TO_PLAING',
+             CLEAR_PLAYING_LIST='CLEAR_PLAYING_LIST',
+             DELETE_SONG = 'DELETE_SONG';
 
 export const    STATUS_PLAYING = 'STATUS_PLAYING',
                 STATUS_PAUSE = 'STATUS_PAUSE',

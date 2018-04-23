@@ -25,7 +25,7 @@ class List extends PureComponent {
         this.centerOffset = this.wrapHeight/2;
 
         let min = this.min = -this.scrollerHeight+this.wrapHeight;
-        console.log(min);
+        // console.log(min);
         min=min>=0?0:min;
         Transform(this.scroller);
         this.alloyTouch = new AlloyTouch({
@@ -77,7 +77,7 @@ class List extends PureComponent {
     render() {
 
         // console.log( this.props.children);
-        let  overflow = this.props.overHidden===false?"inherit":"hidden";
+        let  overflow = this.props.overHidden===false?"initial":"hidden";
         return (
             <div style={{
                 overflow:overflow
@@ -111,5 +111,7 @@ class List extends PureComponent {
 
     }
 }
-
+List.defineProperties={
+    overHidden:false
+};
 export default List;

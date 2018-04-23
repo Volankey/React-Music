@@ -6,6 +6,7 @@ import {setValue} from "./ReducerTools";
 
 
 const  initialState = Immutable({
+
         //播放模式
         mode:TYPE.LIST_LOOP,
         //播放状态
@@ -24,6 +25,7 @@ const  initialState = Immutable({
         lyric:null,
         //播放列表
         playingList:[
+
             // {
             //     name:"Love The Way You Lie ",
             //     singer:"Eminem/Rihanna",
@@ -91,13 +93,57 @@ function playMusic(state,action) {
 
 
 }
+function deleteById(state,action) {
+    let list = {},
+        playlist = state.playingList;
+    let song = action.playload.song;
+
+    //找到这首歌
+    let index = -1;
+
+    for(var i = 0,max = playlist.length; i < max ; i++){
+        let id = playlist[i].id;
+
+        list[id] =  playlist[i];
+        if(id === song.id){
+            index = i ;
+        }
+
+    }
+
+
+
+
+    playlist = Immutable.asMutable(playlist);
+
+
+
+    playlist.splice(index,1);
+
+
+
+
+    delete list[song.id];
+
+
+    let n =  tools.replace(state,{
+        ...state,
+        playingList:playlist,
+        list
+    });
+
+
+    return n;
+
+}
 function addPlayingList(state,action) {
 
     //如果已经存在那么直接播放这个歌曲
     if(state.list[action.playload.song.id]){
-        console.log(state);
+
         return setValue(state,"song",action.playload.song);
     }
+    console.log(state);
     //否则将这首歌加入到当前歌曲的下一首
     let playingList = Immutable.asMutable(state.playingList),
         currentSong = state.song;
@@ -115,7 +161,12 @@ function addPlayingList(state,action) {
         playingList,
     });
 }
+function clearList(state,action) {
 
+    return initialState;
+
+
+}
 export default  function MusicPlayer(state=initialState,action){
     // console.log(action);
     switch (action.type)
@@ -134,6 +185,9 @@ export default  function MusicPlayer(state=initialState,action){
 
         case TYPE.ADD_TO_PLAING : return addPlayingList(state,action);
 
+        case TYPE.CLEAR_PLAYING_LIST: return clearList(state,action);
+
+        case TYPE.DELETE_SONG: return deleteById(state,action);
         default:
             return state;
     }

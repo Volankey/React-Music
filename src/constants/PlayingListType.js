@@ -1,0 +1,3 @@
+export const PLAYING_LIST_SHOW = 'PLAYING_LIST_SHOW';
+
+export const PLAYING_LIST_HIDE = 'PLAYING_LIST_HIDE';
