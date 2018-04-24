@@ -269,7 +269,13 @@ export function addToPlayingList(data,getSong) {
 //得到下一首index
 function getNext(list,currentIdx,type=1) {
     let idx = currentIdx+type;
-    idx = idx<0?list.length-1:idx%list.length;
+    if(idx<0){
+        idx = list.length-1;
+    }
+    else if(idx+1>=list.length){
+        idx = 0;
+    }
+
 
     if(list[idx]==null){
         return null;
@@ -348,6 +354,7 @@ export function deleteById(song) {
 
         if(currentId === song.id){
 
+            player.pause();
             let list = getState().MusicReducer.playingList;
 
             if(list.length==0){
