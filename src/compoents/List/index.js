@@ -53,13 +53,15 @@ class List extends PureComponent {
 
 
         });
-        this.alloyTouch.to(this.top);
+
 
     }
     componentDidUpdate(){
-        this.destory();
-        this.initScroller();
-
+        // this.destory();
+        // this.initScroller();
+        this.scrollerHeight = this.scroller.offsetHeight;
+        let min = -this.scrollerHeight+this.wrapHeight;
+        min < 0 ? this.min = this.alloyTouch.min=min:min;
     }
     componentDidMount(){
         this.top=0;
@@ -96,7 +98,7 @@ class List extends PureComponent {
                         })
                     }
                     {
-                        this.props.end && <p  className="text-center more">{
+                        this.props.data.length>0 && this.props.end && <p  className="text-center more">{
                             this.props.isloading==true?"加载中..":"上滑动加载更多"
                         }</p>
                     }

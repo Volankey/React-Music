@@ -18,6 +18,24 @@ import './index.css';
 *  stick来控制是否到达阈值
 * */
 
+//生成song数据
+const getSong = (data)=>{
+
+    let singgers =   data.singer.map(function (singer) {
+        return singer.name
+    }).join("-");
+
+    let song = {
+        name:data.title,
+        singer:singgers,
+        id:data.mid,
+        album:data.album.mid,
+        duration:data.interval,
+        currentTime:0,
+
+    };
+    return song;
+};
 
 class CdList extends PureComponent {
 
@@ -28,7 +46,7 @@ class CdList extends PureComponent {
         singers = singers.join("/");
         return (
             <div className="diss-item" key={item.id} onClick={()=>{
-                this.props.addToPlaingList(item);
+                this.props.addToPlayingList(item,getSong);
             }}>
 
                 <div className="intro">
@@ -201,8 +219,8 @@ export default withRouter(connect(
         loading:state.CDDataReducer.loading
     }),
     (dispatch) => ({
-        addToPlaingList: (data) => {
-            dispatch(PlayerAction.addToPlaingList(data))
+        addToPlayingList: (data,getsong) => {
+            dispatch(PlayerAction.addToPlayingList(data,getsong))
         },
         getData:(id)=>{
             dispatch(CDListAcrion.getData(id))

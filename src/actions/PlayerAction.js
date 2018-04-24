@@ -219,7 +219,7 @@ export function clearList() {
         })
     }
 }
-export function addToPlaingList(data) {
+export function addToPlayingList(data,getSong) {
 
 
      let singgers =   data.singer.map(function (singer) {
@@ -235,15 +235,15 @@ export function addToPlaingList(data) {
 
         let idx = state.song.index+1;
 
-        let song = {
-            name:data.title,
-            singer:singgers,
-            id:data.mid,
-            album:data.album.mid,
-            duration:data.interval,
-            currentTime:0,
-            index:idx
-        };
+
+        let song ={};
+
+
+        song = getSong(data);
+        song.index = idx;
+
+
+
 
 
 

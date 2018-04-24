@@ -9,7 +9,7 @@ class Mypage extends Component {
 
     render() {
         return (
-            <div className="content">
+            <div className="content ignore">
                 <div>
                     <div>我的收藏</div>
                     <div>播放历史</div>

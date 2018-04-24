@@ -29,6 +29,10 @@ a:visited{
   height: 100%;
   align-items: center;
 
+  box-sizing: border-box;
+}
+.content.ignore{
+  padding-bottom: 60px;
 }
 p{
   margin:0;

@@ -23,7 +23,7 @@ class Find extends PureComponent {
     render() {
         return (
 
-            <div className="content find" ref={(r)=>{this.content = r;}}>
+            <div className="content find ignore" ref={(r)=>{this.content = r;}}>
 
                 <div className="list-wrap ignore">
                     <List
