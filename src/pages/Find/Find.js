@@ -50,7 +50,7 @@ class Find extends PureComponent {
                                 interval={5000}
                                 seamless={true}>
                                 {
-                                    Immutable.asMutable(this.props.slider).map((item,index)=>{
+                                    this.props.slider.map((item,index)=>{
 
                                         return (<a key={item.id} href={item.linkUrl}>
                                             <img  src={item.picUrl} alt=""/></a> )

@@ -120,7 +120,9 @@ class Search extends Component {
                                                     e.preventDefault();
                                                     this.hotClick(item.k)
                                                 }}
-                                                key={index}>{item.k}
+                                                key={index}
+                                            >
+                                                {item.k}
                                             </li>
                                         )
                                     })

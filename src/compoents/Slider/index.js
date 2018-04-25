@@ -189,7 +189,7 @@ class Slider extends Component {
         w = isNaN(w)?0:w;
         let style = {
                 width:w,
-                transform:`translate(${this.state.left}px,0)`,
+                transform:`translate(${this.state.left}px,0) translateZ(0px)`,
             };
         if(this.content)
             this.content.style.transitionDuration=this.transitionDuration;
