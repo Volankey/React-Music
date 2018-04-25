@@ -46,7 +46,11 @@ class List extends PureComponent {
                 this.top=v;
                 this.props.change && this.props.change(v);
                 if(v < this.min-30){
-                    this.props.end && this.props.end();
+                    if(this.props.end){
+                        this.props.end();
+
+                    }
+
                 }
             },
             touchMove:function(evt, value){ evt.stopPropagation();  },
@@ -56,22 +60,40 @@ class List extends PureComponent {
 
 
     }
+    componentWillReceiveProps(nextProps){
+        let diff = nextProps.data.length - this.props.data.length;
+        this.reCaculate = true;
+
+        if(diff===0){
+            this.reCaculate = false;
+        }
+    }
     componentDidUpdate(){
-        // this.destory();
-        // this.initScroller();
-        this.scrollerHeight = this.scroller.offsetHeight;
-        let min = -this.scrollerHeight+this.wrapHeight;
-        min < 0 ? this.min = this.alloyTouch.min=min:min;
+
+        //做一层优化
+        //根据componentWillReceiveProps判断是否重新计算
+        //因为当父元素更新的时候也会触发List更新获取offsetHeight会造成REFLOW
+        if(this.reCaculate===true){
+            this.scrollerHeight = this.scroller.offsetHeight;
+            let min = -this.scrollerHeight+this.wrapHeight;
+            //滚动到最上边
+            if(min>this.min){
+                this.scrollTo(0,0);
+            }
+            min < 0 ? this.min = this.alloyTouch.min=min:min;
+            this.reCaculate=false;
+        }
+
     }
     componentDidMount(){
         this.top=0;
         this.initScroller();
-
+        this.loadMore=false;
     }
 
-    scrollTo(idx,dt=300){
+    scrollTo(pos,dt=300){
 
-        this.alloyTouch.to(this.offsetMap[idx],dt);
+        this.alloyTouch.to(pos,dt);
 
     }
 

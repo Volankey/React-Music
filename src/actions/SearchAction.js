@@ -48,6 +48,8 @@ export function getData(key){
     return (dispatch,getState)=>{
         let state = getState().SearchReducer;
 
+        if(state.isloading==true)
+            return;
         let p = 1;
 
 
