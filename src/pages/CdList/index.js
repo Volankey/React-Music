@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'; // 引入connect函数
 import * as PlayerAction from "../../actions/PlayerAction";
+import * as PlayingListAction from "../../actions/PlayingListAction";
 import * as CDListAcrion from "../../actions/CDListAcrion";
 import {
     withRouter
@@ -220,7 +221,7 @@ export default withRouter(connect(
     }),
     (dispatch) => ({
         addToPlayingList: (data,getsong) => {
-            dispatch(PlayerAction.addToPlayingList(data,getsong))
+            dispatch(PlayingListAction.addToPlayingList(data,getsong))
         },
         getData:(id)=>{
             dispatch(CDListAcrion.getData(id))

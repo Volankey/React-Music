@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; // 引入connect函数
 import * as PlayerAction from "../../actions/PlayerAction";
+import * as PlayingListAction from "../../actions/PlayingListAction";
+
 import { myplayer } from '../../tools/Tools'
 import ProgressBar from '../../compoents/ProgressBar/ProgressBar';
 import * as TYPE from '../../constants/PlayerType';
@@ -185,7 +187,7 @@ class MusicPlayer extends Component {
                             this.props.playNext(1);
                         }}> </div>
 
-                        <div className="btn btn-list ignore"> </div>
+                        <div className="btn btn-list ignore" onClick={this.props.show}> </div>
                     </div>
                     {/*收藏\分享\评论*/}
                     <div className="social">
@@ -221,7 +223,10 @@ export default withRouter(connect(
         },
         getLyric:(id)=>{
             dispatch(PlayerAction.getLyric(id))
-        }
+        },
+        show:()=>{
+            dispatch(PlayingListAction.show())
+        },
 
     })
 )(MusicPlayer))

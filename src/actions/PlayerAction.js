@@ -1,18 +1,24 @@
 import * as TYPE from '../constants/PlayerType';
 import {myplayer,tools} from '../tools/Tools';
 import domian from '../tools/domian';
-var player = myplayer();
+export  var player = myplayer();
 //播放音乐
-function getMusic(song,status,dispatch) {
+export function getMusic(song,status,dispatch,list) {
+    if(list.length<=0){
+        dispatch(
+            {
+                type: TYPE.PLAYER_INIT,
 
-
-    if(song==null){
-        player.pause();
-      return;
+                meta: "没有音乐执行初始化"
+            }
+        );
+        return;
     }
 
-    if(song.id==null){
-        return;
+
+    if(song==null || song.id==null){
+        player.pause();
+      return;
     }
 
     getLyric(song.id,dispatch);
@@ -90,7 +96,7 @@ export function play() {
     return (dispatch,getState) => {
         let state = getState().MusicReducer;
 
-            let list = state.playingList;
+        let list = getState().PlayingListReducer.playingList;
 
             let idx = state.song.index;
 
@@ -113,7 +119,7 @@ export function play() {
                     index: idx,
                 };
 
-                getMusic(song,status,dispatch);
+                getMusic(song,status,dispatch,list);
 
 
             }
@@ -157,7 +163,7 @@ export function statusChange(status) {
 export function playEnd() {
     return (dispatch,getState)=>{
         let state= getState().MusicReducer;
-        let list = state.playingList;
+        let list = getState().PlayingListReducer.playingList;
 
         let idx = state.song.index+1;
 
@@ -188,13 +194,13 @@ export function playEnd() {
 
 
         //准备播放下一首
-        getMusic(song,status,dispatch);
+        getMusic(song,status,dispatch,list);
     }
 }
 export function playByIdx(index) {
     return (dispatch,getState)=>{
         let state= getState().MusicReducer;
-        let list = state.playingList;
+        let list = getState().PlayingListReducer.playingList;
 
         let song={
             ...list[index],
@@ -203,71 +209,71 @@ export function playByIdx(index) {
         };
         let status =  TYPE.STATUS_PLAYING;
         //准备播放下一首
-        getMusic(song,status,dispatch);
+        getMusic(song,status,dispatch,list);
     }
 }
-export function clearList() {
-
-    return (dispatch,getState)=>{
-        player.pause();
-        dispatch({
-            type:TYPE.CLEAR_PLAYING_LIST,
-            meta:"清空播放列表",
-            playload:{
-                status:TYPE.STATUS_EMPTY
-            }
-        })
-    }
-}
-export function addToPlayingList(data,getSong) {
-
-
-     let singgers =   data.singer.map(function (singer) {
-            return singer.name
-        }).join("-");
-
-
-
-
-    return (dispatch,getState)=>{
-        let state= getState().MusicReducer;
-        let status =  TYPE.STATUS_PLAYING;
-
-        let idx = state.song.index+1;
-
-
-        let song ={};
-
-
-        song = getSong(data);
-        song.index = idx;
-
-
-
-
-
-
-        dispatch(
-            {
-                type: TYPE.ADD_TO_PLAING,
-                meta: "添加了一首歌",
-                playload:{
-                    song
-                }
-            }
-        );
-
-        //准备播放下一首
-        getMusic(song,status,dispatch);
-
-
-
-
-    }
-
-}
+// export function clearList() {
+//
+//     return (dispatch,getState)=>{
+//         player.pause();
+//         dispatch({
+//             type:TYPE.CLEAR_PLAYING_LIST,
+//             meta:"清空播放列表",
+//             playload:{
+//                 status:TYPE.STATUS_EMPTY
+//             }
+//         })
+//     }
+// }
+// export function addToPlayingList(data,getSong) {
+//
+//
+//      let singgers =   data.singer.map(function (singer) {
+//             return singer.name
+//         }).join("-");
+//
+//
+//
+//
+//     return (dispatch,getState)=>{
+//         let state= getState().MusicReducer;
+//         let status =  TYPE.STATUS_PLAYING;
+//
+//         let idx = state.song.index+1;
+//
+//
+//         let song ={};
+//
+//
+//         song = getSong(data);
+//         song.index = idx;
+//
+//
+//
+//
+//
+//
+//         dispatch(
+//             {
+//                 type: TYPE.ADD_TO_PLAING,
+//                 meta: "添加了一首歌",
+//                 playload:{
+//                     song
+//                 }
+//             }
+//         );
+//
+//         //准备播放下一首
+//         getMusic(song,status,dispatch);
+//
+//
+//
+//
+//     }
+//
+// }
 //得到下一首index
-function getNext(list,currentIdx,type=1) {
+export function getNext(list,currentIdx,type=1) {
     let idx = currentIdx+type;
     if(idx<0){
         idx = list.length-1;
@@ -294,7 +300,7 @@ export function playNext(type) {
 
     return (dispatch,getState) => {
         let state = getState().MusicReducer;
-        let list = state.playingList;
+        let list = getState().PlayingListReducer.playingList;
 
 
         // idx = idx<0?list.length-1:idx%list.length;
@@ -303,7 +309,7 @@ export function playNext(type) {
 
         let song=getNext(list,state.song.index,type);
 
-        getMusic(song,status,dispatch);
+        getMusic(song,status,dispatch,list);
 
         // dispatch(
         //     {
@@ -330,43 +336,6 @@ export function changeMode() {
     }
 }
 
-export function deleteById(song) {
-    return (dispatch,getState) => {
-
-
-        let state = getState().MusicReducer;
-
-        let currentId = state.song.id;
-
-        let list = state.playingList;
-
-        let next_song=getNext(list,state.song.index);
-
-        dispatch(
-            {
-                type: TYPE.DELETE_SONG,
-                meta: "从播放列表删除歌曲",
-                playload:{
-                    song
-                }
-            }
-        );
-
-        if(currentId === song.id){
-
-            player.pause();
-            let list = getState().MusicReducer.playingList;
-
-            if(list.length==0){
-                player.pause();
-                return;
-            }
-
-
-            getMusic(next_song,TYPE.STATUS_PLAYING,dispatch);
-        }
-    }
-}
 
 
 

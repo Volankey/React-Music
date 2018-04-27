@@ -89,7 +89,7 @@ export default connect(
     (state) => ({
         song:state.MusicReducer.song,
         status:state.MusicReducer.status,
-        playingList:state.MusicReducer.playingList,
+        playingList:state.PlayingListReducer.playingList,
         showPlayingList:state.PlayingListReducer.show,
         mode:state.MusicReducer.mode
 
@@ -119,10 +119,10 @@ export default connect(
             dispatch(PlayerAction.playByIdx(index))
         },
         clearPlayingList:()=>{
-            dispatch(PlayerAction.clearList())
+            dispatch(PlayingListAction.clearList())
         },
         deleteById:(song)=>{
-            dispatch(PlayerAction.deleteById(song))
+            dispatch(PlayingListAction.deleteById(song))
         },
 
 

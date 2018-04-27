@@ -6,6 +6,8 @@ import './index.css';
 import { connect } from 'react-redux'; // 引入connect函数
 import * as SearchAction from "../../actions/SearchAction";
 import * as PlayerAction from "../../actions/PlayerAction";
+import * as PlayingListAction from "../../actions/PlayingListAction";
+
 import {
     withRouter
 } from 'react-router-dom';
@@ -161,7 +163,7 @@ export default withRouter(connect(
             dispatch(SearchAction.getHotKey())
         },
         addToPlayingList: (data,getSong) => {
-            dispatch(PlayerAction.addToPlayingList(data,getSong))
+            dispatch(PlayingListAction.addToPlayingList(data,getSong))
         },
 
     })
