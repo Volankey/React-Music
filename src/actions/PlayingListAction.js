@@ -29,12 +29,18 @@ export function clearList() {
     return (dispatch,getState)=>{
         player.pause();
         dispatch({
+            type:PLAYER_TYPE.PLAYER_INIT,
+            meta:"重置播放器状态",
+
+        });
+        dispatch({
             type:TYPE.CLEAR_PLAYING_LIST,
             meta:"清空播放列表",
             playload:{
                 status:PLAYER_TYPE.STATUS_EMPTY
             }
         })
+
     }
 }
 export function addToPlayingList(data,getSong) {
@@ -112,7 +118,7 @@ export function deleteById(song) {
         if(currentId === song.id){
 
             player.pause();
-            let list = getState().MusicReducer.playingList;
+            let list = getState().PlayingListReducer.playingList;
 
             if(list.length==0){
                 player.pause();

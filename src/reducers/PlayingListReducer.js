@@ -2,18 +2,30 @@ import Immutable from "seamless-immutable";
 import  * as TYPE from '../constants/PlayingListType';
 
 import {setValue,setIn,replace} from "./ReducerTools";
-// import * as tools from './ReducerTools';
+import { tools }  from '../tools/Tools';
+
 
 const  initialState = Immutable({
     show:false,
-    playingList:[
-
-    ],
+    playingList:playingListfromLocal(),
     list:{
 
     }
 });
+//存储到localstorage
+function storagePlayingList(list) {
+    setTimeout(function () {
+        tools.setToLocal("playingList",JSON.stringify(list));
+    },0);
 
+}
+//获取playingList从localstorage
+function playingListfromLocal() {
+    var LOCAL_LIST  = JSON.parse(tools.getFromLocal("playingList"));
+
+    return LOCAL_LIST?LOCAL_LIST:[];
+
+}
 function setShow(state,flag) {
     return setValue(state,"show",flag)
 }
@@ -54,8 +66,13 @@ function deleteById(state,action) {
     delete list[song.id];
 
     //如果没有歌曲了
-    if(playlist.length===0)
+    if(playlist.length===0){
         return initialState;
+    }
+
+
+    storagePlayingList(playlist);
+
 
     let n =  replace(state,{
         ...state,
@@ -87,6 +104,10 @@ function addPlayingList(state,action) {
     let new_state = setIn(state,["list",action.playload.song.id],action.playload.song);
     // debugger;
     console.log("播放列表:",playingList);
+
+    //存储到localstorage
+    storagePlayingList(playingList);
+
     return replace(new_state,{
         ...new_state,
         song: action.playload.song,
@@ -94,6 +115,9 @@ function addPlayingList(state,action) {
     });
 }
 function clearList(state,action) {
+
+    //存储到localstorage
+    storagePlayingList([]);
 
     return initialState;
 

@@ -3,7 +3,7 @@ import {myplayer,tools} from '../tools/Tools';
 import domian from '../tools/domian';
 export  var player = myplayer();
 //播放音乐
-export function getMusic(song,status,dispatch,list) {
+export function getMusic(song,status,dispatch,list,immediate=true) {
     if(list.length<=0){
         dispatch(
             {
@@ -25,6 +25,7 @@ export function getMusic(song,status,dispatch,list) {
 
     if(player.firstPlay===true){
         player.play();
+        player.pause();
     }
     tools.fetch(
         {
@@ -34,6 +35,7 @@ export function getMusic(song,status,dispatch,list) {
     ).then(response=>{
         player.src = response.url;
         player.play();
+        immediate==false?player.pause():"";
 
 
     }).then(()=>{
@@ -162,6 +164,7 @@ export function statusChange(status) {
 
 export function playEnd() {
     return (dispatch,getState)=>{
+
         let state= getState().MusicReducer;
         let list = getState().PlayingListReducer.playingList;
 
@@ -192,9 +195,11 @@ export function playEnd() {
         };
         let status =  TYPE.STATUS_PLAYING;
 
+        //判断是否第一次播放
+        let im = state.song.index==-1?false:true;
 
         //准备播放下一首
-        getMusic(song,status,dispatch,list);
+        getMusic(song,status,dispatch,list,im);
     }
 }
 export function playByIdx(index) {
