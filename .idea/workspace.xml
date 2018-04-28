@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="959fe164-6959-4217-b8c9-9bc69b572178" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/PlayerAction.js" afterPath="$PROJECT_DIR$/src/actions/PlayerAction.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/PlayingListAction.js" afterPath="$PROJECT_DIR$/src/actions/PlayingListAction.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/PlayingListReducer.js" afterPath="$PROJECT_DIR$/src/reducers/PlayingListReducer.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tools/Tools.js" afterPath="$PROJECT_DIR$/src/tools/Tools.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -60,10 +56,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayingListAction.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlayingListAction.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/actions/PlayingListAction.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
+            <state relative-caret-position="184">
               <caret line="31" column="41" lean-forward="true" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
               <folding>
                 <element signature="e#0#53#0" expanded="true" />
@@ -72,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Tools.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Tools.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tools/Tools.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="134" column="81" lean-forward="true" selection-start-line="134" selection-start-column="81" selection-end-line="134" selection-end-column="81" />
+            <state relative-caret-position="190">
+              <caret line="100" column="31" lean-forward="true" selection-start-line="100" selection-start-column="31" selection-end-line="100" selection-end-column="31" />
               <folding>
                 <element signature="e#93#2681#0" expanded="false" />
               </folding>
@@ -189,11 +185,11 @@
         <option value="$PROJECT_DIR$/src/pages/index.js" />
         <option value="$PROJECT_DIR$/src/constants/PlayerType.js" />
         <option value="$PROJECT_DIR$/src/pages/MusicPlayer/MusicPlayer.js" />
-        <option value="$PROJECT_DIR$/src/tools/Tools.js" />
         <option value="$PROJECT_DIR$/src/actions/PlayerAction.js" />
         <option value="$PROJECT_DIR$/src/reducers/MusicReducer.js" />
         <option value="$PROJECT_DIR$/src/reducers/PlayingListReducer.js" />
         <option value="$PROJECT_DIR$/src/actions/PlayingListAction.js" />
+        <option value="$PROJECT_DIR$/src/tools/Tools.js" />
       </list>
     </option>
   </component>
@@ -377,12 +373,12 @@
       <workItem from="1524654473375" duration="64000" />
       <workItem from="1524655793480" duration="587000" />
       <workItem from="1524743989116" duration="1234000" />
-      <workItem from="1524798978655" duration="7235000" />
+      <workItem from="1524798978655" duration="7578000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="529062000" />
+    <option name="totallyTimeSpent" value="529405000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="6" />
@@ -792,16 +788,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tools/Tools.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="134" column="81" lean-forward="true" selection-start-line="134" selection-start-column="81" selection-end-line="134" selection-end-column="81" />
-          <folding>
-            <element signature="e#93#2681#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/reducers/PlayingListReducer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-44">
@@ -835,10 +821,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/PlayingListAction.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
+        <state relative-caret-position="184">
           <caret line="31" column="41" lean-forward="true" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
           <folding>
             <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tools/Tools.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="100" column="31" lean-forward="true" selection-start-line="100" selection-start-column="31" selection-end-line="100" selection-end-column="31" />
+          <folding>
+            <element signature="e#93#2681#0" expanded="false" />
           </folding>
         </state>
       </provider>

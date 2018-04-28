@@ -95,15 +95,12 @@ export  const tools  =     {
     setToLocal:function (key,data) {
         if(window.localStorage)
             window.localStorage.setItem(key,data);
-        else{
-            window.cookie.write(key, data);
-        }
+
     },
     getFromLocal:function (key) {
         if(window.localStorage)
              return window.localStorage.getItem(key);
-        else
-            return window.cookie.read(key);
+
     }
 
 };
