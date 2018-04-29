@@ -223,7 +223,7 @@ export function playEnd() {
         let im = state.song.index==-1?false:true;
 
         //准备播放下一首
-        if(player.firstPlay) getMusic(song,status,dispatch,list,im);
+        getMusic(song,status,dispatch,list,im);
     }
 }
 export function playByIdx(index) {

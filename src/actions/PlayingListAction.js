@@ -121,7 +121,7 @@ export function deleteById(song) {
         if(currentId === song.id){
 
             player.pause();
-            let list = getState().MusicReducer.playingList;
+            let list = getState().PlayingListReducer.playingList;
 
             if(list.length==0){
                 player.pause();
