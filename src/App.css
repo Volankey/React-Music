@@ -5,9 +5,13 @@
   position: absolute;
   overflow: hidden;
   -webkit-tap-highlight-color:rgba(0,0,0,0);
+  background: url("/asset/2.jpg") no-repeat;
+  background-size: 100%;
+  background-position: bottom;
 }
+
 #app{
-  background-color: rgb(26,42,55);
+
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -30,6 +34,7 @@ a:visited{
   align-items: center;
 
   box-sizing: border-box;
+  background-color: rgba(255,255,255,0.08);
 }
 .content.ignore{
   padding-bottom: 60px;
@@ -44,4 +49,7 @@ p{
 }
 .text-center{
   text-align: center;
+}
+.fl{
+  float: left;
 }

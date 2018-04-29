@@ -7,7 +7,7 @@
     /*display: flex;*/
     /*display: block;*/
 }
-.content.cd header{
+ header{
     position: fixed;
     top: 0;
     z-index: 100;
@@ -15,7 +15,7 @@
 
 
 }
-.content.cd header p.ignore{
+ header p.ignore{
     max-width: 300px;
 }
 .back{
@@ -23,14 +23,10 @@
     background-size: 45px;
     height: 45px;
 }
-.content.cd h2 span{
+header h2 span{
     flex:1;
 }
-.content.cd .diss-item{
-    display: flex;
-    padding: 0 40px 60px;
-}
-.content.cd h2.ignore{
+header h2.ignore{
     margin: 0;
     height: 34px;
     font-size: 18px;
@@ -39,12 +35,17 @@
     align-items: center;
 
 }
+.content.cd .diss-item{
+    display: flex;
+    padding: 0 40px 60px;
+}
+
 .layer-wrap{
     background-color: rgb(26,42,55);
     height: 100%;
     width: 100%;
     position: relative;
-    z-index:1;
+    z-index:9;
     flex: 1;
 }
 .content.cd .list-wrap{
@@ -76,6 +77,7 @@
     /*background-position: center;*/
     background-size: cover;
     background-repeat: no-repeat;
+
 }
 .btn-play-all.ignore span{
     margin-left: 20px;

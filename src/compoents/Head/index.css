@@ -1,6 +1,9 @@
 .header{
 
     font-size: 36px;
+    background-color: rgb(21,36,42);
+
+    padding-bottom: 30px;
 }
 .header .header-tabs {
     display: flex;

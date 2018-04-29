@@ -1,5 +1,6 @@
 #scorller-wrap{
     overflow: hidden;
+    width: 100%;
 }
 #scorller-wrap .more{
     position: relative;

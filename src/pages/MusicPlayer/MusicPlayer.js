@@ -109,8 +109,12 @@ class MusicPlayer extends Component {
         return (
             <div className="content music">
 
-                <div className="background ignore">
-                    <img className="image" src={song.album} alt=""/>
+                <div className="background ignore" style={
+                    {
+                        backgroundImage:"url('"+song.album+"')"
+                    }
+                }>
+                    {/*<img className="image" src={≈} alt=""/>*/}
                 </div>
                 <div className="head">
                     <div className="btn btn-down ignore" onClick={this.goBack.bind(this)}></div>
@@ -127,7 +131,7 @@ class MusicPlayer extends Component {
                             <div className="cd ignore" style={{
                                 transform:btn_cd.transform
                             }}>
-                                <img className={btn_cd.cd} height={300} src={song.album} alt=""
+                                <img className={btn_cd.cd} height={300} src={song.albumUrl} alt=""
                                     ref={(ref)=>{this.cd_img=ref}}
                                 />
                             </div>

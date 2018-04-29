@@ -1,5 +1,94 @@
 .content{
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     font-size: 30px;
+    position: relative;
+}
+.content.my-page{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgba(255,255,255,0.08);
+    position: relative;
+}
+.my-page .avatar{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px 0;
+}
+.my-page .avatar{
+    height: 20%;
+    background-color: rgba(255,255,255,0.04);
+    width: 97%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    box-shadow:  0 6px 10px 4px rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+.my-page .avatar .icon{
+    display: flex;
+    align-items: center;
+}
+.my-page .avatar .icon img{
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+.my-page .avatar .desc{
+    padding-top: 30px;
+    font-size: 26px;
+    color: rgba(255,255,255,0.6);
+}
+.my-page .main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+}
+.my-page .main .btn.ignore{
+    width: 32px;
+    height: 32px;
+    background-size: 32px;
+    background-repeat: no-repeat;
+    margin: 20px 50px 5px;
+
+}
+.main p{
+    color: rgb(224,224,224);
+}
+.my-page .main p:last-child{
+    font-size: 28px;
+    color: rgba(255,255,255,0.5);
+}
+.my-page .main .btn.my-love-list{
+    background-image: url('/asset/like-big.png');
+}
+.my-page .main .btn.recent-list{
+    background-image: url('/asset/recent-big.png');
+}
+.my-page .my-list{
+    width: 100%;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    font-size: 36px;
+}
+.my-page .my-list .list-num{
+    font-size: 28px;
+    color: rgba(255,255,255,0.6);
+}
+.my-page .diss-item{
+    display: flex;
+    padding: 20px 10px;
+}
+.my-page .list-wrap.ignore{
+    position: absolute;
+    top: 0px;
+    bottom: 60px;
+    box-sizing: border-box;
+    width: 100%;
 }

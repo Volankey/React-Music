@@ -1,9 +1,16 @@
 #player{
     display: flex;
     font-size: 26px;
-    background-color: rgb(30,34,32);
+    /*background-color: rgb(30,34,32);*/
     width: 100%;
+    /*background-image: url("/asset/2.jpg") ;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: right -75vh;*/
+    /*background-size: 100% 100vh;*/
+    background-color: rgb(21,36,42);
+
 }
+
 #player .left{
     margin-left: 15px;
     display: flex;

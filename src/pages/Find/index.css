@@ -40,7 +40,7 @@
 }
 .find .list-wrap.ignore{
     position: absolute;
-    top: 30px;
+    top: 0px;
     bottom: 60px;
     box-sizing: border-box;
     width: 100%;

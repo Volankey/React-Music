@@ -9,6 +9,8 @@ import Header from '../compoents/Head/Header';
 import Player from '../compoents/Player/Player';
 import PlayingList from '../compoents/PlayingList';
 import CdList from './CdList';
+import RecentList from './RecentList';
+
 import {myplayer} from '../tools/Tools';
 import * as TYPE from '../constants/PlayerType';
 
@@ -49,6 +51,7 @@ class Home extends Component {
 
                 <Router>
                     <div id="app">
+
                         <Header/>
 
                         <Switch>
@@ -57,6 +60,7 @@ class Home extends Component {
                             <Route path='/search' exact component={Search}/>
                             <Route path='/music' exact component={MusicPlayer}/>
                             <Route path='/list/:id' exact component={CdList}/>
+                            <Route path='/recent' exact component={RecentList}/>
                         </Switch>
 
                         <Player

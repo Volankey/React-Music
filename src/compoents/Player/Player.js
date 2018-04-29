@@ -44,7 +44,7 @@ class Player extends Component {
                     <div className="left" onClick={this.goDetail.bind(this)}>
 
                         <div className="pic">
-                            <div className="pic ignore"  style={{backgroundImage:"url("+song.album+")"}}></div>
+                            <div className="pic ignore"  style={{backgroundImage:"url("+song.albumUrl+")"}}></div>
                         </div>
                         <div className="info">
                             <p className="text-overflow">{song.name}</p>

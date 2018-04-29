@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'; // 引入connect函数
-import * as PlayerAction from "../../actions/PlayerAction";
 import * as PlayingListAction from "../../actions/PlayingListAction";
 import * as CDListAcrion from "../../actions/CDListAcrion";
 import {
@@ -170,7 +169,7 @@ class CdList extends PureComponent {
             ,
             zIndex:this.state.stick?20:null,
             height:this.state.stick?40:300,
-            transform:`scale(${this.state.scale})`
+            transform:`scale(${this.state.scale}) translateZ(0px)`
         };
 
         let display = this.state.stick?"none":"flex";
@@ -198,8 +197,11 @@ class CdList extends PureComponent {
                 </div>
                 {/*cd图片结束*/}
 
-                {/*背景遮罩 start*/}
-                <div className="layer-wrap" style={{transform:"translateY("+this.state.top+"px)"}}> </div>
+                {/*背景遮罩 start
+                    增加复合层提高性能
+                */}
+
+                <div className="layer-wrap" style={{transform:"translateY("+this.state.top+"px) translateZ(0px)"}}> </div>
                 {/*背景遮罩 end*/}
 
                 {/*滚动列表*/}

@@ -181,6 +181,8 @@
     z-index: -1;
     opacity: .6;
     filter: blur(20px);
+    background-size: cover;
+    background-position: center;
 }
 
 @keyframes rotate {

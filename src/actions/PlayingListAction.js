@@ -1,5 +1,5 @@
-import * as TYPE from '../constants/PlayingListType';
 import * as PLAYER_TYPE from '../constants/PlayerType';
+import * as TYPE from '../constants/PlayingListType';
 import {getMusic,player,getNext} from  './PlayerAction';
 export function show() {
     return (dispatch,getState) => {
@@ -29,26 +29,28 @@ export function clearList() {
     return (dispatch,getState)=>{
         player.pause();
         dispatch({
-            type:PLAYER_TYPE.PLAYER_INIT,
-            meta:"重置播放器状态",
-
-        });
-        dispatch({
             type:TYPE.CLEAR_PLAYING_LIST,
             meta:"清空播放列表",
             playload:{
                 status:PLAYER_TYPE.STATUS_EMPTY
             }
         })
-
     }
+}
+export function playByIndex(song) {
+    return (dispatch,getState)=>{
+        let status =  PLAYER_TYPE.STATUS_PLAYING;
+        let list = getState().PlayingListReducer.playingList;
+        getMusic(song,status,dispatch,list);
+    }
+
 }
 export function addToPlayingList(data,getSong) {
 
 
-    let singgers =   data.singer.map(function (singer) {
-        return singer.name
-    }).join("-");
+    // let singgers =   data.singer.map(function (singer) {
+    //     return singer.name
+    // }).join("-");
 
 
 
@@ -118,7 +120,7 @@ export function deleteById(song) {
         if(currentId === song.id){
 
             player.pause();
-            let list = getState().PlayingListReducer.playingList;
+            let list = getState().MusicReducer.playingList;
 
             if(list.length==0){
                 player.pause();

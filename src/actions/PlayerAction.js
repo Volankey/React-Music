@@ -23,10 +23,18 @@ export function getMusic(song,status,dispatch,list,immediate=true) {
 
     getLyric(song.id,dispatch);
 
+
     if(player.firstPlay===true){
-        player.play();
-        player.pause();
+
+        if(immediate==true){
+            player.play();
+            status = TYPE.STATUS_PAUSE;
+
+        }
+        player.firstPlay=false;
+
     }
+
     tools.fetch(
         {
             url:'http://'+domian+':3001/apis/vkey?id='+song.id,
@@ -34,8 +42,17 @@ export function getMusic(song,status,dispatch,list,immediate=true) {
         }
     ).then(response=>{
         player.src = response.url;
-        player.play();
-        immediate==false?player.pause():"";
+        if(immediate==true && player.firstPlay===false){
+
+            player.play();
+            status = TYPE.STATUS_PLAYING;
+        }
+        else{
+            status = TYPE.STATUS_PAUSE;
+            player.pause();
+        }
+
+        // immediate==false?player.pause():"";
 
 
     }).then(()=>{
@@ -165,6 +182,7 @@ export function statusChange(status) {
 export function playEnd() {
     return (dispatch,getState)=>{
 
+
         let state= getState().MusicReducer;
         let list = getState().PlayingListReducer.playingList;
 
@@ -199,7 +217,7 @@ export function playEnd() {
         let im = state.song.index==-1?false:true;
 
         //准备播放下一首
-        getMusic(song,status,dispatch,list,im);
+        if(player.firstPlay) getMusic(song,status,dispatch,list,im);
     }
 }
 export function playByIdx(index) {
