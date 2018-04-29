@@ -129,7 +129,7 @@ export var myplayer = (function () {
         this.play =  function(){
             try{
                 if(this.firstPlay===true){
-                    this.src = "http://dl.stream.qqmusic.qq.com/C400002ZnJAb2w8Ynn.m4a";
+                    if(this.src=="") this.src = "http://dl.stream.qqmusic.qq.com/C400002ZnJAb2w8Ynn.m4a";
                     audio.play();
                     audio.pause();
                     this.firstPlay=false;

@@ -111,7 +111,7 @@ class MusicPlayer extends Component {
 
                 <div className="background ignore" style={
                     {
-                        backgroundImage:"url('"+song.album+"')"
+                        backgroundImage:"url('"+song.albumUrl+"')"
                     }
                 }>
                     {/*<img className="image" src={≈} alt=""/>*/}

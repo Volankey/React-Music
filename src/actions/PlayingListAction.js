@@ -84,6 +84,7 @@ export function addToPlayingList(data,getSong) {
             }
         );
         let list = getState().PlayingListReducer.playingList;
+        // alert(song.name);
         //准备播放下一首
         getMusic(song,status,dispatch,list);
 

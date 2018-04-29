@@ -7,6 +7,7 @@ import {
 import { connect } from 'react-redux'; // 引入connect函数
 import List from "../../compoents/List";
 import * as PlayingListAction from "../../actions/PlayingListAction";
+import * as PlayerAction from "../../actions/PlayerAction";
 import "./index.css";
 //生成song数据
 const getSong = (data)=>{
@@ -39,7 +40,7 @@ class RecentList extends Component {
         return(
             <div onClick={()=>{
 
-                this.props.playByindex(song);
+                this.props.playByindex(song.index);
             }} className="recent-item" key={song.id}>
                 <p className="text-overflow">{song.name}</p>
                 <p className="text-overflow">{song.singer}</p>
@@ -86,8 +87,8 @@ export default withRouter(connect(
         addToPlayingList: (data,getsong) => {
             dispatch(PlayingListAction.addToPlayingList(data,getsong))
         },
-        playByindex:(song)=>{
-            dispatch(PlayingListAction.playByIndex(song))
+        playByindex:(index)=>{
+            dispatch(PlayerAction.playByIdx(index))
         }
 
 

@@ -29,9 +29,14 @@ export function getMusic(song,status,dispatch,list,immediate=true) {
         if(immediate==true){
             player.play();
             status = TYPE.STATUS_PAUSE;
-
+            // player.pause();
+            player.firstPlay=false;
         }
-        player.firstPlay=false;
+        else{
+
+            player.pause();
+        }
+
 
     }
 
@@ -148,6 +153,7 @@ export function play() {
                 setStatus(dispatch,status);
             }
             else {
+                player.firstPlay=false;
                 player.play();
                 status = TYPE.STATUS_PLAYING;
                 setStatus(dispatch,status);
