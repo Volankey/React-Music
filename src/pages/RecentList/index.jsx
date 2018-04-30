@@ -80,7 +80,7 @@ class RecentList extends Component {
 
 export default withRouter(connect(
     (state) => ({
-        data:state.PlayingListReducer.playingList,
+        data:state.PlayingListReducer.history,
         loading:state.PlayingListReducer.loading
     }),
     (dispatch) => ({

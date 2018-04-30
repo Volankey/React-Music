@@ -1,6 +1,7 @@
 import * as PLAYER_TYPE from '../constants/PlayerType';
 import * as TYPE from '../constants/PlayingListType';
 import {getMusic,player,getNext} from  './PlayerAction';
+import {tools} from '../tools/Tools'
 export function show() {
     return (dispatch,getState) => {
         dispatch(
@@ -44,6 +45,44 @@ export function playByIndex(song) {
         getMusic(song,status,dispatch,list);
     }
 
+}
+export function addListToPlayingList(list) {
+    return (dispatch,getState)=>{
+        let state= getState().MusicReducer;
+
+
+        let status =  PLAYER_TYPE.STATUS_PLAYING;
+
+        let idx = state.song.index+1;
+
+
+        let song ={};
+
+        let first = list[0];
+
+        song =   {
+            album:first.album.mid,
+            currentTime:0,
+            duration:first.interval,
+            id:first.mid,
+            index:idx,
+            name:first.name,
+            singer:tools.getSinger(first.singer)
+        };
+        dispatch(
+            {
+                type: TYPE.ADD_TO_PLAING,
+                meta: "添加了一个歌单",
+                playload:{
+                    song:list,
+                    currentSong:state.song
+                }
+            }
+        );
+
+        let currentlist = getState().PlayingListReducer.playingList;
+        getMusic(song,status,dispatch,currentlist);
+    }
 }
 export function addToPlayingList(data,getSong) {
 

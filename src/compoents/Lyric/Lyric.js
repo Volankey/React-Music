@@ -73,7 +73,6 @@ class Lyric extends Component {
     shouldComponentUpdate(nextProps,nextState){
 
         if(nextProps.data.lyric!=this.props.data.lyric
-            || nextState.id != this.state.id
         )
             return true;
         return false;
@@ -137,7 +136,7 @@ class Lyric extends Component {
 
     }
     init(){
-        this.destory();
+        // this.destory();
         //在这里执行绑定
         this.props.bind("timeupdate",this.updateTime);
 
@@ -155,22 +154,27 @@ class Lyric extends Component {
 
 
         }
-        this.setState ({
-                lyric :lyric,
-                id:id
-            },
-            this.initScroller.bind(this)
-        );
+        return lyric;
+        // this.setState ({
+        //         lyric :lyric,
+        //         id:id
+        //     },
+        //     this.initScroller.bind(this)
+        // );
     }
     componentDidMount(){
 
-        this.init();
+        this.initScroller();
         console.log("mount")
     }
     componentDidUpdate(){
-
-
-        this.loaded && this.init() && console.log("update");
+        if(this.loaded){
+            this.alloyTouch.min = -this.scrollerHeight+this.wrapHeight/2-20;
+        }
+        // else{
+        //
+        // }
+        // this.loaded && this.init() && console.log("update");
 
     }
     scrollTo(idx,dt=300){
@@ -231,12 +235,13 @@ class Lyric extends Component {
     render() {
 
         console.log("我更新了");
+        let lyric = this.init();
         return (
             <div  id="lyric" className="ignore"  ref={(ref)=>{this.wrap = ref}} >
 
                 <div id="scroll" ref={(ref)=>{this.scroller = ref}}>
                     {
-                        content(this.state.lyric)
+                        content(lyric)
                     }
 
                 </div>

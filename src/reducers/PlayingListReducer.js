@@ -1,31 +1,44 @@
 import Immutable from "seamless-immutable";
 import  * as TYPE from '../constants/PlayingListType';
-
+import  * as PLAYER_TYPE from '../constants/PlayerType';
 import {setValue,setIn,replace} from "./ReducerTools";
 import { tools }  from '../tools/Tools';
 
 
 const  initialState = Immutable({
     show:false,
-    playingList:playingListfromLocal(),
+    playingList:getFromstorage("playingList"),
     list:{
 
-    }
+    },
+    history:getFromstorage("history"),
+    last:getLastFromstorage()
 });
 //存储到localstorage
-function storagePlayingList(list) {
+function storage(key,list) {
     setTimeout(function () {
-        tools.setToLocal("playingList",JSON.stringify(list));
+        tools.setToLocal(key,JSON.stringify(list));
     },0);
 
 }
 //获取playingList从localstorage
-function playingListfromLocal() {
-    var LOCAL_LIST  = JSON.parse(tools.getFromLocal("playingList"));
+function getFromstorage(key) {
+    var LOCAL_LIST  = JSON.parse(tools.getFromLocal(key));
 
     return LOCAL_LIST?LOCAL_LIST:[];
 
 }
+//获取playingList从localstorage
+function getLastFromstorage() {
+    var index  = JSON.parse(tools.getFromLocal("last"));
+
+    return index?index:null;
+
+}
+
+
+
+
 function setShow(state,flag) {
     return setValue(state,"show",flag)
 }
@@ -71,7 +84,7 @@ function deleteById(state,action) {
     }
 
 
-    storagePlayingList(playlist);
+    storage("playingList",playlist);
 
 
     let n =  replace(state,{
@@ -84,6 +97,62 @@ function deleteById(state,action) {
     return n;
 
 }
+
+function handleAdd(state,action) {
+    //否则将这首歌加入到当前歌曲的下一首
+    let playingList = Immutable.asMutable(state.playingList),
+        list = Immutable.asMutable(state.list),
+        currentSong = action.playload.currentSong;
+
+    let index = currentSong.index+1;
+    let addList = [];
+    if(action.playload.song.length){
+        addList = Array.from(action.playload.song,function (song,i) {
+            if(state.list[song.mid]==null) {
+                let t_song = {
+                    album: song.album.mid,
+                    currentTime: 0,
+                    duration: song.interval,
+                    id: song.mid,
+                    index: index + i,
+                    name: song.name,
+                    singer: tools.getSinger(song.singer)
+                };
+
+                list[song.mid] = t_song;
+                return t_song;
+            }
+
+        });
+        playingList = [];
+    }
+    else{
+        if(state.list[action.playload.song.id]==null){
+            list[action.playload.song.album]=action.playload.song;
+            addList = Array.from([action.playload.song]);
+        }
+
+    }
+    addList = addList.filter((obj)=>{
+        return obj!=null;
+    });
+
+    playingList.splice(currentSong.index+1,0,...addList);
+    playingList = Immutable(playingList);
+
+
+    // debugger;
+    console.log("播放列表:",playingList);
+
+    return {
+        ...state,
+        list,
+        song: action.playload.song,
+        playingList,
+    }
+
+
+}
 function addPlayingList(state,action) {
 
     // debugger;
@@ -93,35 +162,62 @@ function addPlayingList(state,action) {
         return setValue(state,"song",action.playload.song);
     }
     console.log(state);
+    /*
     //否则将这首歌加入到当前歌曲的下一首
     let playingList = Immutable.asMutable(state.playingList),
         currentSong = action.playload.currentSong;
 
     action.playload.song.index = currentSong.index+1;
+
     playingList.splice(currentSong.index+1,0,action.playload.song);
     playingList = Immutable(playingList);
 
     let new_state = setIn(state,["list",action.playload.song.id],action.playload.song);
     // debugger;
     console.log("播放列表:",playingList);
+    */
+
+    let new_state = handleAdd(state,action);
 
     //存储到localstorage
-    storagePlayingList(playingList);
 
-    return replace(new_state,{
-        ...new_state,
-        song: action.playload.song,
-        playingList,
-    });
+    storage("playingList",new_state.playingList);
+
+    return replace(state,new_state);
 }
 function clearList(state,action) {
 
     //存储到localstorage
-    storagePlayingList([]);
+    storage([]);
 
-    return initialState;
+    return Immutable({
+        show:false,
+        playingList:[],
+        list:{
+
+        }
+    });
 
 
+}
+function saveToHistory(state,action) {
+    let song = action.playload.song;
+    // alert(state.history);
+    let historyList = Immutable.asMutable(state.history);
+
+    for(var i =0 ,max = historyList.length;i<max;i++){
+        if(historyList[i].id == song.id)
+            break;
+    }
+
+
+    historyList.splice(i,1);
+
+    historyList.unshift(song);
+
+    storage("history",historyList);
+    storage("last",song);
+    return setValue(state,"history",historyList)
 }
 export default  function PlayingListReducer(state=initialState,action){
     // console.log(action);
@@ -136,6 +232,8 @@ export default  function PlayingListReducer(state=initialState,action){
         case TYPE.CLEAR_PLAYING_LIST: return clearList(state,action);
 
         case TYPE.DELETE_SONG: return deleteById(state,action);
+
+        case PLAYER_TYPE.MUSIC_PLAY :return saveToHistory(state,action);
 
         default:
             return state;

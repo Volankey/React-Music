@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'; // 引入connect函数
 import * as PlayingListAction from "../../actions/PlayingListAction";
 import * as CDListAcrion from "../../actions/CDListAcrion";
+import {tools} from '../../tools/Tools';
+
 import {
     withRouter
 } from 'react-router-dom';
@@ -40,10 +42,8 @@ const getSong = (data)=>{
 class CdList extends PureComponent {
 
     renderItem = (item,index)=>{
-        let singers = item.singer.map(function (singer) {
-            return singer.name;
-        });
-        singers = singers.join("/");
+
+        let singers = tools.getSinger(item.singer);
         return (
             <div className="diss-item" key={item.id} onClick={()=>{
                 this.props.addToPlayingList(item,getSong);
@@ -70,7 +70,7 @@ class CdList extends PureComponent {
                     //监听change
                     change={this.setTop}
                     //数据
-                    end={this.props.loadMore}
+                    // end={this.props.loadMore}
                     data={data}
                     renderItem={this.renderItem}
                 >
@@ -192,7 +192,12 @@ class CdList extends PureComponent {
                 <div className="cd-intro ignore" style={cd_style}>
 
                     <div className="filter">
-                        <div style={{display}} className="btn-play-all ignore"><span>播放全部</span></div>
+                        <div style={{display}} className="btn-play-all ignore">
+                            {/*播放按钮*/}
+                            <span
+                              onClick={()=>{
+                                  this.props.addListToPlayingList(this.props.data.cdlist[0].songlist)
+                              }}>播放全部</span></div>
                     </div>
                 </div>
                 {/*cd图片结束*/}
@@ -230,6 +235,9 @@ export default withRouter(connect(
         },
         loadMore:()=>{
             dispatch(CDListAcrion.loadMore())
+        },
+        addListToPlayingList:(list)=>{
+            dispatch(PlayingListAction.addListToPlayingList(list))
         }
 
     })

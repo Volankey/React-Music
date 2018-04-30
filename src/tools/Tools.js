@@ -101,6 +101,13 @@ export  const tools  =     {
         if(window.localStorage)
              return window.localStorage.getItem(key);
 
+    },
+    getSinger:function (singerArray,symbol="/") {
+        let singers = singerArray.map(function (singer) {
+            return singer.name;
+        });
+        singers = singers.join(symbol);
+        return singers;
     }
 
 };
@@ -129,13 +136,14 @@ export var myplayer = (function () {
         this.play =  function(){
             try{
                 if(this.firstPlay===true){
-                    if(this.src=="") this.src = "http://dl.stream.qqmusic.qq.com/C400002ZnJAb2w8Ynn.m4a";
+                    if(this.src=="") this.src = "http://dl.stream.qqmusic.qq.com/xiaobai.m4a";
+                    this.first_error=true;
                     audio.play();
                     audio.pause();
                     this.firstPlay=false;
                     return;
                 }
-
+                this.first_error=false;
 
                 audio.play();
                 loading=false;

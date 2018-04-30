@@ -132,7 +132,7 @@ export function play() {
                 return;
             }
             if(status === TYPE.STATUS_EMPTY){
-                idx = (idx+1)%list.length;
+                idx = (idx)%list.length;
 
                 // let song = list[idx];
                 status = TYPE.STATUS_PLAYING;
@@ -188,6 +188,7 @@ export function statusChange(status) {
 export function playEnd() {
     return (dispatch,getState)=>{
 
+        if(player.firstPlay || player.first_error) return;
 
         let state= getState().MusicReducer;
         let list = getState().PlayingListReducer.playingList;
@@ -220,10 +221,10 @@ export function playEnd() {
         let status =  TYPE.STATUS_PLAYING;
 
         //判断是否第一次播放
-        let im = state.song.index==-1?false:true;
+        let im = player.firstPlay?false:true;
 
         //准备播放下一首
-        getMusic(song,status,dispatch,list,im);
+         getMusic(song,status,dispatch,list,im);
     }
 }
 export function playByIdx(index) {

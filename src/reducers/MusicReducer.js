@@ -1,8 +1,30 @@
 import * as TYPE from '../constants/PlayerType';
+import * as LIST_TYPE from '../constants/PlayingListType';
 import Immutable from "seamless-immutable";
 import * as tools from './ReducerTools';
 
+import {tools as commonTools} from '../tools/Tools'
 
+
+const last_song =()=>{
+    let song = JSON.parse(commonTools.getFromLocal("last"));
+    if(song){
+        song.albumUrl =  'https://y.gtimg.cn/music/photo_new/T002R300x300M000' + song.album + '.jpg?max_age=2592000';
+    }
+    else{
+        song = {
+            name: "暂无歌曲",
+            singer: "小白",
+            currentTime: 0,
+            index: -1,
+            id: null,
+            duration: 0,
+            albumUrl: "http://www.bimdiot.net/images/demo.jpg"
+        }
+    }
+    return song;
+
+};
 
 const initialState = Immutable({
 
@@ -11,15 +33,7 @@ const initialState = Immutable({
     //播放状态
     status: TYPE.STATUS_EMPTY,
     //当前歌曲
-    song: {
-        name: "暂无歌曲",
-        singer: "小白",
-        currentTime: 0,
-        index: -1,
-        id: null,
-        duration: 0,
-        albumUrl: "http://www.bimdiot.net/images/demo.jpg"
-    },
+    song: last_song(),
     //当前歌曲的歌词
     lyric: null,
     //播放列表
@@ -125,6 +139,7 @@ export default function MusicPlayer(state = initialState, action) {
 
     case TYPE.PLAYER_INIT:
         return initPlayer();
+    case LIST_TYPE.CLEAR_PLAYING_LIST: return initPlayer();
         //
         // case TYPE.ADD_TO_PLAING : return addPlayingList(state,action);
         //

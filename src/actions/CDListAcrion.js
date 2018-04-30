@@ -69,7 +69,7 @@ export function getData(id){
         tools.fetch(
             {
 
-                url:`http://${domain}:3001/apis/list_data?id=${id}&s=${s}&n=15`,
+                url:`http://${domain}:3001/apis/list_data?id=${id}&s=${s}&n=0`,
                 dataType:"json",
             }
         ).then((res)=>{
