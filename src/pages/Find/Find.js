@@ -32,7 +32,7 @@ class Find extends PureComponent {
                         renderItem={(item,index)=>{
                             return (
 
-                                <Link to={"/list/"+item.dissid} key={item.dissid}>
+                                <Link to={"/find/list/"+item.dissid} key={item.dissid}>
                                     <div  className="diss-item" key={item.dissid}>
                                         <img className="ignore" src={item.imgurl} alt=""/>
                                         <div className="intro">

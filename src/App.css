@@ -75,7 +75,7 @@ p{
 .left-enter.left-enter-active {
   opacity: 1;
   transform: translateX(0);
-  transition: all 600ms;
+  transition: all 400ms ease;
 }
 
 .left-leave {

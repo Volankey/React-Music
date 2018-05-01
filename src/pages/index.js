@@ -81,6 +81,7 @@ class Home extends Component {
                                     <div className="content-wrap" key={location.pathname}>
                                         <Route location={location}  path='/home/recent'  component={RecentList}/>
                                         <Route location={location} path='/home/list/:id' component={CdList}/>
+                                        <Route location={location} path='/find/list/:id' component={CdList}/>
                                     </div>
                                 </CSSTransitionGroup>
                             )
@@ -92,7 +93,7 @@ class Home extends Component {
 
 
                         <Route path='/home' component={MyPage}/>
-                        <Route path='/find' exact component={Find}/>
+                        <Route path='/find' component={Find}/>
                         <Route path='/search' exact component={Search}/>
 
 
