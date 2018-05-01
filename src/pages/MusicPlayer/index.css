@@ -193,3 +193,35 @@
         transform: rotate(360deg);
     }
 }
+
+.player-enter {
+
+    opacity: 0.03;
+    z-index: 1000;
+}
+.player-enter .head{
+    transform: translate3d(0, -100px, 0);
+
+}
+.player-enter .player-controller{
+    transform: translate3d(0, 100px, 0);
+}
+.player-enter.player-enter-active .head,.player-enter.player-enter-active .player-controller{
+    transform: translate3d(0, 0px, 0);
+    transition: all 0.6s;
+}
+.player-enter.player-enter-active {
+
+    opacity:1;
+}
+
+.player-leave {
+    opacity:1;
+    transition: opacity 300ms;
+}
+
+.player-leave.player-leave-active {
+
+    opacity: 0;
+
+}

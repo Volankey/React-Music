@@ -1,11 +1,12 @@
 .content.cd{
     position: absolute;
-    z-index:100;
+
     width: 100%;
     background-color: rgb(26,42,55);
     flex-direction: column;
     /*display: flex;*/
     /*display: block;*/
+    z-index: 200;
 }
  header{
     position: fixed;

@@ -13,7 +13,7 @@ class Header extends Component {
         return (
             <div className="header">
                 <div className="header-tabs">
-                    <Link to={"/"}>
+                    <Link to={"/home"}>
                         <span>我的</span>
                     </Link>
 

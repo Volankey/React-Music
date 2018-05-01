@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 
 import {
+    Route,
     withRouter,
     Link
 } from 'react-router-dom';
 import data from './data.json';
 import List from '../../compoents/List'
 import './index.css';
-
+import RecentList from '../RecentList';
 
 class Mypage extends Component {
 
@@ -15,6 +16,7 @@ class Mypage extends Component {
     render() {
         return (
             <div className="content my-page ignore">
+
                 <div className="list-wrap ignore">
 
                     <List
@@ -22,7 +24,7 @@ class Mypage extends Component {
                         renderItem={(item,index)=>{
                             return (
 
-                                <Link to={"/list/"+item.tid} key={item.tid}>
+                                <Link to={"/home/list/"+item.tid} key={item.tid}>
                                     <div  className="diss-item">
                                         <img className="ignore" src={item.diss_cover} alt=""/>
                                         <div className="intro">
@@ -46,12 +48,12 @@ class Mypage extends Component {
                         </div>
 
                         <div className="main">
-                            <Link to={"/list/2306806058"}>
+                            <Link to={"/home//list/2306806058"}>
                                 <div className=" ignore btn my-love-list"></div>
                                 <p className="text-center">我喜欢</p>
                                 <p className="text-center">97</p>
                             </Link>
-                            <Link to={"/recent"}>
+                            <Link to={"/home/recent"}>
                                 <div className="ignore btn recent-list"></div>
                                 <p className="text-center">最近播放</p>
                                 <p className="text-center">200</p>

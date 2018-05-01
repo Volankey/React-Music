@@ -4,6 +4,7 @@
     background-color: rgb(21,36,42);
 
     padding-bottom: 30px;
+    z-index: 100;
 }
 .header .header-tabs {
     display: flex;

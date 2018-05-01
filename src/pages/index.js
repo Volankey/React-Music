@@ -17,13 +17,15 @@ import * as TYPE from '../constants/PlayerType';
 import {
     BrowserRouter as Router,
     Route,
-    Switch
+    Switch,
+    Redirect
 } from 'react-router-dom';
 
 
 import { connect } from 'react-redux'; // 引入connect函数
 import * as PlayerAction from "../actions/PlayerAction";
 import * as PlayingListAction from "../actions/PlayingListAction";
+import { CSSTransitionGroup } from 'react-transition-group' // ES6
 class Home extends Component {
     
     componentDidMount() {
@@ -54,14 +56,51 @@ class Home extends Component {
 
                         <Header/>
 
-                        <Switch>
-                            <Route path='/' exact component={MyPage}/>
-                            <Route path='/find' exact component={Find}/>
-                            <Route path='/search' exact component={Search}/>
-                            <Route path='/music' exact component={MusicPlayer}/>
-                            <Route path='/list/:id' exact component={CdList}/>
-                            <Route path='/recent' exact component={RecentList}/>
-                        </Switch>
+                        <Route render={({ location }) => {
+                            return(
+                                <CSSTransitionGroup
+                                    transitionName='player'
+                                    transitionEnterTimeout={300}
+                                    transitionLeaveTimeout={500}
+                                >
+
+                                    <div className="content-wrap" key={location.pathname}>
+                                        <Route location={location}  path='/music'  component={MusicPlayer}/>
+                                    </div>
+                                </CSSTransitionGroup>
+                            )
+                        }}/>
+                        <Route render={({ location }) => {
+                            return(
+                                <CSSTransitionGroup
+                                    transitionName='left'
+                                    transitionEnterTimeout={300}
+                                    transitionLeaveTimeout={500}
+                                >
+
+                                    <div className="content-wrap" key={location.pathname}>
+                                        <Route location={location}  path='/home/recent'  component={RecentList}/>
+                                        <Route location={location} path='/home/list/:id' component={CdList}/>
+                                    </div>
+                                </CSSTransitionGroup>
+                            )
+                        }}/>
+
+                        <Route exact path="/" render={() => (
+                            <Redirect path="/" exact to={{pathname: '/home'}} />
+                        )}/>
+
+
+                        <Route path='/home' component={MyPage}/>
+                        <Route path='/find' exact component={Find}/>
+                        <Route path='/search' exact component={Search}/>
+
+
+
+
+
+
+
 
                         <Player
                             status={this.props.status}

@@ -8,7 +8,7 @@ import ProgressBar from '../../compoents/ProgressBar/ProgressBar';
 import * as TYPE from '../../constants/PlayerType';
 import Lyric from '../../compoents/Lyric/Lyric';
 import Slider from '../../compoents/Slider';
-// import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+
 import './index.css';
 
 import {
@@ -18,6 +18,7 @@ var player = myplayer();
 class MusicPlayer extends Component {
 
     goBack() {
+
         this.props.history.goBack();
     }
     onloadstart(){
@@ -107,8 +108,9 @@ class MusicPlayer extends Component {
 
         // console.log(d);
         return (
-            <div className="content music">
 
+            <div className="content music">
+              
                 <div className="background ignore" style={
                     {
                         backgroundImage:"url('"+song.albumUrl+"')"
@@ -201,6 +203,7 @@ class MusicPlayer extends Component {
                 </div>
 
             </div>
+
 
         );
     }

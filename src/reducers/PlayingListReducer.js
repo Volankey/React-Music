@@ -128,7 +128,7 @@ function handleAdd(state,action) {
     }
     else{
         if(state.list[action.playload.song.id]==null){
-            list[action.playload.song.album]=action.playload.song;
+            list[action.playload.song.id]=action.playload.song;
             addList = Array.from([action.playload.song]);
         }
 
