@@ -60,7 +60,7 @@ class MusicPlayer extends Component {
 
         if (status === TYPE.STATUS_PLAYING) {
             return {
-                btn:"btn-pause",
+                btn:"bg-pause-big",
                 cd:"play",
                 transform:this.cd_wrap_transform
             }
@@ -68,7 +68,7 @@ class MusicPlayer extends Component {
         else {
 
             return {
-                btn:"btn-play",
+                btn:"bg-play-big",
                 cd:"",
                 transform:this.cd_wrap_transform
             }
@@ -78,11 +78,11 @@ class MusicPlayer extends Component {
     computeModeClass() {
         let mode = this.props.mode;
         if (mode === TYPE.LIST_LOOP)
-            return "btn-loop";
+            return "bg-loop";
         else if (mode === TYPE.SINGLE_LOOP)
-            return "btn-single-loop";
+            return "bg-singleloop";
         else
-            return "btn-random";
+            return "bg-random";
     }
     computeCd(){
         if(this.cd_img){
@@ -119,9 +119,8 @@ class MusicPlayer extends Component {
                     {/*<img className="image" src={≈} alt=""/>*/}
                 </div>
                 <div className="head">
-                    <div className="btn btn-down ignore" onClick={this.goBack.bind(this)}></div>
+                    <div className="btn bg-down ignore" onClick={this.goBack.bind(this)}></div>
                     <div className="title"><span>{song.name}</span></div>
-                    <div className="btn ignore"></div>
                 </div>
 
                 <div className="slider-wrap ignore">
@@ -179,7 +178,7 @@ class MusicPlayer extends Component {
                         <div className={"btn ignore " + mode} onClick={() => {
                             this.props.changeMode();
                         }}> </div>
-                        <div className="btn btn-pre  ignore" onClick={() => {
+                        <div className="btn bg-playPreview  ignore" onClick={() => {
                             this.props.playNext(-1);
                         }}> </div>
 
@@ -188,12 +187,12 @@ class MusicPlayer extends Component {
                             this.props.play();
                         }}> </div>
 
-                        <div className="btn btn-next ignore" onClick={() => {
+                        <div className="btn bg-playNext ignore" onClick={() => {
 
                             this.props.playNext(1);
                         }}> </div>
 
-                        <div className="btn btn-list ignore" onClick={this.props.show}> </div>
+                        <div className="btn bg-list ignore" onClick={this.props.show}> </div>
                     </div>
                     {/*收藏\分享\评论*/}
                     <div className="social">

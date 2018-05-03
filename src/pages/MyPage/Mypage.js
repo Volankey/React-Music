@@ -49,12 +49,12 @@ class Mypage extends Component {
 
                         <div className="main">
                             <Link to={"/home//list/2306806058"}>
-                                <div className=" ignore btn my-love-list"></div>
+                                <div className="ignore btn  bg-like"></div>
                                 <p className="text-center">我喜欢</p>
                                 <p className="text-center">97</p>
                             </Link>
                             <Link to={"/home/recent"}>
-                                <div className="ignore btn recent-list"></div>
+                                <div className="ignore btn bg-recent"></div>
                                 <p className="text-center">最近播放</p>
                                 <p className="text-center">200</p>
                             </Link>

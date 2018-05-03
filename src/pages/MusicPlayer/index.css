@@ -19,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 30px 10px 0;
+    padding: 30px 0px 0;
     margin-bottom: 30px;
 
 }
@@ -34,18 +34,14 @@
 
 }
 .content.music .btn.ignore{
-    width: 24px;
-    height: 24px;
-    background-size: contain;
 
     background-repeat: no-repeat;
     margin:0 10px;
+
 }
-.btn-down{
-    background-image: url("./down.png");
-
-
-
+.bg-down{
+    position: absolute;
+    left: 0;
 }
 .page-1{
     height: 100%;
@@ -126,37 +122,37 @@
     width: 42px;
     height: 42px;
 }
-#controller .btn-loop{
-    background-image: url("/asset/loop.png");
-    background-size: contain;
-}
-#controller .btn-single-loop{
-    background-image: url("/asset/singleloop.png");
-    background-size: contain;
-}
-#controller .btn-random{
-    background-image: url("/asset/random.png");
-    background-size: contain;
-}
-#controller .btn-pre{
-    background-image: url("/asset/playPreview.fw.png");
-    background-size: contain;
-}
-#controller .btn-next{
-    background-image: url("/asset/playNext.fw.png");
-    background-size: contain;
-}
-#controller .btn-list{
-    background-image: url("/asset/list.png");
-    background-size: contain;
-}
-#controller .btn-play{
-    background-image: url("/asset/play.fw.png");
-    background-size: contain;
-}#controller .btn-pause{
-     background-image: url("/asset/pause.fw.png");
-     background-size: contain;
- }
+/*#controller .btn-loop{*/
+    /*background-image: url("/asset/loop.png");*/
+    /*background-size: contain;*/
+/*}*/
+/*#controller .btn-single-loop{*/
+    /*background-image: url("/asset/singleloop.png");*/
+    /*background-size: contain;*/
+/*}*/
+/*#controller .btn-random{*/
+    /*background-image: url("/asset/random.png");*/
+    /*background-size: contain;*/
+/*}*/
+/*#controller .btn-pre{*/
+    /*background-image: url("/asset/playPreview.fw.png");*/
+    /*background-size: contain;*/
+/*}*/
+/*#controller .btn-next{*/
+    /*background-image: url("/asset/playNext.fw.png");*/
+    /*background-size: contain;*/
+/*}*/
+/*#controller .btn-list{*/
+    /*background-image: url("/asset/list.png");*/
+    /*background-size: contain;*/
+/*}*/
+/*#controller .btn-play{*/
+    /*background-image: url("/asset/play.fw.png");*/
+    /*background-size: contain;*/
+/*}#controller .btn-pause{*/
+     /*background-image: url("/asset/pause.fw.png");*/
+     /*background-size: contain;*/
+ /*}*/
  .slider-wrap.ignore{
      height: 400px;
      width: 100%;

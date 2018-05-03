@@ -27,12 +27,12 @@ class Player extends Component {
 
 
         if (status === TYPE.STATUS_PLAYING) {
-            return "btn-pause";
+            return "bg-pause";
 
         }
         else {
 
-            return "btn-play";
+            return "bg-play";
         }
 
     }
@@ -57,7 +57,7 @@ class Player extends Component {
                     <div className={"btn ignore "+this.computeBtnClass()}
                          onClick={()=>{this.props.play()}}
                     > </div>
-                    <div className="btn ignore btn-list" onClick={()=>{
+                    <div className="btn ignore bg-list" onClick={()=>{
                         this.props.show();
                     }}></div>
                 </div>

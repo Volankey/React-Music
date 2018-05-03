@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import  {Provider} from 'react-redux';
 // import logo from './logo.svg';
 import './App.css';
@@ -9,7 +9,7 @@ import configureStore from "./store/ConfiguerStore";
 
 const  store = configureStore();
 
-class App extends Component {
+class App extends PureComponent {
 
 
     render() {

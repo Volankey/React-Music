@@ -89,3 +89,73 @@ p{
   transform: translateX(100%);
   transition: all 600ms;
 }
+/*按钮图标雪碧图*/
+.ignore.bg-down {
+  width: 32px; height: 32px;
+  background: url('css_sprites.png') -190px -122px;
+}
+
+.ignore.bg-like_fill {
+  width: 36px; height: 36px;
+  background: url('css_sprites.png') -10px -72px;
+}
+
+.ignore.bg-like {
+  width: 32px; height: 32px;
+  background: url('css_sprites.png') -10px -184px;
+}
+
+.ignore.bg-list {
+  width: 36px; height: 36px;
+  background: url('css_sprites.png') -66px -72px;
+}
+
+.ignore.bg-loop {
+  width: 36px; height: 36px;
+  background: url('css_sprites.png') -134px -10px;
+}
+
+.ignore.bg-pause {
+  width: 36px; height: 36px;
+  background: url('css_sprites.png') -134px -66px;
+}
+
+.ignore.bg-pause-big{
+  width: 42px; height: 42px;
+  background: url('css_sprites.png') -10px -10px;
+}
+
+.ignore.bg-play {
+  width: 36px; height: 36px;
+  background: url('css_sprites.png') -10px -128px;
+}
+
+.ignore.bg-play-big {
+  width: 42px; height: 42px;
+  background: url('css_sprites.png') -72px -10px;
+}
+
+.ignore.bg-playNext {
+  width: 36px; height: 36px;
+  background: url('css_sprites.png') -66px -128px;
+}
+
+.ignore.bg-playPreview {
+  width: 36px; height: 36px;
+  background: url('css_sprites.png') -122px -128px;
+}
+
+.ignore.bg-random {
+  width: 36px; height: 36px;
+  background: url('css_sprites.png') -190px -10px;
+}
+
+.ignore.bg-recent {
+  width: 32px; height: 32px;
+  background: url('css_sprites.png') -62px -184px;
+}
+
+.ignore.bg-singleloop {
+  width: 36px; height: 36px;
+  background: url('css_sprites.png') -190px -66px;
+}

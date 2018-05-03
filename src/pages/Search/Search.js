@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import List from '../../compoents/List'
 import './index.css';
@@ -28,7 +28,7 @@ const getSong = (data)=>{
     };
      return song;
 };
-class Search extends Component {
+class Search extends PureComponent {
 
     goBack(){
         this.props.history.goBack();

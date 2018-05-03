@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 
 import MyPage from './MyPage/Mypage';
@@ -26,7 +26,7 @@ import { connect } from 'react-redux'; // 引入connect函数
 import * as PlayerAction from "../actions/PlayerAction";
 import * as PlayingListAction from "../actions/PlayingListAction";
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
-class Home extends Component {
+class Home extends PureComponent {
     
     componentDidMount() {
 
