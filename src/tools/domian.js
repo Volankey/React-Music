@@ -1,2 +1,2 @@
-const  domain = "192.168.1.104";
+const  domain = "140.143.62.133";
 export  default domain;

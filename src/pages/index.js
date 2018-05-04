@@ -51,7 +51,7 @@ class Home extends PureComponent {
         return (
 
 
-                <Router>
+                <Router basename="/my-app-music">
                     <div id="app">
 
                         <Header/>

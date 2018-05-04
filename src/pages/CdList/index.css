@@ -20,7 +20,7 @@
     max-width: 300px;
 }
 .back{
-    background: url("/asset/back.png") no-repeat center left;
+    background: url("./back.png") no-repeat center left;
     background-size: 45px;
     height: 45px;
 }
