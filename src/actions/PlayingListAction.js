@@ -1,7 +1,25 @@
 import * as PLAYER_TYPE from '../constants/PlayerType';
 import * as TYPE from '../constants/PlayingListType';
 import {getMusic,player,getNext} from  './PlayerAction';
-import {tools} from '../tools/Tools'
+import {tools} from '../tools/Tools';
+//生成song数据
+const getSong = (data)=>{
+
+    let singgers =   data.singer.map(function (singer) {
+        return singer.name
+    }).join("-");
+
+    let song = {
+        name:data.title,
+        singer:singgers,
+        id:data.mid,
+        album:data.album.mid,
+        duration:data.interval,
+        currentTime:0,
+
+    };
+    return song;
+};
 export function show() {
     return (dispatch,getState) => {
         dispatch(

@@ -38,7 +38,7 @@ class LocalList extends Component {
         return(
             <div onClick={()=>{
 
-                this.props.playByindex(song.index);
+                this.props.play(song);
             }} className="recent-item" key={song.id}>
                 <p className="text-overflow">{song.name}</p>
                 <p className="text-overflow">{song.singer}</p>

@@ -115,7 +115,8 @@ export  const tools  =     {
         }
 
         return singers;
-    }
+    },
+
 
 };
 

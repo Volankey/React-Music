@@ -8,7 +8,6 @@ import { connect } from 'react-redux'; // 引入connect函数
 import Immutable from "seamless-immutable";
 import LocalList from '../../compoents/LocalList'
 import * as PlayingListAction from "../../actions/PlayingListAction";
-import * as PlayerAction from "../../actions/PlayerAction";
 import "./index.css";
 
 
@@ -18,8 +17,8 @@ class RecentList extends Component {
         return (
             <LocalList
                 data={this.props.data}
-                addToPlayingList={this.props.addToPlayingList}
-                playByindex={this.props.playByindex}
+                addToPlayingList={this.props.addToListPlayingList}
+                play={this.props.addToPlayingList}
             />
         )
     }
@@ -31,15 +30,17 @@ export default withRouter(connect(
         loading:state.PlayingListReducer.loading
     }),
     (dispatch) => ({
-        addToPlayingList: (data) => {
+        addToListPlayingList: (data) => {
             function getSong(song) {
                 return Immutable.asMutable(song);
             }
             dispatch(PlayingListAction.addListToPlayingList(data,getSong))
         },
-        playByindex:(index)=>{
-
-            dispatch(PlayerAction.playByIdx(index))
+        addToPlayingList:(song)=>{
+            function getSong(song) {
+                return Immutable.asMutable(song);
+            }
+            dispatch(PlayingListAction.addToPlayingList(song,getSong))
         }
 
 
