@@ -156,7 +156,7 @@
  .slider-wrap.ignore{
      height: 400px;
      width: 100%;
-     overflow: hidden;
+     /*overflow: hidden;*/
      position: relative;
      z-index: 5;
  }

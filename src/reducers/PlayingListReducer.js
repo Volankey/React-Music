@@ -110,7 +110,8 @@ function handleAdd(state,action) {
     if(action.playload.song.length){
         addList = Array.from(action.playload.song,function (song,i) {
             if(state.list[song.mid]==null) {
-                let t_song = action.playload.getSong(song)
+                let t_song = action.playload.getSong(song);
+                t_song.index = i;
                 // {
                 //     album: song.album.mid,
                 //     currentTime: 0,

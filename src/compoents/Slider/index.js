@@ -253,7 +253,7 @@ class Slider extends Component {
 
         return(
             <div className="dots" style={{
-                bottom:this.props.dotBottom>=0?this.props.dotBottom:"10%"
+                bottom:this.props.dotBottom!==undefined?this.props.dotBottom:"10%"
             }}>
                 {
                     dot

@@ -61,7 +61,7 @@ export function addListToPlayingList(list,getSong) {
 
         let first = list[0];
         song = getSong(first);
-        song.index = idx;
+        song.index = 0;
 
         dispatch(
             {
@@ -76,7 +76,7 @@ export function addListToPlayingList(list,getSong) {
         );
 
         let currentlist = getState().PlayingListReducer.playingList;
-        getMusic(song,status,dispatch,currentlist);
+        getMusic(currentlist[0],status,dispatch,currentlist);
     }
 }
 export function addToPlayingList(data,getSong) {

@@ -126,7 +126,7 @@ class MusicPlayer extends Component {
                 <div className="slider-wrap ignore">
                     <Slider
                         showDot={true}
-                        dotBottom={0    }
+                        dotBottom={-20}
                     >
                         <div className="page-1">
                             <div className="singer">

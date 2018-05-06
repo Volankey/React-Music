@@ -308,7 +308,7 @@ export function getNext(list,currentIdx,type=1) {
     if(idx<0){
         idx = list.length-1;
     }
-    else if(idx+1>=list.length){
+    else if(idx+1>list.length){
         idx = 0;
     }
 
