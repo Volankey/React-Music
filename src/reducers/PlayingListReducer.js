@@ -106,10 +106,12 @@ function handleAdd(state,action) {
 
     let index = currentSong.index+1;
     let addList = [];
-    //列表
+    //列表的话替换当前的播放列表
     if(action.playload.song.length){
+        list={};
+
         addList = Array.from(action.playload.song,function (song,i) {
-            if(state.list[song.mid]==null) {
+
                 let t_song = action.playload.getSong(song);
                 t_song.index = i;
                 // {
@@ -124,21 +126,22 @@ function handleAdd(state,action) {
 
                 list[song.mid] = t_song;
                 return t_song;
-            }
+
 
         });
         playingList = [];
     }
     else{
+        //添加单手歌曲
         if(state.list[action.playload.song.id]==null){
             list[action.playload.song.id]=action.playload.song;
             addList = Array.from([action.playload.song]);
         }
 
     }
-    addList = addList.filter((obj)=>{
-        return obj!=null;
-    });
+    // addList = addList.filter((obj)=>{
+    //     return obj!=null;
+    // });
 
     playingList.splice(currentSong.index+1,0,...addList);
     playingList = Immutable(playingList);
