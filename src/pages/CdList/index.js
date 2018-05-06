@@ -237,7 +237,18 @@ export default withRouter(connect(
             dispatch(CDListAcrion.loadMore())
         },
         addListToPlayingList:(list)=>{
-            dispatch(PlayingListAction.addListToPlayingList(list))
+            function getSong(song) {
+                return  {
+                    album:song.album.mid,
+                    currentTime:0,
+                    duration:song.interval,
+                    id:song.mid,
+                    name:song.name,
+                    singer:tools.getSinger(song.singer)
+                };
+
+            }
+            dispatch(PlayingListAction.addListToPlayingList(list,getSong))
         }
 
     })

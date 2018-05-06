@@ -97,16 +97,23 @@ export  const tools  =     {
             window.localStorage.setItem(key,data);
 
     },
+    isArray(o){
+        return Object.prototype.toString.call(o)=='[object Array]';
+    },
     getFromLocal:function (key) {
         if(window.localStorage)
              return window.localStorage.getItem(key);
 
     },
     getSinger:function (singerArray,symbol="/") {
-        let singers = singerArray.map(function (singer) {
-            return singer.name;
-        });
-        singers = singers.join(symbol);
+        let singers = singerArray;
+        if(this.isArray(singerArray)){
+            singers = singerArray.map(function (singer) {
+                return singer.name;
+            });
+            singers = singers.join(symbol);
+        }
+
         return singers;
     }
 

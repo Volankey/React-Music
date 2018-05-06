@@ -46,7 +46,8 @@ export function playByIndex(song) {
     }
 
 }
-export function addListToPlayingList(list) {
+
+export function addListToPlayingList(list,getSong) {
     return (dispatch,getState)=>{
         let state= getState().MusicReducer;
 
@@ -59,23 +60,17 @@ export function addListToPlayingList(list) {
         let song ={};
 
         let first = list[0];
+        song = getSong(first);
+        song.index = idx;
 
-        song =   {
-            album:first.album.mid,
-            currentTime:0,
-            duration:first.interval,
-            id:first.mid,
-            index:idx,
-            name:first.name,
-            singer:tools.getSinger(first.singer)
-        };
         dispatch(
             {
                 type: TYPE.ADD_TO_PLAING,
                 meta: "添加了一个歌单",
                 playload:{
                     song:list,
-                    currentSong:state.song
+                    currentSong:state.song,
+                    getSong
                 }
             }
         );
