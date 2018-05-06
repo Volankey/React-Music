@@ -106,6 +106,7 @@ function handleAdd(state,action) {
 
     let index = currentSong.index+1;
     let addList = [];
+    //列表
     if(action.playload.song.length){
         addList = Array.from(action.playload.song,function (song,i) {
             if(state.list[song.mid]==null) {
@@ -213,7 +214,12 @@ function saveToHistory(state,action) {
 
     historyList.splice(i,1);
 
-    historyList.unshift(song);
+    let len = historyList.unshift(song);
+
+    //存储超过200首那么删掉最后一首
+    if(len>200){
+        historyList.pop();
+    }
 
     storage("history",historyList);
     storage("last",song);

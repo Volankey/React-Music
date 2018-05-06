@@ -10,6 +10,7 @@ import List from '../../compoents/List'
 import './index.css';
 import RecentList from '../RecentList';
 
+import { connect } from 'react-redux'; // 引入connect函数
 class Mypage extends Component {
 
 
@@ -39,7 +40,7 @@ class Mypage extends Component {
                     >
                         <div className="avatar">
                             <div className="icon">
-                                <img src="http://f.hiphotos.baidu.com/zhidao/pic/item/d1a20cf431adcbef63081c28abaf2edda3cc9fdb.jpg" alt=""/>
+                                <img src="https://img2.woyaogexing.com/2018/05/04/839d91f60aee1316!400x400_big.jpg" alt=""/>
                                 <span>未登录</span>
                             </div>
                             <div className="desc">
@@ -56,7 +57,7 @@ class Mypage extends Component {
                             <Link to={"/home/recent"}>
                                 <div className="ignore btn bg-recent"></div>
                                 <p className="text-center">最近播放</p>
-                                <p className="text-center">200</p>
+                                <p className="text-center">{this.props.recentList.length}</p>
                             </Link>
 
                         </div>
@@ -78,4 +79,12 @@ class Mypage extends Component {
     }
 }
 
-export default Mypage;
+export default connect(
+    (state) => ({
+        recentList:state.PlayingListReducer.history,
+
+    }),
+    (dispatch) => ({
+
+    })
+)(Mypage)

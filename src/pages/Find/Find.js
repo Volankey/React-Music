@@ -47,13 +47,15 @@ class Find extends PureComponent {
                     >
                         <div className="slider-wrap ignore">
                             <Slider
+                                showDot={true}
                                 interval={5000}
                                 seamless={true}>
                                 {
                                     this.props.slider.map((item,index)=>{
 
-                                        return (<a key={item.id} href={item.linkUrl}>
-                                            <img  src={item.picUrl} alt=""/></a> )
+                                        return (<a  key={item.id} href={item.linkUrl}>
+                                            <img  src={item.picUrl} alt=""/>
+                                        </a> )
                                     })
                                 }
                             </Slider>

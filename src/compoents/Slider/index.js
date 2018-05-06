@@ -13,9 +13,11 @@ class Slider extends Component {
         this.handleStart=this.handleStart.bind(this);
         this.handleMove=this.handleMove.bind(this);
         this.handleEnd = this.handleEnd.bind(this);
+        let dot = this.props.seamless?1:0;
         this.state={
             width:0,
-            left:0
+            left:0,
+            dot:dot
         }
     }
     componentWillUnmount(){
@@ -200,8 +202,17 @@ class Slider extends Component {
         this.isAnimating = isAnimating;
         this.idx=idx;
         this.x = -this.state.width*idx;
+        let dot_idx = idx;
+        if(this.idx===0){
+            dot_idx = this.len-2;
+        }
+        else if(this.idx===this.len-1){
+            dot_idx = 1;
+        }
+
         this.setState({
-            left:this.x
+            left:this.x,
+            dot:dot_idx
         })
     }
     animateEnd(){
@@ -209,22 +220,51 @@ class Slider extends Component {
             this.isAnimating = false;
 
             this.transitionDuration=null;
-            if(this.idx===0){
+            let idx = this.idx;
 
+            if(this.idx===0){
+                idx=this.len-2;
                 //说明是源数据的最后一图
-                this.scrollTo(this.len-2,false);
+                this.scrollTo(idx,false);
             }
             else if(this.idx===this.len-1){
-
+                idx=1;
                 //说明是第一个图
-                this.scrollTo(1,false);
+                this.scrollTo(idx,false);
             }
+
         }
 
+    }
+    renderDots(){
+
+        let dot = this.props.children.map((el,idx)=>{
+            let k = this.props.seamless? idx + 1 : idx;
+            if(this.state.dot === k)
+               return (
+
+                   <span className="dot active" key={k}></span>
+               );
+            else
+                return(
+                    <span className="dot" key={k}></span>
+                )
+        });
+
+        return(
+            <div className="dots" style={{
+                bottom:this.props.dotBottom>=0?this.props.dotBottom:"10%"
+            }}>
+                {
+                    dot
+                }
+            </div>
+        )
     }
     renderItems(){
         let children = this.props.children && this.props.children;
 
+        //返回内容（由li包裹的）
         let els = children.map(
             (el,idx)=>{
 
@@ -241,12 +281,15 @@ class Slider extends Component {
                 );
             }
         );
-        //无缝
+        //如果是无缝滚动那么
         if(this.props.seamless && children.length>=2){
+            //传入的可能不是一个数组，可能是伪数组比如immutable要进行一下转换
             els = Array.prototype.slice.apply(els);
+            //将第一个内容push到最后完成最后一个内容和第一个内容无缝滚动
             els.push((<li  key={els.length} style={{width:this.state.width}}>
                 {children[0]}
                      </li>));
+            //同理 第一个和最后一个的无缝滚动
             els.unshift((<li key={-1} style={{width:this.state.width}}>
                 {children[els.length-2]}
             </li>))
@@ -282,6 +325,9 @@ class Slider extends Component {
                         this.renderItems()
                     }
                 </ul>
+                {
+                    this.props.showDot && this.renderDots()
+                }
             </div>
 
 
@@ -292,6 +338,7 @@ class Slider extends Component {
 Slider.defaultProps = {
     autoSlide: true,
     interval:3000,
-    seamless:false
+    seamless:false,
+    showDot:false
 };
 export default Slider;

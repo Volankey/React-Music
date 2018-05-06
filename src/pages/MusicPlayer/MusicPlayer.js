@@ -124,7 +124,10 @@ class MusicPlayer extends Component {
                 </div>
 
                 <div className="slider-wrap ignore">
-                    <Slider>
+                    <Slider
+                        showDot={true}
+                        dotBottom={0    }
+                    >
                         <div className="page-1">
                             <div className="singer">
                                 <span>{song.singer}</span>
