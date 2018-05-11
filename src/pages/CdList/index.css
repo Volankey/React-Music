@@ -93,7 +93,7 @@ header h2.ignore{
     font-size: 16px;
     color: #fff;
     border-radius: 20px;
-    background: url("/asset/play-all.png") no-repeat 30px center;
+    background: url("./play-all.png") no-repeat 30px center;
     background-size: 24px;
     background-color: #31c27c;
     margin-bottom: 40px;
