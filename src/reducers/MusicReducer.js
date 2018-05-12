@@ -4,23 +4,36 @@ import Immutable from "seamless-immutable";
 import * as tools from './ReducerTools';
 
 import {tools as commonTools} from '../tools/Tools'
-
+const initSong  = {
+    name: "暂无歌曲",
+    singer: "小白",
+    currentTime: 0,
+    index: -1,
+    id: null,
+    duration: 0,
+    albumUrl: "http://www.bimdiot.net/images/demo.jpg"
+};
+const getAlbumUrl = (song)=>{
+    let albumUrl = "http://www.bimdiot.net/images/demo.jpg";
+    if(song.album && song.album!=""){
+        albumUrl =  'https://y.gtimg.cn/music/photo_new/T002R300x300M000' + (song.album) + '.jpg?max_age=2592000';
+    }
+   return albumUrl;
+};
 
 const last_song =()=>{
     let song = JSON.parse(commonTools.getFromLocal("last"));
     if(song){
-        song.albumUrl =  'https://y.gtimg.cn/music/photo_new/T002R300x300M000' + song.album + '.jpg?max_age=2592000';
+        song.albumUrl = getAlbumUrl(song);
+        // if(song.album && song.album!=""){
+        //     song.albumUrl =  'https://y.gtimg.cn/music/photo_new/T002R300x300M000' + (song.album) + '.jpg?max_age=2592000';
+        // }
+        // else
+        //     song.albumUrl ='http://www.bimdiot.net/images/demo.jpg';
+
     }
     else{
-        song = {
-            name: "暂无歌曲",
-            singer: "小白",
-            currentTime: 0,
-            index: -1,
-            id: null,
-            duration: 0,
-            albumUrl: "http://www.bimdiot.net/images/demo.jpg"
-        }
+       song = initSong;
     }
     return song;
 
@@ -92,7 +105,9 @@ function setCurrentTime(state, action) {
     return tools.setIn(state, ["song", "currentTime"], action.playload.current);
 }
 function initPlayer() {
-    return initialState;
+
+    return tools.setValue(initialState,"song",initSong);
+
 }
 function playMusic(state, action) {
     let playload = action.playload;
@@ -104,8 +119,7 @@ function playMusic(state, action) {
 
     let song = playload.song,
         status = playload.status,
-        albumUrl = 'https://y.gtimg.cn/music/photo_new/T002R300x300M000' + song.album + '.jpg?max_age=2592000';
-    ;
+        albumUrl = getAlbumUrl(song);
     song = tools.setValue(song, "albumUrl", albumUrl);
 
     return tools.replace(state, {

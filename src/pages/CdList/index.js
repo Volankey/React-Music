@@ -169,7 +169,7 @@ class CdList extends PureComponent {
             ,
             zIndex:this.state.stick?20:null,
             height:this.state.stick?40:300,
-            transform:`scale(${this.state.scale}) translateZ(0px)`
+            transform:`scale(${this.state.scale}) translate3d(0,0,0)`
         };
 
         let display = this.state.stick?"none":"flex";
@@ -206,7 +206,7 @@ class CdList extends PureComponent {
                     增加复合层提高性能
                 */}
 
-                <div className="layer-wrap" style={{transform:"translateY("+this.state.top+"px) translateZ(0px)"}}> </div>
+                <div className="layer-wrap ignore" style={{transform:"translateY("+this.state.top+"px)"}}> </div>
                 {/*背景遮罩 end*/}
 
                 {/*滚动列表*/}

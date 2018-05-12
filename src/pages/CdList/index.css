@@ -41,12 +41,15 @@ header h2.ignore{
     padding: 0 40px 60px;
 }
 
-.layer-wrap{
+.layer-wrap.ignore{
+    /*background-color: red;*/
     background-color: rgb(26,42,55);
-    height: 100%;
     width: 100%;
-    position: relative;
-    z-index:9;
+    height: 300px;
+    position: absolute;
+    top:300px;
+
+    z-index: 5;
     flex: 1;
 }
 .content.cd .list-wrap{
@@ -62,6 +65,8 @@ header h2.ignore{
 
 }
 .content.cd .list-wrap.ignore{
+    /*background-color: rgb(26,42,55);*/
+    z-index: 9;
     top:300px;
     bottom:60px;
 }
@@ -71,13 +76,17 @@ header h2.ignore{
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    transform: translate3d(0,0,0);
 }
 .cd-intro.ignore{
     height: 300px;
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-
+    position: absolute;
+    top: 0px;
+    transform-origin: top;
+    transform: translate3d(0,0,0);
 }
 .btn-play-all.ignore span{
     margin-left: 20px;

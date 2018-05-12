@@ -69,25 +69,31 @@ p{
   position: absolute;
   z-index: 10000;
   opacity: 1;
-  transform: translateX(100%);
+  transform: translate3d(100%,0,0);
 }
 
 .left-enter.left-enter-active {
+  position: absolute;
+  z-index: 10000;
   opacity: 1;
-  transform: translateX(0);
-  transition: all 400ms ease;
+  transform: translate3d(0,0,0);
+  transition: all 300ms ease;
 }
 
 .left-leave {
   opacity: 1;
   z-index: 10000;
-  transform: translateX(0);
+  transform: translate3d(0,0,0);
+  position: absolute;
+
 }
 
 .left-leave.left-leave-active {
   opacity: 1;
-  transform: translateX(100%);
-  transition: all 600ms;
+  transform: translate3d(100%,0,0);
+  position: absolute;
+  z-index: 1000;
+  transition: all 300ms;
 }
 /*按钮图标雪碧图*/
 .ignore.bg-down {

@@ -40,7 +40,7 @@ class Mypage extends Component {
                     >
                         <div className="avatar">
                             <div className="icon">
-                                <img src="https://img2.woyaogexing.com/2018/05/04/839d91f60aee1316!400x400_big.jpg" alt=""/>
+                                <img src={require("./avatar.jpg")} alt=""/>
                                 <span>未登录</span>
                             </div>
                             <div className="desc">

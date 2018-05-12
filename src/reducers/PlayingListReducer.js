@@ -194,9 +194,9 @@ function addPlayingList(state,action) {
 function clearList(state,action) {
 
     //存储到localstorage
-    storage([]);
-
-    return Immutable({
+    storage("playingList",[]);
+    storage("last",null);
+    return Immutable.merge(state,{
         show:false,
         playingList:[],
         list:{

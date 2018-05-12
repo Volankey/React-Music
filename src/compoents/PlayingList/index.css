@@ -24,7 +24,7 @@
 .playing-list-item.active .info{
     color: #31c27c;
 
-    background: url("/asset/songListWave.gif") no-repeat right -5px;
+    background: url("./songListWave.gif") no-repeat right -5px;
     background-size: 40px 40px;
 }
 .playing-list-item{
