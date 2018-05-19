@@ -169,7 +169,7 @@ class Lyric extends Component {
     }
     componentDidUpdate(){
         if(this.loaded){
-            this.alloyTouch.min = -this.scrollerHeight+this.wrapHeight/2-20;
+            this.alloyTouch.min = -this.scroller.offsetHeight+this.wrapHeight/2-20;
         }
         // else{
         //
