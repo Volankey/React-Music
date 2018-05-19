@@ -1,28 +1,54 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {
-    Link
+    Link,withRouter
 } from 'react-router-dom';
 
 import './index.css';
 
 
-class Header extends PureComponent {
+class Header extends Component {
+    constructor(props){
+        super(props);
+        this.renderItem = this.renderItem.bind(this);
 
+            this.state ={
+                navs: [
+                    {
+                        path: "/home",
+                        name: "我的"
+                    },
+                    {
+                        path: "/find",
+                        name: "音乐馆"
+                    },
+                    {
+                        path: "/search",
+                        name: "搜索"
+                    },
 
+                ]
+            }
+    }
+    renderItem(item,index){
+        let ptn = this.props.location.pathname,
+            current = "";
+
+        current = ptn == item.path?"current":"";
+
+        return (
+            <Link to={item.path} key={item.path}>
+                <span className={current}>{item.name}</span>
+            </Link>
+        )
+    }
     render() {
+
         return (
             <div className="header">
                 <div className="header-tabs">
-                    <Link to={"/home"}>
-                        <span>我的</span>
-                    </Link>
-
-                    <Link to={"/find"}>
-                        <span>音乐馆</span>
-                    </Link>
-                    <Link to={"/search"}>
-                        <span>搜索</span>
-                    </Link>
+                    {
+                        this.state.navs.map(this.renderItem)
+                    }
                 </div>
 
 
@@ -34,4 +60,4 @@ class Header extends PureComponent {
     }
 }
 
-export default Header;
+export default withRouter(Header);

@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import {
-    Route,
-    withRouter,
-    Link
+    Link,
 } from 'react-router-dom';
 import data from './data.json';
 import List from '../../compoents/List'
 import './index.css';
-import RecentList from '../RecentList';
-
+import LazyLoad, {forceCheck} from 'react-lazyload';
+import PlaceHolderImage from '../../compoents/PlaceHolderImage'
 import { connect } from 'react-redux'; // 引入connect函数
-class Mypage extends Component {
+class Mypage extends PureComponent {
 
 
     render() {
@@ -21,13 +19,17 @@ class Mypage extends Component {
                 <div className="list-wrap ignore">
 
                     <List
+                        change={()=>{forceCheck();}}
                         data={data.data.disslist}
                         renderItem={(item,index)=>{
                             return (
 
                                 <Link to={"/home/list/"+item.tid} key={item.tid}>
                                     <div  className="diss-item">
-                                        <img className="ignore" src={item.diss_cover} alt=""/>
+                                        <LazyLoad height={60} placeholder={PlaceHolderImage(60,60)}>
+                                            <img className="ignore" src={item.diss_cover} alt=""/>
+                                        </LazyLoad>
+
                                         <div className="intro">
                                             <p>{item.diss_name}</p>
                                             <p>{item.song_cnt}首</p>
@@ -54,7 +56,7 @@ class Mypage extends Component {
                                 <p className="text-center">我喜欢</p>
                                 <p className="text-center">97</p>
                             </Link>
-                            <Link to={"/home/recent"}>
+                                <Link to={"/home/recent"}>
                                 <div className="ignore btn bg-recent"></div>
                                 <p className="text-center">最近播放</p>
                                 <p className="text-center">{this.props.recentList.length}</p>

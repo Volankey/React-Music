@@ -58,7 +58,7 @@ class PlayingList extends PureComponent {
 
                 },
                 list:{
-                    transform:"translateY(0px)"
+                    transform:"translate3d(0,0px,0)"
                 },
                 mode:s
             }
@@ -72,7 +72,7 @@ class PlayingList extends PureComponent {
 
                 },
                 list:{
-                    transform:"translateY(100%)"
+                    transform:"translate3d(0,100%,0)"
                 },
                 mode:""
 

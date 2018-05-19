@@ -118,11 +118,14 @@ class MusicPlayer extends Component {
                 }>
                     {/*<img className="image" src={≈} alt=""/>*/}
                 </div>
+               {/*头部区域-开始*/}
                 <div className="head">
                     <div className="btn bg-down ignore" onClick={this.goBack.bind(this)}></div>
-                    <div className="title"><span>{song.name}</span></div>
+                    <div className="title text-overflow"><span>{song.name}</span></div>
                 </div>
+                {/*头部区域-结束*/}
 
+                {/*滑动区域，歌词/cd转动-开始*/}
                 <div className="slider-wrap ignore">
                     <Slider
                         showDot={true}
@@ -153,6 +156,7 @@ class MusicPlayer extends Component {
                         />
                     </Slider>
                 </div>
+                {/*滑动区域，歌词/cd转动-结束*/}
 
                 {/*唱片区域*/}
                 {/* <div className="cd">

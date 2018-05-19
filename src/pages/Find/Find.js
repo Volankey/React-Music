@@ -2,14 +2,15 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'; // 引入connect函数
 import Slider from '../../compoents/Slider'
 import List from '../../compoents/List'
-import Immutable from "seamless-immutable";
+
+
 import {
     Link
 } from 'react-router-dom';
 import './index.css';
 import * as SongListAction from '../../actions/SongListAction';
-
-
+import LazyLoad, {forceCheck} from 'react-lazyload';
+import PlaceHolderImage from '../../compoents/PlaceHolderImage'
 
 class Find extends PureComponent {
 
@@ -19,6 +20,7 @@ class Find extends PureComponent {
     }
     componentDidMount(){
         this.props.getData();
+
     }
     render() {
         return (
@@ -27,14 +29,18 @@ class Find extends PureComponent {
 
                 <div className="list-wrap ignore">
                     <List
-
+                        // 根据react-lazyload文档，需要这么做才会监听到translate的滚动
+                        change={()=>{forceCheck();}}
                         data={this.props.data.list}
                         renderItem={(item,index)=>{
                             return (
 
                                 <Link to={"/find/list/"+item.dissid} key={item.dissid}>
                                     <div  className="diss-item" key={item.dissid}>
-                                        <img className="ignore" src={item.imgurl} alt=""/>
+                                        {/*懒加载*/}
+                                        <LazyLoad height={60} placeholder={PlaceHolderImage(60,60)}>
+                                            <img className="ignore" src={item.imgurl} alt=""/>
+                                        </LazyLoad>
                                         <div className="intro">
                                             <p>{item.dissname}</p>
                                             <p>{item.creator.name}</p>
@@ -60,7 +66,9 @@ class Find extends PureComponent {
                                 }
                             </Slider>
                         </div>
-
+                        <div className="diss-item">
+                            歌单推荐
+                        </div>
 
                     </List>
                 </div>

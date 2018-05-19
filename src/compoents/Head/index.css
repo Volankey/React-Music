@@ -19,3 +19,7 @@
     display: flex;
     justify-content: center;
 }
+.header .current{
+    font-weight: bolder;
+    font-size: 38px;
+}

@@ -18,6 +18,7 @@ class List extends PureComponent {
 
     }
     initScroller(){
+
         this.loaded = true;
         // this.wrapHeight = this.props.height;
         this.wrapHeight = this.props.height || this.wrap.parentNode.offsetHeight;
@@ -105,9 +106,9 @@ class List extends PureComponent {
         return (
             <div style={{
                 overflow:overflow
-            }}  id="scorller-wrap" className="ignore"  ref={(ref)=>{this.wrap = ref}} >
+            }}   className="ignore scorller-wrap"  ref={(ref)=>{this.wrap = ref}} >
 
-                <div id="scroller-content" ref={(ref)=>{this.scroller = ref}}>
+                <div className="scroller-content" ref={(ref)=>{this.scroller = ref}}>
                     {
 
                         React.Children.map(this.props.children,(c)=>{
@@ -116,7 +117,7 @@ class List extends PureComponent {
                     }
                     {
                         this.props.data.map((item,index)=>{
-                            return this.props.renderItem(item,index);
+                              return this.props.renderItem(item,index);
                         })
                     }
                     {

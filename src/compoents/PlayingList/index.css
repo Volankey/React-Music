@@ -60,13 +60,15 @@
     padding: 30px 20px;
     border-bottom: 1px solid rgba(222,222,222,0.5);
     position: relative;
-    z-index: 10000;
+    z-index: 100;
     display: flex;
     justify-content: space-between;
 }
 .playing-list-content{
     flex:1;
     overflow: hidden;
+    z-index: 1000;
+    position: relative;
 }
 .playing-list-wrap .btn-close{
     width: 100%;
