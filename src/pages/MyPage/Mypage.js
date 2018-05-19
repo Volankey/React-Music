@@ -10,8 +10,6 @@ import LazyLoad, {forceCheck} from 'react-lazyload';
 import PlaceHolderImage from '../../compoents/PlaceHolderImage'
 import { connect } from 'react-redux'; // 引入connect函数
 class Mypage extends PureComponent {
-
-
     render() {
         return (
             <div className="content my-page ignore">
@@ -19,7 +17,14 @@ class Mypage extends PureComponent {
                 <div className="list-wrap ignore">
 
                     <List
-                        change={()=>{forceCheck();}}
+                        change={()=>{
+                            //加一层优化 节流
+                            clearTimeout(this.timer);
+                            setTimeout(function () {
+                                forceCheck();
+                            },100)
+
+                        }}
                         data={data.data.disslist}
                         renderItem={(item,index)=>{
                             return (

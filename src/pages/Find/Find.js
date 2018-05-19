@@ -17,6 +17,7 @@ class Find extends PureComponent {
     constructor(props){
         super(props);
         // console.log(data);
+        this.timer = null;
     }
     componentDidMount(){
         this.props.getData();
@@ -30,7 +31,13 @@ class Find extends PureComponent {
                 <div className="list-wrap ignore">
                     <List
                         // 根据react-lazyload文档，需要这么做才会监听到translate的滚动
-                        change={()=>{forceCheck();}}
+                        change={()=>{
+                            clearTimeout(this.timer);
+                            setTimeout(function () {
+                                forceCheck();
+                            },100)
+
+                        }}
                         data={this.props.data.list}
                         renderItem={(item,index)=>{
                             return (
