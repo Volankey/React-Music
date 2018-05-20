@@ -68,7 +68,7 @@ export function getMusic(song,status,dispatch,list,immediate=true) {
                     song ,
                     status
                 },
-                meta: "播放音乐 "
+                meta: "播放音乐"
             }
         );
 
@@ -128,7 +128,7 @@ export function play() {
 
 
             if(list.length===0){
-                alert("您没有歌曲需要播放");
+                alert("您没有歌曲需要播放~");
                 return;
             }
             if(status === TYPE.STATUS_EMPTY){

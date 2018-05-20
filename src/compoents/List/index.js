@@ -87,7 +87,7 @@ class List extends PureComponent {
 
     }
     componentDidMount(){
-        this.top = 0;
+        this.top=0;
         this.initScroller();
         this.loadMore=false;
     }
