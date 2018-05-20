@@ -58,7 +58,12 @@ module.exports = {
     // You can exclude the *.map files from the build during deployment.
     devtool: shouldUseSourceMap ? 'source-map' : false,
     // In production, we only want to load the polyfills and the app code.
-    entry: [require.resolve('./polyfills'), paths.appIndexJs],
+    entry: {
+        //抽离react的库文件
+        vendor:["react","react-dom","react-redux","react-router","react-router-dom","redux","redux-thunk","react-lazyload"],
+        main: [paths.appIndexJs, require.resolve('./polyfills')],
+
+    },
     output: {
         // The build folder.
         path: paths.appBuild,
@@ -343,6 +348,11 @@ module.exports = {
         // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
         // You can remove this if you don't use Moment.js:
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        //抽离react的库文件
+        new webpack.optimize.CommonsChunkPlugin({name: 'vendor'}),
+        //建立mainfest以便缓存未更改的chunkhash
+        new webpack.optimize.CommonsChunkPlugin({name: 'mainifest', chunks: ['vendor']})
+
 
     ],
     // Some libraries import Node modules but don't use them in the browser.
