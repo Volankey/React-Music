@@ -46,6 +46,10 @@
 #player .info{
     padding: 15px;
     flex: 4;
+    /*修复mini播放控制的不居中bug*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
 
 }
