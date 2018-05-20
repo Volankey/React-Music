@@ -11,7 +11,7 @@ import './index.css';
 class PlayingList extends PureComponent {
 
     componentDidMount(){
-        console.log(this.scroll)
+        // console.log(this.scroll)
 
         this.currentIndex=0;
         this.itemHeight =  document.querySelector(".playing-list-item").offsetHeight;
