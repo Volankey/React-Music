@@ -10,25 +10,11 @@ import './index.css';
 
 class PlayingList extends PureComponent {
 
-    componentDidMount(){
-        console.log(this.scroll)
-
-        this.currentIndex=0;
-        this.itemHeight =  document.querySelector(".playing-list-item").offsetHeight;
-
-
-
-    }
-    componentDidUpdate(){
-        this.scroll.scrollTo(-this.itemHeight*this.currentIndex);
-
-    }
     renderItem(item,index){
 
         let active = "";
         if(item.id == this.props.currentSongId){
             active="active"
-            this.currentIndex = index;
         }
 
         return (
@@ -127,7 +113,6 @@ class PlayingList extends PureComponent {
                             overHidden={false}
                             renderItem={this.renderItem.bind(this)}
                             data={this.props.playingList}
-                            ref={(ref)=>{this.scroll=ref}}
                         />
                     </div>
                     <div className="btn-close" onClick={()=>{
