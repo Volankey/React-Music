@@ -9,12 +9,25 @@ import './index.css';
 // "inherit"
 
 class PlayingList extends PureComponent {
+    componentDidMount(){
+        console.log(this.scroll)
 
+        this.currentIndex=0;
+        this.itemHeight =  document.querySelector(".playing-list-item").offsetHeight;
+
+
+
+    }
+    componentDidUpdate(){
+        this.scroll.scrollTo(-this.itemHeight*this.currentIndex);
+
+    }
     renderItem(item,index){
 
         let active = "";
         if(item.id == this.props.currentSongId){
-            active="active"
+            active="active";
+            this.currentIndex = index;
         }
 
         return (
@@ -110,6 +123,7 @@ class PlayingList extends PureComponent {
                     </div>
                     <div className="playing-list-content">
                         <List
+                            ref={(ref)=>{this.scroll=ref}}
                             overHidden={false}
                             renderItem={this.renderItem.bind(this)}
                             data={this.props.playingList}
