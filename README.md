@@ -1,5 +1,8 @@
 # BaiMusic
 [查看演示](http://140.143.62.133/my-app-music/)
+[走过的坑](https://github.com/Volankey/React-Music/blob/master/FIXEDPROBLEM.md)
+
+
 ### 技术栈
 - react
 - react-router4
