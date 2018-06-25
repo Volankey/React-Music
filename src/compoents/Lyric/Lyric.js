@@ -40,9 +40,10 @@ class Lyric extends Component {
             var lyric = decodeURIComponent(lyrics[i]);
             var timeReg = /\[\d*:\d*((\.|\:)\d*)*\]/g;
             var timeRegExpArr = lyric.match(timeReg);
-            if(!timeRegExpArr){
+            if(!timeRegExpArr) {
                 continue;
             }
+
             var clause = lyric.replace(timeReg,'');
             for(var k = 0,h = timeRegExpArr.length;k < h;k++) {
                 var t = timeRegExpArr[k];

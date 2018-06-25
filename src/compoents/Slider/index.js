@@ -77,7 +77,7 @@ class Slider extends Component {
     }
     handleMove(e){
         console.log("slider");
-        e.preventDefault();
+
         if(this.isTracking){
             let currentX = e.touches[0].clientX,
                 currentY = e.touches[0].clientY;

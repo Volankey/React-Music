@@ -13,7 +13,8 @@ class PlayingList extends PureComponent {
         console.log(this.scroll)
 
         this.currentIndex=0;
-        this.itemHeight =  document.querySelector(".playing-list-item").offsetHeight;
+        let scroll =  document.querySelector(".playing-list-item");
+        this.itemHeight = scroll?scroll.offsetHeight:0;
 
 
 

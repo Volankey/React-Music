@@ -5,7 +5,6 @@ import './index.css';
 
 import { connect } from 'react-redux'; // 引入connect函数
 import * as SearchAction from "../../actions/SearchAction";
-import * as PlayerAction from "../../actions/PlayerAction";
 import * as PlayingListAction from "../../actions/PlayingListAction";
 
 import {
@@ -79,8 +78,16 @@ class Search extends PureComponent {
         )
     }
     handleChange(event){
+
         this.setState({
             value:event.target.value
+        },()=>{
+            const { value } = this.state;
+            //节流
+            clearTimeout(this.timer);
+            this.timer = setTimeout(()=>{
+                this.props.getData(value);
+            },500);
         })
     }
     render() {

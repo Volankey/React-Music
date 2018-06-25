@@ -13,14 +13,14 @@ export  const tools  =     {
             let headers = param.headers || {};
 
             //构造表单数据
-            var formData = new FormData();
+            var formData = "";
 
 
             for (let key in data)
             {
-                formData.append(key,param[key]);
+                formData+=`${key}=${data[key]}&`;
             }
-            
+            console.log(formData);
             //创建xhr对象
             var xhr = new XMLHttpRequest();
             //设置xhr请求的超时时间

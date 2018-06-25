@@ -83,7 +83,7 @@ export function getLyric(id,dispatch) {
         dataType:"json",
 
     }).then(response=>{
-        // console.log(response);
+        console.log(response);
         dispatch(
             {
                 type: TYPE.MUSIC_LYRIC,
