@@ -112,7 +112,7 @@ https://codepen.io/HaoyCn/pen/BZZrLd
 
 ![image](https://volankey.github.io/React-Music/MYLOG/vendor2.png)
 
-## 配置V2P
+## 配置P2V
 
 
 ```
