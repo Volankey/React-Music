@@ -108,9 +108,9 @@ https://codepen.io/HaoyCn/pen/BZZrLd
 ## 抽离vendor
 > 打包过程中发现，文件其实不小，每次更改只生成成一个main.js，其实这里面包含了许多三方库，但是我们并不需要更改他们，所以应该抽离出来，改业务逻辑那么只需要业务逻辑文件的hash发生变化，react等三方库文件应该不变，对用户应用缓存加速用户二次打开速度.
 
-![image](https://note.youdao.com/favicon.ico)
+![image](https://volankey.github.io/React-Music/MYLOG/vendor1.png)
 
-![image](https://note.youdao.com/favicon.ico)
+![image](https://volankey.github.io/React-Music/MYLOG/vendor2.png)
 
 ## 配置V2P
 
