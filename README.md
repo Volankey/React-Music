@@ -1,4 +1,6 @@
 # BaiMusic
+> 我在这几天内看了<深入react技术栈>这本书发现自己对react技术栈的应用并不是很到位，秋招完毕准备重构.
+
 [查看演示](http://140.143.62.133/my-app-music/)
 [走过的坑](https://github.com/Volankey/React-Music/blob/master/FIXEDPROBLEM.md)
 
