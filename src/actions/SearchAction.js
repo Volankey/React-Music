@@ -11,13 +11,17 @@ export function loadMore() {
         // let e = state.end+15;
         let key = state.data.keyword;
 
+        if(!key)
+            return;
 
-        if(!state.loading && p < state.data.song.curnum){
+        if(!state.loading && !state.noMore){
+
             dispatch({
                 type:TYPE.SEARCH_LIST_FETCHING,
                 meta:"正在取回搜索数据成功",
 
             });
+
             tools.fetch(
                 {
                     // http://localhost:3001/apis/search?k=%E9%B9%BF%E6%99%97&p=1
@@ -25,20 +29,22 @@ export function loadMore() {
                     dataType:"json",
                 }
             ).then((res)=>{
-                console.log(res);
+
+                let list = res.data.song.list;
                 dispatch({
                     type:TYPE.SEARCH_LOADMORE,
                     meta:"取回搜索数据成功",
-                    playload:{
-                        list:res.data.song.list,
+                    payload:{
+                        list:list,
                         p:p,
-
+                        noMore:list.length===0
                     }
                 })
 
             });
 
         }
+
 
     }
 }
@@ -48,7 +54,7 @@ export function getData(key){
     return (dispatch,getState)=>{
         let state = getState().SearchReducer;
 
-        if(state.isloading==true)
+        if(state.isloading==true || key==undefined)
             return;
         let p = 1;
 
@@ -63,9 +69,6 @@ export function getData(key){
         dispatch({
             type:TYPE.SEARCH_LIST_FETCHING,
             meta:"正在取回搜索列表数据",
-            playload:{
-                notMore:true
-            }
         });
 
 
@@ -80,9 +83,10 @@ export function getData(key){
             dispatch({
                 type:TYPE.SEARCH_LIST_FETCHEND,
                 meta:"取回搜索列表数据成功",
-                playload:{
+                payload:{
                     data:res.data,
                     p:p,
+
                 }
             })
             // this.setState({
@@ -106,7 +110,7 @@ export function getHotKey() {
             dispatch({
                 type:TYPE.HOT_KEY,
                 meta:"获取热门搜索",
-                playload:{
+                payload:{
                     hotkey:res.data.hotkey
                 }
             })

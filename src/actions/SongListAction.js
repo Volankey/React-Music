@@ -47,7 +47,7 @@ export function getData(){
             dispatch({
                 type:TYPE.SONG_SLIDER_FETCHEND,
                 meta:"获取轮播图",
-                playload:{
+                payload:{
                     slider:res.data.slider,
                 }
             })
@@ -64,7 +64,7 @@ export function getData(){
             dispatch({
                 type:TYPE.SONG_LIST_FETCHEND,
                 meta:"取回歌单数据成功",
-                playload:{
+                payload:{
                     data:res.data,
                 }
             })

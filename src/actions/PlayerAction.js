@@ -64,7 +64,7 @@ export function getMusic(song,status,dispatch,list,immediate=true) {
         dispatch(
             {
                 type: TYPE.MUSIC_PLAY,
-                playload: {
+                payload: {
                     song ,
                     status
                 },
@@ -87,7 +87,7 @@ export function getLyric(id,dispatch) {
         dispatch(
             {
                 type: TYPE.MUSIC_LYRIC,
-                playload: {
+                payload: {
                     lyric:response,
                     id
                 },
@@ -103,7 +103,7 @@ function setStatus(dispatch,status) {
     dispatch(
         {
             type: TYPE.CHANGE_STATUS,
-            playload: {
+            payload: {
                 status
             },
             meta: status
@@ -169,7 +169,7 @@ export function updateTime(t) {
         dispatch(
             {
                 type: TYPE.SET_CURRENTTIME,
-                playload: {
+                payload: {
                     current: t
                 },
                 meta: "更新进度"
@@ -249,7 +249,7 @@ export function playByIdx(index) {
 //         dispatch({
 //             type:TYPE.CLEAR_PLAYING_LIST,
 //             meta:"清空播放列表",
-//             playload:{
+//             payload:{
 //                 status:TYPE.STATUS_EMPTY
 //             }
 //         })
@@ -287,7 +287,7 @@ export function playByIdx(index) {
 //             {
 //                 type: TYPE.ADD_TO_PLAING,
 //                 meta: "添加了一首歌",
-//                 playload:{
+//                 payload:{
 //                     song
 //                 }
 //             }
@@ -344,7 +344,7 @@ export function playNext(type) {
         // dispatch(
         //     {
         //         type: TYPE.MUSIC_NEXT,
-        //         playload: {
+        //         payload: {
         //             type
         //         },
         //         meta: "播放下一首"

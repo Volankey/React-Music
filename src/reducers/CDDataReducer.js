@@ -17,7 +17,7 @@ const  initialState = Immutable({
 //正在取回数据
 function fetchingData(state,action) {
 
-    if(action.playload && action.playload.notMore){
+    if(action.payload && action.payload.notMore){
         return tools.setValue(tools.setValue(state,"loading",true),"data",{
             cdlist:[]
         })
@@ -28,16 +28,16 @@ function fetchingData(state,action) {
 
 function setData(state,action) {
     return tools.replace(state,{
-        data:action.playload.data,
+        data:action.payload.data,
         loading:false,
-        start:action.playload.start,
-        end:action.playload.end
+        start:action.payload.start,
+        end:action.payload.end
     })
 }
 function setMore(state,action) {
 
     let cd_list = Immutable.asMutable(state.data.cdlist);
-    let songlist =  cd_list[0].songlist.concat(action.playload.list);
+    let songlist =  cd_list[0].songlist.concat(action.payload.list);
 
     cd_list = tools.setIn(cd_list,["0","songlist"],songlist);
     // cd_list[0].songlist = songlist;
@@ -48,8 +48,8 @@ function setMore(state,action) {
             cdlist:cd_list
         },
         loading:false,
-        start:action.playload.start,
-        end:action.playload.end
+        start:action.payload.start,
+        end:action.payload.end
     })
 }
 export default  function CDDataReducer(state=initialState,action){

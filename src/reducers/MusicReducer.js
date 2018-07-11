@@ -80,8 +80,8 @@ const initialState = Immutable({
 
 
 function setLyric(state, action) {
-    let data = action.playload.lyric;
-    data.id = action.playload.id;
+    let data = action.payload.lyric;
+    data.id = action.payload.id;
     return tools.setValue(state, "lyric", data);
 }
 
@@ -97,12 +97,12 @@ function setMode(state, action) {
 
 function setStatus(state, action) {
 
-    return tools.setValue(state, "status", action.playload.status);
+    return tools.setValue(state, "status", action.payload.status);
 }
 
 function setCurrentTime(state, action) {
 
-    return tools.setIn(state, ["song", "currentTime"], action.playload.current);
+    return tools.setIn(state, ["song", "currentTime"], action.payload.current);
 }
 function initPlayer() {
 
@@ -110,15 +110,15 @@ function initPlayer() {
 
 }
 function playMusic(state, action) {
-    let playload = action.playload;
+    let payload = action.payload;
 
     // //如果没有歌曲了
     // if(state.playingList.length===0)
     //     return initialState;
 
 
-    let song = playload.song,
-        status = playload.status,
+    let song = payload.song,
+        status = payload.status,
         albumUrl = getAlbumUrl(song);
     song = tools.setValue(song, "albumUrl", albumUrl);
 

@@ -28,7 +28,7 @@ export function loadMore() {
                 dispatch({
                     type:TYPE.CD_SONG_LOADMORE,
                     meta:"取回歌单列表数据成功",
-                    playload:{
+                    payload:{
                         list:res.cdlist[0].songlist,
                         start:s,
 
@@ -60,7 +60,7 @@ export function getData(id){
         dispatch({
             type:TYPE.CD_SONG_FETCHING,
             meta:"正在取回歌单列表数据",
-            playload:{
+            payload:{
                 notMore:true
             }
         });
@@ -77,7 +77,7 @@ export function getData(id){
             dispatch({
                 type:TYPE.CD_SONG_FETCHEND,
                 meta:"取回歌单列表数据成功",
-                playload:{
+                payload:{
                     data:res,
                     start:s,
                 }

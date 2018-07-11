@@ -1,0 +1,25 @@
+.portal-bgc{
+    position: absolute;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1000;
+}
+
+.clearfix:after{
+    content: "";
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+.clearfix{
+    *zoom: 1;
+}
+.close{
+    float: right;
+    margin-right: 5px;
+    font-weight: normal;
+    cursor: pointer;
+}

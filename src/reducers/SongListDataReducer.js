@@ -21,10 +21,10 @@ function fetchingData(state,action) {
 }
 
 function setData(state,action) {
-    // console.log(action.playload.data);
+    // console.log(action.payload.data);
     return tools.replace(state,{
         ...state,
-        data:action.playload.data,
+        data:action.payload.data,
         loading:false,
         last_time:new Date().getTime(),
 
@@ -33,7 +33,7 @@ function setData(state,action) {
 
 function setSlider(state,action) {
 
-    return tools.setValue(state,"slider",action.playload.slider)
+    return tools.setValue(state,"slider",action.payload.slider)
 
 }
 

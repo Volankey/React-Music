@@ -22,7 +22,7 @@ const  initialState = Immutable({
 //正在取回数据
 function fetchingData(state,action) {
 
-    if(action.playload && action.playload.notMore){
+    if(action.payload && action.payload.noMore){
         return tools.setValue(state,"noMore",true);
     }
     return tools.setValue(state,"loading",true);
@@ -32,21 +32,22 @@ function fetchingData(state,action) {
 function setData(state,action) {
     return tools.replace(state,{
         ...state,
-        data:action.playload.data,
+        data:action.payload.data,
         loading:false,
-        p:action.playload.p,
-        noMore:false,
+        p:action.payload.p,
+        noMore:action.payload.data.song.curnum<20
+
     })
 }
 function setMore(state,action) {
-    if(action.playload.list.length==0){
-        return setValue(state,"noMore",true);
-    }
+    // if(action.payload.list.length==0){
+    //     return setValue(state,"noMore",true);
+    // }
     let list = Immutable.asMutable(state.data.song.list);
-    let songlist =  list.concat(action.playload.list);
+    let songlist =  list.concat(action.payload.list);
 
     // list = tools.setIn(list,["0","songlist"],songlist);
-
+    console.log(action.payload)
     return tools.replace(state,{
         ...state,
         data:{
@@ -57,12 +58,12 @@ function setMore(state,action) {
             }
         },
         loading:false,
-        p:action.playload.p,
-
+        p:action.payload.p,
+        noMore:action.payload.noMore,
     })
 }
 function setHotKey(state,action) {
-    return tools.setValue(state,"hotkey",action.playload.hotkey)
+    return tools.setValue(state,"hotkey",action.payload.hotkey)
 }
 export default  function CDDataReducer(state=initialState,action){
     // console.log(action);

@@ -4,16 +4,28 @@ import  * as PLAYER_TYPE from '../constants/PlayerType';
 import {setValue,setIn,replace} from "./ReducerTools";
 import { tools }  from '../tools/Tools';
 
+var localPlaying = getPlayingListFromstorage();
 
 const  initialState = Immutable({
     show:false,
-    playingList:getFromstorage("playingList"),
-    list:{
-
-    },
+    playingList:localPlaying.LOCAL_LIST,
+    list:localPlaying.LIST_MAP,
     history:getFromstorage("history"),
     last:getLastFromstorage()
 });
+
+function getPlayingListFromstorage() {
+    var LOCAL_LIST  = JSON.parse(tools.getFromLocal("playingList"));
+    var list = {};
+    for(let item of LOCAL_LIST) {
+        list[item.id] = item;
+    }
+    return {
+        LOCAL_LIST:LOCAL_LIST?LOCAL_LIST:[],
+        LIST_MAP :list
+    };
+
+}
 //存储到localstorage
 function storage(key,list) {
     setTimeout(function () {
@@ -47,7 +59,7 @@ function setShow(state,flag) {
 function deleteById(state,action) {
     let list = {},
         playlist = state.playingList;
-    let song = action.playload.song;
+    let song = action.payload.song;
 
     //找到这首歌
     let index = -1;
@@ -102,17 +114,16 @@ function handleAdd(state,action) {
     //否则将这首歌加入到当前歌曲的下一首
     let playingList = Immutable.asMutable(state.playingList),
         list = Immutable.asMutable(state.list),
-        currentSong = action.playload.currentSong;
+        currentSong = action.payload.currentSong;
 
     let index = currentSong.index+1;
     let addList = [];
     //列表的话替换当前的播放列表
-    if(action.playload.song.length){
+    if(action.payload.song.length){
         list={};
+        addList = Array.from(action.payload.song,function (song,i) {
 
-        addList = Array.from(action.playload.song,function (song,i) {
-
-                let t_song = action.playload.getSong(song);
+                let t_song = action.payload.getSong(song);
                 t_song.index = i;
                 // {
                 //     album: song.album.mid,
@@ -124,7 +135,7 @@ function handleAdd(state,action) {
                 //     singer: tools.getSinger(song.singer)
                 // };
 
-                list[song.mid] = t_song;
+                list[song.id] = t_song;
                 return t_song;
 
 
@@ -133,9 +144,9 @@ function handleAdd(state,action) {
     }
     else{
         //添加单手歌曲
-        if(state.list[action.playload.song.id]==null){
-            list[action.playload.song.id]=action.playload.song;
-            addList = Array.from([action.playload.song]);
+        if(state.list[action.payload.song.id]==null){
+            list[action.payload.song.id]=action.payload.song;
+            addList = Array.from([action.payload.song]);
         }
 
     }
@@ -153,7 +164,7 @@ function handleAdd(state,action) {
     return {
         ...state,
         list,
-        song: action.playload.song,
+        song: action.payload.song,
         playingList,
     }
 
@@ -163,22 +174,22 @@ function addPlayingList(state,action) {
 
     // debugger;
     //如果已经存在那么直接播放这个歌曲
-    if(state.list[action.playload.song.id]){
+    if(state.list[action.payload.song.id]){
 
-        return setValue(state,"song",action.playload.song);
+        return setValue(state,"song",action.payload.song);
     }
     console.log(state);
     /*
     //否则将这首歌加入到当前歌曲的下一首
     let playingList = Immutable.asMutable(state.playingList),
-        currentSong = action.playload.currentSong;
+        currentSong = action.payload.currentSong;
 
-    action.playload.song.index = currentSong.index+1;
+    action.payload.song.index = currentSong.index+1;
 
-    playingList.splice(currentSong.index+1,0,action.playload.song);
+    playingList.splice(currentSong.index+1,0,action.payload.song);
     playingList = Immutable(playingList);
 
-    let new_state = setIn(state,["list",action.playload.song.id],action.playload.song);
+    let new_state = setIn(state,["list",action.payload.song.id],action.payload.song);
     // debugger;
     console.log("播放列表:",playingList);
     */
@@ -207,7 +218,7 @@ function clearList(state,action) {
 
 }
 function saveToHistory(state,action) {
-    let song = action.playload.song;
+    let song = action.payload.song;
     // alert(state.history);
     let historyList = Immutable.asMutable(state.history);
 

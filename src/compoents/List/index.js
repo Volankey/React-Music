@@ -116,15 +116,20 @@ class List extends PureComponent {
                         })
                     }
                     {
-                        this.props.data.map((item,index)=>{
+                        this.props.data && this.props.data.map((item,index)=>{
                               return this.props.renderItem(item,index);
                         })
                     }
-                    {
-                        this.props.data.length>0 && this.props.end && <p  className="text-center more">{
-                            this.props.isloading==true?"加载中..":"上滑动加载更多"
-                        }</p>
-                    }
+                    {/*{*/}
+                        {/*this.props.data.length>0 && this.props.end && <p  className="text-center more">{*/}
+                            {/*this.props.isloading==true?"加载中..":"上滑动加载更多"*/}
+                        {/*}</p>*/}
+                    {/*}*/}
+                    <EndText
+                        show={this.props.data.length>0 && this.props.end }
+                        noMore={this.props.noMore}
+                        isloading={this.props.isloading}
+                    />
                 </div>
 
 
@@ -135,6 +140,19 @@ class List extends PureComponent {
 
 
     }
+}
+function EndText(props){
+    if(!props.show){
+        return null;
+    }
+    let text = "上滑加载更多";
+    if(props.noMore===true){
+        text = "没有更多了"
+    }
+    else if(props.isloading){
+        text = "加载中.."
+    }
+    return  <p  className="text-center more">{text}</p>
 }
 List.defineProperties={
     overHidden:false

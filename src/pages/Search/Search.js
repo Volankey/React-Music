@@ -10,6 +10,9 @@ import * as PlayingListAction from "../../actions/PlayingListAction";
 import {
     withRouter
 } from 'react-router-dom';
+import {
+    Link
+} from 'react-router-dom';
 
 const getSong = (data)=>{
 
@@ -29,9 +32,7 @@ const getSong = (data)=>{
 };
 class Search extends PureComponent {
 
-    goBack(){
-        this.props.history.goBack();
-    }
+
     search (e){
         e && e.preventDefault();
 
@@ -101,9 +102,9 @@ class Search extends PureComponent {
                         <input name="key" type="search" value={this.state.value}  onChange={this.handleChange} placeholder="搜索音乐、歌手"/>
                     </form>
 
-                    <span onClick={()=>{
-                        this.goBack();
-                    }}>取消</span>
+
+                        <span> <Link to="/home">取消 </Link></span>
+
                 </div>
                 {/*输入区域结束*/}
 
@@ -114,6 +115,7 @@ class Search extends PureComponent {
                         renderItem={this.renderItem}
                         isloading={this.props.isloading}
                         end={this.props.loadMore}
+                        noMore={this.props.noMore}
                     >
                         {/*热门搜索*/}
                         <div className="hot-key">
@@ -156,7 +158,8 @@ export default withRouter(connect(
     (state) => ({
        data:state.SearchReducer.data.song.list,
         isloading:state.SearchReducer.loading,
-        hotkey:state.SearchReducer.hotkey
+        hotkey:state.SearchReducer.hotkey,
+        noMore:state.SearchReducer.noMore
     }),
     (dispatch) => ({
 

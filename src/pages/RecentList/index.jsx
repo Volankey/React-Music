@@ -31,6 +31,7 @@ export default withRouter(connect(
     }),
     (dispatch) => ({
         addToListPlayingList: (data) => {
+
             function getSong(song) {
                 return Immutable.asMutable(song);
             }

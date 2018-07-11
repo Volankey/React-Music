@@ -50,7 +50,7 @@ export function clearList() {
         dispatch({
             type:TYPE.CLEAR_PLAYING_LIST,
             meta:"清空播放列表",
-            playload:{
+            payload:{
                 status:PLAYER_TYPE.STATUS_EMPTY
             }
         })
@@ -85,7 +85,7 @@ export function addListToPlayingList(list,getSong) {
             {
                 type: TYPE.ADD_TO_PLAING,
                 meta: "添加了一个歌单",
-                playload:{
+                payload:{
                     song:list,
                     currentSong:state.song,
                     getSong
@@ -129,7 +129,7 @@ export function addToPlayingList(data,getSong) {
             {
                 type: TYPE.ADD_TO_PLAING,
                 meta: "添加了一首歌",
-                playload:{
+                payload:{
                     song,
                     currentSong:state.song
                 }
@@ -164,7 +164,7 @@ export function deleteById(song) {
             {
                 type: TYPE.DELETE_SONG,
                 meta: "从播放列表删除歌曲",
-                playload:{
+                payload:{
                     song
                 }
             }
