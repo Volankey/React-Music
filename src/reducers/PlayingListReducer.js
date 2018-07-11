@@ -15,7 +15,7 @@ const  initialState = Immutable({
 });
 
 function getPlayingListFromstorage() {
-    var LOCAL_LIST  = JSON.parse(tools.getFromLocal("playingList"));
+    var LOCAL_LIST  = JSON.parse(tools.getFromLocal("playingList"))||[];
     var list = {};
     for(let item of LOCAL_LIST) {
         list[item.id] = item;
