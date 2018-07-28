@@ -13,6 +13,7 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <%= htmlWebpackPlugin.options.loading.css %>
 
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -23,6 +24,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
     <title>bai music</title>
   </head>
   <body  ontouchmove="event.preventDefault()">
@@ -30,7 +32,9 @@
       You need to enable JavaScript to run this app.
       你需要JavaScript来运行这个app
     </noscript>
-    <div id="root"></div>
+    <div id="root">
+      <%= htmlWebpackPlugin.options.loading.html %>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

@@ -12,6 +12,12 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+const fs = require("fs");
+//loading动画
+const loading = {
+    html: fs.readFileSync(paths.indexLoading.html),
+    css: '<style>' + fs.readFileSync(paths.indexLoading.css) + '</style>'
+};
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -263,6 +269,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             inject: true,
             template: paths.appHtml,
+            loading: loading,
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,

@@ -70,8 +70,15 @@ var apis = {
     },
     search:function(key,page){
         var url = 'https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&w='+encodeURIComponent(key)+'&zhidaqu=1&catZhida=1&t=0&flag=1&ie=utf-8&sem=1&aggr=0&perpage=20&n=20&p='+page+'&remoteplace=txt.mqq.all&_=1524549397065'
+
         return {
-            url
+            url,
+            headers: {
+                "origin":"https://y.qq.com",
+                "authority": "c.y.qq.com",
+                "referer": "https://y.qq.com/m/index.html",
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36",
+            }
         }
     },
     my_list:function(uid){
